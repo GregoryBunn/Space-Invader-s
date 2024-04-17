@@ -6,7 +6,9 @@ def clear():
 def reload():
     stddraw.show(3000)
     project.main()
-
+'''
+Test
+'''
 
 def gamerun(SCREEN, SHOOTER):
     #initialising objects
