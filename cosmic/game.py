@@ -7,7 +7,7 @@ def reload():
     stddraw.show(3000)
     project.main()
 '''
-Test
+Hello
 '''
 
 def gamerun(SCREEN, SHOOTER):
