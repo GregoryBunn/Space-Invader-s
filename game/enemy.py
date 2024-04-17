@@ -10,6 +10,7 @@ class Enemy:
     '''
     Handels individual enemy functions:
     proces enemy movements
+    Test
     '''
     def __init__(self,x,y,typ,size,dir,speed,powerup):
         self.x = x
