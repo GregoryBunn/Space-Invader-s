@@ -10,7 +10,7 @@ class Alien:
         self._state = state
 
     def stay(self):
-        stddraw.picture(pic, self,_x, self._y)
+        stddraw.picture(pic, self._x, self._y)
     def move(self, d, spd):
         self._x += d*spd
         stddraw.picture(pic, self._x, self._y)
