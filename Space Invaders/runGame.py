@@ -230,8 +230,9 @@ def main():
         end = time.time()
         '''
         Handles the frame rate so that the game has a constant speed throughout
-        and does not speed up ir slow down depending on proccess time
+        and does not speed up or slow down depending on proccess time
         '''
+        print(f'Process time: {end - beg}')
         try:
             fps = 1/(end - beg)
             stddraw.text(1.8, 1.8, '%.0f' % (fps))
