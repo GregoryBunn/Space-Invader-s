@@ -3,7 +3,7 @@ from player import Player,PlayerList
 import math
 from missile import Missile,MissileList
 from enemy import EnemySettings,EnemyList,Powerup,Powerup_List
-import random
+import random, time
 
 
 class GameLoop:
@@ -40,6 +40,7 @@ class GameLoop:
 
     #Update game variables and draw screen
     def Update_game(self):
+        st = time.time()
         #Create graphics
         stddraw.clear() #clear screen
         self.createPlayscreen() #create new screen
@@ -70,6 +71,8 @@ class GameLoop:
 
         #draw and move missiles
         self.Missiles_list.move_drawMissiles()
+        en = time.time()
+        print(f'proccess time: {en-st}')
 
         #show Graphics
         stddraw.show(50)
