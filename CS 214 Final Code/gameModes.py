@@ -1,4 +1,6 @@
-import screens, stddraw, enemies, time
+import screens, stddraw, enemies, time, threading
+from ship import Ship, Bullet
+from math import pi
 #Scale is just incase we all used different scale when programming but we can talk about what scale we want to use when we are all together
 #I used scale of '2' when i coded mine so it would work inbetween -2 and 2
 def mainGame(scale):
@@ -31,6 +33,9 @@ def mainGame(scale):
             counter += 1
             x += spacing
         y -= spacing
+    #Make a ship
+    s0 = Ship(0, -1.8, pi/2, 37)
+
 
     while True:
         stddraw.clear(stddraw.BLACK)
@@ -47,9 +52,29 @@ def mainGame(scale):
                 if check == 1:
                     changeDir = 1
         #__________________________________________________________________________
+        keys = stddraw.getKeysPressed()
+        if keys[stddraw.K_e]:
+            s0.rotate(1)
+        elif keys[stddraw.K_q]:
+            s0.rotate(-1)
+        if keys[stddraw.K_a]:
+            if s0.getX() > (-scale+0.2):
+                s0.move(-1)
+            else:
+                s0.rotate()
+        elif keys[stddraw.K_d]:
+            if s0.getX() < (scale-0.2):
+                s0.move(1)
+            else:
+                s0.rotate()
+        else:
+            s0.rotate()
+        
+
+        
         frameEND = time.time()
         '''
-        The next code does the math inorder to have a consistent frame rate throughout the game
+        The next few lines of code does the math inorder to have a consistent frame rate throughout the game
         '''
         try:
             fps = 1/(frameEND - frameST )
