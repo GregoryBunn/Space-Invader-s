@@ -1,5 +1,5 @@
 #the game?
-import stddraw, title, objects, draw, move, project
+import stddraw, title, objects, draw, move, project, time
 def clear():
     stddraw.clear(stddraw.GRAY)
 
@@ -20,6 +20,7 @@ def gamerun(SCREEN, SHOOTER):
 
     play = True
     while (play):
+        st = time.time()
         #draw screen & objects 
         draw.gameScreen(screen)
         draw.shooter(shooter)
@@ -55,8 +56,8 @@ def gamerun(SCREEN, SHOOTER):
         shooter.aDir = move.aim(shooter)
         move.enemy(enemies)
         missiles = move.missile(missiles)
-
-           
+        end = time.time()
+        print(f'Process time: {end-st}')
         stddraw.show(20)
         shooter.time += 1 #update time since last missile
 
