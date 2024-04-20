@@ -6,6 +6,7 @@ Main project
 
 from home import HomeScreen,EndScreen
 from gamerun import GameLoop
+import time
 
 
 
@@ -46,7 +47,6 @@ class Game:
 
         #games main loop(continues rounds)
         while active:
-
 
     
             #Run gameloop

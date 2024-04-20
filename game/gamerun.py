@@ -220,16 +220,3 @@ class GameLoop:
         #scale form
         stddraw.setXscale(-self.screenX,self.screenY)
         stddraw.setYscale(-self.screenY,self.screenY)
-
-
-
-
-
-
-
-
-
-
-
-
-
