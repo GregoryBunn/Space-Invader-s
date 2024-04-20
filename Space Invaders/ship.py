@@ -35,7 +35,7 @@ class Ship:
                         col = pic.get(i, j)
                         t = (i-64)*cos(stAngle)-(j-64)*sin(stAngle) + 64
                         l = (i-64)*sin(stAngle)+(j-64)*cos(stAngle) + 64
-                        pic1.set(int(t), int(l), col)
+                        pic1._surface.set_at((int(t), int(l)), (col.getRed(), col.getBlue(), col.getGreen(), 255))
             pics[count] = pic1
             stAngle +=pi/36
             count +=1 
