@@ -16,10 +16,21 @@ def startScreen():
     stddraw.setFontSize(35)
     stddraw.text(0, -1.4, "Press any key to start")
     stddraw.show(0)
+
 def loseScreen():
     stddraw.clear(stddraw.GRAY)
     stddraw.setPenColor(stddraw.WHITE)
     stddraw.setFontSize(45)
     stddraw.text(0, 1.4, "You Lose :(")
     stddraw.setFontSize(35)
-    stddraw.text(0, -1.4, "Press any key to reStart")
+    stddraw.text(0, -1.4, "Press any key to restart")
+    stddraw.show(0)
+
+def winScreen():
+    stddraw.clear(stddraw.GRAY)
+    stddraw.setPenColor(stddraw.WHITE)
+    stddraw.setFontSize(45)
+    stddraw.text(0, 1.4, "You WIN!")
+    stddraw.setFontSize(35)
+    stddraw.text(0, -1.4, "Press any key to go to the next level!")
+    stddraw.show(0)
