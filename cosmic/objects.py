@@ -1,8 +1,5 @@
 #objects? classes?
 import stddraw, objects, math
-
-#testing 2
-
 #object classes
 class shooter():
     xPos = 0  #x position
@@ -16,19 +13,22 @@ class shooter():
     time = 0 #time since last missile
     mTime = 10 #time(ms) between missiles
     lives = 1 #default: 3 lives
+    level = 1 #player level counter, default: 1
 
 class screen():
     x = 10
     y = 10
     win = False #default: lose
 
+class enemy_level():    
+    xNum = 1  #number of enemies across (default 1)
+    yNum = 0  #number of enemies down (default 0)
+
 class enemy():
-    xNum = 5  #number of enemies across
-    yNum = 3  #number of enemies down
     rad = 0.75  #radius
     eDir = 1 #direction
     s = 0.05 #speed
-    life = 3
+    life = 3 #hitpoint default 1
     def __init__(self, xPos, yPos):
         self.xPos = xPos  #imported x position
         self.yPos = yPos  #imported y position
@@ -42,10 +42,9 @@ class missile():
         self.direc = direc #imported direction
 
 #extra object functions
-def buildEnemies(e, wind):
-    enemy = objects.enemy(0,0)
-    for y in range(enemy.yNum):
-        for x in range(enemy.xNum): 
+def buildEnemies(e, eSize, wind):
+    for y in range(eSize.yNum):
+        for x in range(eSize.xNum): 
             e.append(objects.enemy((-9 + x*2), (7.25 - y*2)))
             
 def addMiss(m, s): #missile, shooter
@@ -76,11 +75,6 @@ def checkGameover(E,P,S):  #E=enemies, P=player, S=screen
             S.win = False #player loses
             return False
 
-    #check if no enemies
-    if len(E)==0:
-        S.win = True #player wins
-        return False
-
     return True
 
 #(modified for hitpoints using enemy lives)
@@ -89,7 +83,7 @@ def checkEnemHit(E, M, P): #E=enemy, M=missile, P=player
     remove_enemies = []
     remove_missiles = []
 
-    #loop through enemies
+    #loop through enemies and track indexes
     for m, missile in enumerate(M):
         for e, enemy in enumerate(E):
             #distance between missile and enemy
@@ -105,17 +99,6 @@ def checkEnemHit(E, M, P): #E=enemy, M=missile, P=player
                     remove_enemies.append(e)
                     P.score += 2 #player score increase
                 break
-
-            """
-            #check if enemy is hit on last life and add index to removal list
-            if (dis <= enemy.rad) or (enemy.life==0):
-                remove_enemies.append(e)
-                remove_missiles.append(m)
-                #increase score
-                P.score += 2
-                #break inner loop to move to next missile
-                break
-            """
 
     #remove enemies and missiles
     #loops through sorted removal lists starting from the back

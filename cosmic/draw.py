@@ -5,6 +5,7 @@ def gameScreen(wind):
     game.clear()
     stddraw.setXscale(-wind.x, wind.x)
     stddraw.setYscale(-wind.y, wind.y)
+    stddraw.setFontSize(18)
 
 def shooter(s):
     #player
@@ -37,7 +38,11 @@ def highscore():
 
     #draw highscore
     stddraw.setPenColor(stddraw.WHITE)
-    stddraw.text(-8, 9, "Highscore: "+str(high_s))
+    stddraw.text(-8, 9.5, "Highscore: "+str(high_s))
+
+def level(player):
+    stddraw.setPenColor(stddraw.WHITE)
+    stddraw.text(-8.7, 8.5, "Level: "+str(player.level))
 
 def missiles(m):
     stddraw.setPenColor(stddraw.BLACK)
