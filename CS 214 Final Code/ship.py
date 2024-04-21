@@ -2,17 +2,18 @@ from math import sin, cos, pi
 from picture import Picture
 from stddraw import picture, filledCircle, setPenColor, WHITE
 pic = Picture('Ship1.png')
-pics = [None]*73
+pics = [None]*74
 
 class Ship:
     '''
     Pos - the position in the pics list that we are displaying
     angle - the angle of the ship that the bullet takes on when being fired
     '''
-    def __init__(self, x, y, angle, pos):
+    def __init__(self, x, y, angle, fireRate, pos):
         self._x = x
         self._y = y
         self._angle = angle
+        self._fireRate = fireRate
         self._pos = pos
     def create():
         count = 0
@@ -56,14 +57,14 @@ class Ship:
         '''
         if rotation == -1 and self._pos != 0:
             self._pos -= 1
-            self._angle += pi/36
+            self._angle += pi/72
         elif rotation == 1 and self._pos !=len(pics)-1:
             self._pos += 1
-            self._angle -= pi/36
+            self._angle -= pi/72
         else:
             pass
         picture(pics[self._pos], self._x, self._y)
-        if self._pos == 37:
+        if self._pos == 74:
             self._angle = 0
         elif self._pos == 0:
             self._angle = pi
@@ -82,16 +83,21 @@ class Ship:
         self._pos = pos
     def getY(self):
         return self._y
+    def getFireRate(self):
+        return self._fireRate
+    def setFireRate(self, fireRate):
+        self._fireRate = fireRate
 
 '''
 This class handles the bullets and their movements
 '''
 class Bullet:
-    def __init__(self, x, y, angle, state):
+    def __init__(self, x, y, angle, owner, state):
         self._x = x
         self._y = y
         self._angle = angle
         self._state = state
+        self._owner = owner
 
     def move(self):
         self._y += 0.06*sin(self._angle)
@@ -111,3 +117,5 @@ class Bullet:
         return self._state
     def setState(self, state):
         self._state = state
+    def getOwner(self):
+        return self._owner

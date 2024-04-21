@@ -1,24 +1,25 @@
 import screens, stddraw, enemies, time, threading
 from ship import Ship, Bullet
-from math import pi
+from math import pi, sqrt
 #Scale is just incase we all used different scale when programming but we can talk about what scale we want to use when we are all together
 #I used scale of '2' when i coded mine so it would work inbetween -2 and 2
-def mainGame(scale):
+def mainGame(scale, players):
     #initializing all variables
     aliens = []
+    bullets = []
     numEnemies = 3
     spacing = scale*0.2
     y = scale - scale*0.1
     dir = 1
-    temp = None
     changeDir = 0
+    fireRate = 10
+    limit = 0
+    gameState = True
     #______________________________________________________________________________________________#
     '''
     centers the enemies when starting the game, we can decide if we want to do this later on.
     It just looks nice when running but doesnt really matter at all, just adds extra lines of code.
     '''
-    while not stddraw.hasNextKeyTyped():
-        screens.startScreen()
     if numEnemies%2 == 0:
         xInit = (-spacing/2)-((numEnemies/2) - 1)*spacing
     else:                                   
@@ -34,11 +35,25 @@ def mainGame(scale):
             x += spacing
         y -= spacing
     #Make a ship
-    s0 = Ship(0, -1.8, pi/2, 37)
+    if players == 2:
+        s1 = Ship(0.4, -1.8, pi/2, 0, 37)
+        s0 = Ship(-0.4, -1.8, pi/2, 0, 37)
+    elif players == 1:
+        s0 = Ship(0, -1.8, pi/2, 0, 37)
 
-
-    while True:
+    while gameState:
         stddraw.clear(stddraw.BLACK)
+        if len(aliens) == 0:
+            del s0
+            for i in range(len(bullets)):
+                del bullets[0]
+            while stddraw.hasNextKeyTyped():
+                stddraw.nextKeyTyped()
+            screens.winScreen()
+            time.sleep(1)
+            while not stddraw.hasNextKeyTyped():
+                screens.winScreen()
+            return 1
         frameST = time.time()
         #Handles all of the enemies movements
         if changeDir == 1:
@@ -51,12 +66,16 @@ def mainGame(scale):
                 check = aliens[i].move(dir, 0.01, scale)
                 if check == 1:
                     changeDir = 1
-        #__________________________________________________________________________
+
+        #keyboard inputs
         keys = stddraw.getKeysPressed()
         if keys[stddraw.K_e]:
             s0.rotate(1)
         elif keys[stddraw.K_q]:
             s0.rotate(-1)
+        elif keys[stddraw.K_w]:
+            s0.setAngle(pi/2)
+            s0.setPos(37)
         if keys[stddraw.K_a]:
             if s0.getX() > (-scale+0.2):
                 s0.move(-1)
@@ -70,8 +89,72 @@ def mainGame(scale):
         else:
             s0.rotate()
         
+        if players == 2:
+            if keys[stddraw.K_o]:
+                s1.rotate(1)
+            elif keys[stddraw.K_u]:
+                s1.rotate(-1)
+            elif keys[stddraw.K_i]:
+                s1.setAngle(pi/2)
+                s1.setPos(37)
+            if keys[stddraw.K_j]:
+                if s1.getX() > (-scale+0.2):
+                    s1.move(-1)
+                else:
+                    s1.rotate()
+            elif keys[stddraw.K_l]:
+                if s1.getX() < (scale-0.2):
+                    s1.move(1)
+                else:
+                    s1.rotate()
+            else:
+                s1.rotate()
 
+        if keys[stddraw.K_SPACE] and s0.getFireRate() <= 0:
+            bullet = Bullet(s0.getX(), s0.getY(), s0.getAngle(), 'player1',  True)
+            bullets.append(bullet)
+            s0.setFireRate(fireRate)
+        else: s0.setFireRate(s0.getFireRate()-1)
+        if players == 2:
+            if keys[stddraw.K_n] and s1.getFireRate() <= 0:
+                bullet = Bullet(s1.getX(), s1.getY(), s1.getAngle(), 'player2',  True)
+                bullets.append(bullet)
+                s1.setFireRate(fireRate)
+            else: s1.setFireRate(s1.getFireRate()-1)
+
+        i = 0
+        while i != len(bullets):
+            bullets[i].move()
+            if bullets[i].getX() > 2 or bullets[i].getX() < -2 or bullets[i].getY() > 2 or bullets[i].getY() < -2:
+                del bullets[i]
+            else:
+                i += 1
         
+        j = 0
+        while j < len(aliens):
+            i = 0
+            while i < len(bullets):
+                distance = sqrt((aliens[j].getX() - bullets[i].getX())**2 + (aliens[j].getY() - bullets[i].getY())**2)
+                if distance <= (scale*0.075+0.05):
+                    print(bullets[i].getOwner())
+                    bullets[i].setState(False)
+                    aliens[j].setState(False)
+                    flag = True
+                i += 1
+            j += 1
+
+        i = 0
+        while i < len(aliens):
+            if aliens[i].getState() == False:
+                del aliens[i]
+            else: i+= 1
+        i = 0
+        while i < len(bullets):
+            if bullets[i].getState() == False:
+                del bullets[i]
+            else:
+                i += 1
+    
         frameEND = time.time()
         '''
         The next few lines of code does the math inorder to have a consistent frame rate throughout the game
