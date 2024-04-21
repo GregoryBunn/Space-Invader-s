@@ -3,11 +3,11 @@ find the png files in the current directory
 
 
 Different methods for objects that may be confusing:
-
-The get... and set... method: (getX() or setY()):
-- variables are ment to be private in objects according to our prof, so thats why unders the dunder method init (__init__) when you set the variables
-- with the '_' it makes them private. For example self._x = x. But now because they are provate, we can't access or change the variables information outside of the class. 
-- Thats why we have the get and set method. get will return the value that it's getting and set will set the value you input to the atribute you set it to.
+      
+      The get... and set... method: (getX() or setY()):
+      - variables are ment to be private in objects according to our prof, so thats why unders the dunder method init (__init__) when you set the variables
+      - with the '_' it makes them private. For example self._x = x. But now because they are provate, we can't access or change the variables information outside of the class. 
+      - Thats why we have the get and set method. get will return the value that it's getting and set will set the value you input to the atribute you set it to.
 
 The ships have and angle, pos, state, x, and y atribute:
       - x and y are pretty self explanitory
