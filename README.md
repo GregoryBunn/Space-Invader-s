@@ -13,3 +13,7 @@ The ships have and angle, pos, state, x, and y atribute:
 - the pos atribute is the position in the pics list in the file 'ship.py', the pics list is where we store all the different png's of the ship in different orrientations. All of these png's are done
 - on start up of the program and thats why it takes a second or 2 to start. If we didn;t store them in a list before the game started it would have to do the maths for the orrientation of the ship every time and
 - that would slow down the program considerably.
+
+The owner atribute for bullets:
+- That is just so that we can see which player shot the bullet in 2 player
+- it's to make score traking a lot easier. you will see if you kill an alien now it will print to terminal which player shot the bullet that killed the alien.
