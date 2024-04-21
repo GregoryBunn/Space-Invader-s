@@ -1,8 +1,6 @@
 Run the 'gameRun.py' in 'CS 214 Final Code' to run the code. Just make sure you change your directory in terminal to 'CS 214 Final Code' otherwise it will say that it can't
 find the png files in the current directory
 
-
-Different methods for objects that may be confusing:
       
 The get... and set... method: (getX() or setY()):
 - variables are ment to be private in objects according to our prof, so thats why unders the dunder method init (__init__) when you set the variables
