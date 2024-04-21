@@ -15,6 +15,9 @@ class Ship:
         self._angle = angle
         self._fireRate = fireRate
         self._pos = pos
+    #The create function makes all the different png's needed for the ship and stores it in a list. 
+    #So when we rotate it just gets a photo that has already been rotated when we first started the program and that's
+    #why it takes a few second to start the program because it does all this calculation before we start instead of during the game
     def create():
         count = 0
         stAngle = -pi/2
@@ -30,6 +33,9 @@ class Ship:
             print(count)
             stAngle += pi/72
             count += 1
+            
+    #two functions so that we can thread them - you can see the threading in the 'game.py' file
+    #this just makes the start up time double the speed it would be if we didnt thread them
     def create1():
         count = 37
         stAngle = 0
@@ -83,6 +89,7 @@ class Ship:
         self._pos = pos
     def getY(self):
         return self._y
+    #Each ship gets there own fire rate that can be changed aswell as we collect power ups
     def getFireRate(self):
         return self._fireRate
     def setFireRate(self, fireRate):

@@ -35,6 +35,8 @@ def mainGame(scale, players):
             x += spacing
         y -= spacing
     #Make a ship
+    #You'll see that this function 'mainGame' takes in players aswell and that is because on the start screen if you press the number 2 key
+    #it will be 2 player, making a second ship. this happens in the 'game.py' file
     if players == 2:
         s1 = Ship(0.4, -1.8, pi/2, 0, 37)
         s0 = Ship(-0.4, -1.8, pi/2, 0, 37)
@@ -43,6 +45,8 @@ def mainGame(scale, players):
 
     while gameState:
         stddraw.clear(stddraw.BLACK)
+
+        #Shows the win screen
         if len(aliens) == 0:
             del s0
             for i in range(len(bullets)):
@@ -53,8 +57,14 @@ def mainGame(scale, players):
             time.sleep(1)
             while not stddraw.hasNextKeyTyped():
                 screens.winScreen()
+            #return 1 so that in the 'game.py' file, we can see if they have won a game and then make it more difficult later on
+            #So for now it doesn't do much but is there for code to use later on.
             return 1
         frameST = time.time()
+
+
+
+
         #Handles all of the enemies movements
         if changeDir == 1:
             changeDir = 0
@@ -66,6 +76,9 @@ def mainGame(scale, players):
                 check = aliens[i].move(dir, 0.01, scale)
                 if check == 1:
                     changeDir = 1
+
+
+
 
         #keyboard inputs
         keys = stddraw.getKeysPressed()
@@ -89,6 +102,7 @@ def mainGame(scale, players):
         else:
             s0.rotate()
         
+        #The movement for the second player on if a second player is chosen, otherwise it does nothing
         if players == 2:
             if keys[stddraw.K_o]:
                 s1.rotate(1)
@@ -110,11 +124,19 @@ def mainGame(scale, players):
             else:
                 s1.rotate()
 
+
+
+
+
+
+        #shooting for the first player
         if keys[stddraw.K_SPACE] and s0.getFireRate() <= 0:
             bullet = Bullet(s0.getX(), s0.getY(), s0.getAngle(), 'player1',  True)
             bullets.append(bullet)
             s0.setFireRate(fireRate)
         else: s0.setFireRate(s0.getFireRate()-1)
+
+        #Shooting for the second player
         if players == 2:
             if keys[stddraw.K_n] and s1.getFireRate() <= 0:
                 bullet = Bullet(s1.getX(), s1.getY(), s1.getAngle(), 'player2',  True)
@@ -122,6 +144,12 @@ def mainGame(scale, players):
                 s1.setFireRate(fireRate)
             else: s1.setFireRate(s1.getFireRate()-1)
 
+
+
+
+
+
+        #interaction between the enemies and bullets. 
         i = 0
         while i != len(bullets):
             bullets[i].move()
