@@ -1,26 +1,31 @@
 #the game?
-import stddraw, title, objects, draw, move, project, time
+import stddraw, title, objects, draw, move, project, level
 def clear():
     stddraw.clear(stddraw.GRAY)
 
 def reload():
     stddraw.show(3000)
     project.main()
-'''
-Hello
-'''
+
 
 def gamerun(SCREEN, SHOOTER):
     #initialising objects
     shooter = SHOOTER
     screen = SCREEN
     enemies = []
-    objects.buildEnemies(enemies, screen)
+    enemySize = objects.enemy_level()
     missiles = []
+    lDisplay = False #level-screen-displayed flag
 
     play = True
-    while (play):
-        st = time.time()
+    while (play):        
+        #levels
+        if not(lDisplay):
+            level.drawScreen(screen, shooter)
+            lDisplay = True        
+            level.enemyUpdate(shooter, enemySize, enemies, screen)
+        
+
         #draw screen & objects 
         draw.gameScreen(screen)
         draw.shooter(shooter)
@@ -28,11 +33,13 @@ def gamerun(SCREEN, SHOOTER):
         draw.score(shooter)
         draw.highscore()
         draw.lives(shooter)
+        draw.level(shooter)
         draw.missiles(missiles)
            
-        #check for gameover, enemy hit
+        #check game statuses
         enemies, missiles = objects.checkEnemHit(enemies, missiles, shooter)
         play = objects.checkGameover(enemies, shooter, screen)
+        lDisplay = level.checkLevel(enemies, shooter)
 
         #user inputs
         if(stddraw.hasNextKeyTyped()):
@@ -56,9 +63,9 @@ def gamerun(SCREEN, SHOOTER):
         shooter.aDir = move.aim(shooter)
         move.enemy(enemies)
         missiles = move.missile(missiles)
-        end = time.time()
-        print(f'Process time: {end-st}')
-        stddraw.show(20)
+
+           
+        stddraw.show(10)
         shooter.time += 1 #update time since last missile
 
     return shooter
