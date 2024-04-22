@@ -20,13 +20,16 @@ def main():
     a.join()
     b.join()
 
-    while not stddraw.hasNextKeyTyped():
-        screens.startScreen()
+    #starting screen(s) displayed
+    screens.playerSelect()
     keys = stddraw.getKeysPressed()
     if keys[stddraw.K_2]:
         players = 2
-    else:
+    elif keys[stddraw.K_1]:
         players = 1
+    while not stddraw.hasNextKeyTyped():
+        screens.startScreen()
+
     while True:
         if wl == 0:
             spd = 0
