@@ -26,6 +26,8 @@ def main():
     while True:
         if wl == 0:
             spd = 0
+            wl = None
+            score = 0
         if outcome < 3:
                 temp, score = gameModes.mainGame(scale, players, outcome, spd, score)
                 if temp == 1:
@@ -36,7 +38,7 @@ def main():
                     spd = 0
                     score = 0
         else:
-            wl = gameModes.boss(scale, 5)
+            wl = gameModes.boss(scale, 10)
             outcome = 0
 
 
