@@ -7,6 +7,7 @@ def mainGame(scale, players, en, spd, sc):
     #initializing all variables
     aliens = []
     bullets = []
+    enBullets = []
     numEnemies = 3
     if en != 0:
         numEnemies += en
@@ -14,7 +15,10 @@ def mainGame(scale, players, en, spd, sc):
     y = scale - scale*0.1
     dir = 1
     changeDir = 0
+    shootingEnemy = 0
+    test = 0
     fireRate = 20
+    rand = None
     gameState = True
     #______________________________________________________________________________________________#
     '''
@@ -30,7 +34,7 @@ def mainGame(scale, players, en, spd, sc):
         x = xInit
         for i in range(numEnemies):
             name = counter
-            name = enemies.Enemy(x, y, scale*0.075, True)
+            name = enemies.Enemy(x, y, scale*0.075, 1, True)
             aliens.append(name)
             counter += 1
             x += spacing
@@ -39,10 +43,10 @@ def mainGame(scale, players, en, spd, sc):
     #You'll see that this function 'mainGame' takes in players aswell and that is because on the start screen if you press the number 2 key
     #it will be 2 player, making a second ship. this happens in the 'game.py' file
     if players == 2:
-        s1 = Ship(0.4, -1.8, pi/2, 0, 37, sc)
-        s0 = Ship(-0.4, -1.8, pi/2, 0, 37, sc)
+        s1 = Ship(0.4, -1.8, pi/2, 0, 37, 0.1, 1, sc)
+        s0 = Ship(-0.4, -1.8, pi/2, 0, 37, 0.1, 1, sc)
     elif players == 1:
-        s0 = Ship(0, -1.8, pi/2, 0, 37, sc)
+        s0 = Ship(0, -1.8, pi/2, 0, 37, 0.1, 1, sc)
 
     while gameState:
         stddraw.clear(stddraw.BLACK)
@@ -64,8 +68,16 @@ def mainGame(scale, players, en, spd, sc):
             return 1, sc
         frameST = time.time()
 
-
-
+        rand = random.randint(0, 200)
+        if rand == 50:
+            shootingEnemy = int(random.random()*(len(aliens)-1))
+            bul = test
+            bul = enemies.enBullet(aliens[shootingEnemy].getX(),aliens[shootingEnemy].getY())
+            enBullets.append(bul)
+            test += 1
+        for i in range(len(enBullets)):
+            enBullets[i].move()
+            
 
         #Handles all of the enemies movements
         if changeDir == 1:
@@ -175,7 +187,15 @@ def mainGame(scale, players, en, spd, sc):
                    # flag = True
                 i += 1
             j += 1
-
+        i = 0
+        while i < len(enBullets):
+            distance = sqrt((enBullets[i].get_x() - s0.getX())**2 + (enBullets[i].get_y() - s0.getY())**2)
+            if distance <= s0.get_hitBox() + 0.05:
+                print('test')
+                stddraw.clear()
+                time.sleep(2)
+                return 0, 0
+            i += 1
         i = 0
         while i < len(aliens):
             if aliens[i].getState() == False:
@@ -224,7 +244,7 @@ def boss(scale, htps):
     gameState = True
     lose = False
     fireRate = 50
-    s0 = Ship(0, -1.8, pi/2, 0, 37, 0)
+    s0 = Ship(0, -1.8, pi/2, 0, 37, 0.01, 1, 0)
     boss = enemies.Boss(0, scale - scale*0.2, htps, 0.18, True)
     while gameState:
         stddraw.clear(stddraw.BLACK)
@@ -235,7 +255,7 @@ def boss(scale, htps):
             time.sleep(1)
             while not stddraw.hasNextKeyTyped():
                 screens.loseScreen()
-            return 0
+            return 0, 0
         if changeDir == 1:
             changeDir = 0
             boss.moveDown()
@@ -246,8 +266,6 @@ def boss(scale, htps):
                 changeDir = 1
         
         rand = random.randint(0, 200)
-        if rand == 50:
-            print('swap')
         if rand == 50 and timer <= 0:
             dir *= -1
             timer = 10
@@ -308,7 +326,7 @@ def boss(scale, htps):
             time.sleep(1)
             while not stddraw.hasNextKeyTyped():
                 screens.winScreen()
-            return 1
+            return 1, 0
         i = 0
         while i < len(bullets):
             if bullets[i].getState() == False:

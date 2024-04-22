@@ -1,5 +1,6 @@
 from stddraw import picture
 from picture import Picture
+import stddraw
 pic = Picture('Aliens.png')
 boss = Picture('Boss0.png')
 class Enemy:
@@ -65,3 +66,16 @@ class Boss:
         return self._htp
     def hit(self):
         self._htp -= 1
+    
+class enBullet:
+    def __init__(self, x, y):
+        self._x = x
+        self._y = y
+    def move(self):
+        self._y -= 0.01
+        stddraw.setPenColor(stddraw.BLUE)
+        stddraw.filledCircle(self._x, self._y, 0.05)
+    def get_x(self):
+        return self._x
+    def get_y(self):
+        return self._y
