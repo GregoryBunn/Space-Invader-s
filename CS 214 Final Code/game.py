@@ -20,10 +20,10 @@ def main():
     else:
         players = 1
     while True:
-        if outcome < 2:
+        if outcome < 3:
             outcome += gameModes.mainGame(scale, players)
         else:
-            gameModes.boss(scale)
+            gameModes.boss(scale, 15)
             outcome = 0
 
 

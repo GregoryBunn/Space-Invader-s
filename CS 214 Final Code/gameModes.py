@@ -1,4 +1,4 @@
-import screens, stddraw, enemies, time, threading, score
+import screens, stddraw, enemies, time, threading, score, random
 from ship import Ship, Bullet
 from math import pi, sqrt
 #Scale is just incase we all used different scale when programming but we can talk about what scale we want to use when we are all together
@@ -203,24 +203,36 @@ def mainGame(scale, players):
             stddraw.show(1000/90)
 
 
-def boss(scale):
+def boss(scale, htps):
     bullets = []
     changeDir = 0
     dir = 1
     gameState = True
-    fireRate = 40
+    lose = False
+    fireRate = 50
     s0 = Ship(0, -1.8, pi/2, 0, 37, 0)
-    boss = enemies.Boss(0, scale - scale*0.1, 10, 0.3, True)
+    boss = enemies.Boss(0, scale - scale*0.2, htps, 0.3, True)
     while gameState:
         stddraw.clear(stddraw.BLACK)
+        if lose == True:
+            while stddraw.hasNextKeyTyped():
+                stddraw.nextKeyTyped()
+            screens.loseScreen()
+            time.sleep(1)
+            while not stddraw.hasNextKeyTyped():
+                screens.loseScreen()
         if changeDir == 1:
             changeDir = 0
             boss.moveDown()
             dir *= -1
         else:
-            check = boss.move(dir, 0.01, scale)
+            check = boss.move(dir, 0.02, scale)
             if check == 1:
                 changeDir = 1
+        
+        rand = random.randint(0, 200)
+        if rand == 50:
+            dir *= -1
 
         keys = stddraw.getKeysPressed()
         if keys[stddraw.K_e]:
@@ -277,5 +289,8 @@ def boss(scale):
                 del bullets[i]
             else:
                 i += 1
+        
+        if sqrt((boss.get_y() - s0.getY())**2) <= boss.get_hitBox():
+            lose = True 
         
         stddraw.show(1000/90)
