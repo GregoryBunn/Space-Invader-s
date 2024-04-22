@@ -28,7 +28,7 @@ def main():
             spd = 0
             wl = None
             score = 0
-        if outcome < 3:
+        if outcome < 0:
                 temp, score = gameModes.mainGame(scale, players, outcome, spd, score)
                 if temp == 1:
                     spd += 0.01

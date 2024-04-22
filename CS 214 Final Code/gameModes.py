@@ -220,6 +220,7 @@ def boss(scale, htps):
     bullets = []
     changeDir = 0
     dir = 1
+    timer = 0
     gameState = True
     lose = False
     fireRate = 50
@@ -246,7 +247,12 @@ def boss(scale, htps):
         
         rand = random.randint(0, 200)
         if rand == 50:
+            print('swap')
+        if rand == 50 and timer <= 0:
             dir *= -1
+            timer = 10
+        timer -= 1
+
 
         keys = stddraw.getKeysPressed()
         if keys[stddraw.K_e]:

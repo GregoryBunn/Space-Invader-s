@@ -3,10 +3,11 @@ from picture import Picture
 pic = Picture('Aliens.png')
 boss = Picture('Boss0.png')
 class Enemy:
-    def __init__(self, x, y, hitBox, state):
+    def __init__(self, x, y, hitBox, htp, state):
         self._x = x
         self._y = y
         self._state = state
+        self._htp = htp
         self._hitBox = hitBox
     
     def move(self, dir, spd, scale):
