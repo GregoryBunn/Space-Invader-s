@@ -3,7 +3,7 @@ import stddraw
 def startScreen():
     stddraw.clear(stddraw.GRAY)
     stddraw.setPenColor(stddraw.WHITE)
-    stddraw.setFontSize(45)
+    stddraw.setFontSize(40)
     stddraw.text(0, 1.8, "COMSIC CONQUISTADORS")
     stddraw.setFontSize(35)
     stddraw.text(0, 0.8, "Instructions:")
@@ -31,6 +31,6 @@ def winScreen():
     stddraw.setPenColor(stddraw.WHITE)
     stddraw.setFontSize(45)
     stddraw.text(0, 1.4, "You WIN!")
-    stddraw.setFontSize(35)
+    stddraw.setFontSize(18)
     stddraw.text(0, -1.4, "Press any key to go to the next level!")
     stddraw.show(0)

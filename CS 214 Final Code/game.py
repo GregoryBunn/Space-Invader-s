@@ -8,14 +8,18 @@ def main():
     htp = 2
     spd = 0
     score = 0
+     
+    #game setup?
     stddraw.setXscale(-scale, scale)
     stddraw.setYscale(-scale, scale)
+    stddraw.setFontFamily('OCR A Extended')
     a = threading.Thread(target=Ship.create)
     b = threading.Thread(target=Ship.create1)
     a.start()
     b.start()
     a.join()
     b.join()
+
     while not stddraw.hasNextKeyTyped():
         screens.startScreen()
     keys = stddraw.getKeysPressed()
