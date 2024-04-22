@@ -74,7 +74,8 @@ class enBullet:
     def move(self):
         self._y -= 0.01
         stddraw.setPenColor(stddraw.BLUE)
-        stddraw.filledCircle(self._x, self._y, 0.05)
+        stddraw.setPenRadius(0.01)
+        stddraw.line(self._x, self._y, self._x, (self._y-0.1))
     def get_x(self):
         return self._x
     def get_y(self):

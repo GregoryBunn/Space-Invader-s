@@ -191,7 +191,6 @@ def mainGame(scale, players, en, spd, sc):
         while i < len(enBullets):
             distance = sqrt((enBullets[i].get_x() - s0.getX())**2 + (enBullets[i].get_y() - s0.getY())**2)
             if distance <= s0.get_hitBox() + 0.05:
-                print('test')
                 stddraw.clear()
                 time.sleep(2)
                 return 0, 0
