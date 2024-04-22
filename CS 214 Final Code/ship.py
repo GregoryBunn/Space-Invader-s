@@ -9,12 +9,13 @@ class Ship:
     Pos - the position in the pics list that we are displaying
     angle - the angle of the ship that the bullet takes on when being fired
     '''
-    def __init__(self, x, y, angle, fireRate, pos):
+    def __init__(self, x, y, angle, fireRate, pos, score):
         self._x = x
         self._y = y
         self._angle = angle
         self._fireRate = fireRate
         self._pos = pos
+        self._score = score
     #The create function makes all the different png's needed for the ship and stores it in a list. 
     #So when we rotate it just gets a photo that has already been rotated when we first started the program and that's
     #why it takes a few second to start the program because it does all this calculation before we start instead of during the game
@@ -89,6 +90,12 @@ class Ship:
         self._pos = pos
     def getY(self):
         return self._y
+    def getScore(self):
+        return self._score
+    def inscreaseScore(self):
+        self._score += 1
+    def resetScore(self):
+        self._score = 0
     #Each ship gets there own fire rate that can be changed aswell as we collect power ups
     def getFireRate(self):
         return self._fireRate

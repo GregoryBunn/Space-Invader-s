@@ -1,4 +1,4 @@
-import screens, stddraw, enemies, time, threading
+import screens, stddraw, enemies, time, threading, score
 from ship import Ship, Bullet
 from math import pi, sqrt
 #Scale is just incase we all used different scale when programming but we can talk about what scale we want to use when we are all together
@@ -38,10 +38,10 @@ def mainGame(scale, players):
     #You'll see that this function 'mainGame' takes in players aswell and that is because on the start screen if you press the number 2 key
     #it will be 2 player, making a second ship. this happens in the 'game.py' file
     if players == 2:
-        s1 = Ship(0.4, -1.8, pi/2, 0, 37)
-        s0 = Ship(-0.4, -1.8, pi/2, 0, 37)
+        s1 = Ship(0.4, -1.8, pi/2, 0, 37, 0)
+        s0 = Ship(-0.4, -1.8, pi/2, 0, 37, 0)
     elif players == 1:
-        s0 = Ship(0, -1.8, pi/2, 0, 37)
+        s0 = Ship(0, -1.8, pi/2, 0, 37, 0)
 
     while gameState:
         stddraw.clear(stddraw.BLACK)
@@ -131,7 +131,7 @@ def mainGame(scale, players):
 
         #shooting for the first player
         if keys[stddraw.K_SPACE] and s0.getFireRate() <= 0:
-            bullet = Bullet(s0.getX(), s0.getY(), s0.getAngle(), 'player1',  True)
+            bullet = Bullet(s0.getX(), s0.getY(), s0.getAngle(), '1',  True)
             bullets.append(bullet)
             s0.setFireRate(fireRate)
         else: s0.setFireRate(s0.getFireRate()-1)
@@ -139,7 +139,7 @@ def mainGame(scale, players):
         #Shooting for the second player
         if players == 2:
             if keys[stddraw.K_n] and s1.getFireRate() <= 0:
-                bullet = Bullet(s1.getX(), s1.getY(), s1.getAngle(), 'player2',  True)
+                bullet = Bullet(s1.getX(), s1.getY(), s1.getAngle(), '2',  True)
                 bullets.append(bullet)
                 s1.setFireRate(fireRate)
             else: s1.setFireRate(s1.getFireRate()-1)
@@ -164,7 +164,10 @@ def mainGame(scale, players):
             while i < len(bullets):
                 distance = sqrt((aliens[j].getX() - bullets[i].getX())**2 + (aliens[j].getY() - bullets[i].getY())**2)
                 if distance <= (scale*0.075+0.05):
-                    print(bullets[i].getOwner())
+                    if bullets[i].getOwner() == '1':
+                        s0.inscreaseScore()
+                    elif bullets[i].getOwner() == '2':
+                        s1.inscreaseScore()
                     bullets[i].setState(False)
                     aliens[j].setState(False)
                     flag = True
@@ -182,7 +185,10 @@ def mainGame(scale, players):
                 del bullets[i]
             else:
                 i += 1
-    
+        if players == 1:
+            score.displayScore(s0.getScore())
+        elif players == 2:
+            score.displayScore(s0.getScore(), s1.getScore())
         frameEND = time.time()
         '''
         The next few lines of code does the math inorder to have a consistent frame rate throughout the game
