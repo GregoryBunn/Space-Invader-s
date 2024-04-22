@@ -1,4 +1,4 @@
-import gameModes, stddraw, threading, screens
+import gameModes, stddraw, threading, screens, enemies
 from ship import Ship
 
 def main():
@@ -20,8 +20,11 @@ def main():
     else:
         players = 1
     while True:
-        if outcome < 3:
+        if outcome < 2:
             outcome += gameModes.mainGame(scale, players)
         else:
-            return
+            gameModes.boss(scale)
+            outcome = 0
+
+
 if __name__=='__main__': main()

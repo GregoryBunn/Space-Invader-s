@@ -31,7 +31,6 @@ class Ship:
                         l = (i-64)*sin(stAngle)+(j-64)*cos(stAngle) + 64
                         pic1._surface.set_at((int(t), int(l)), (col.getRed(), col.getBlue(), col.getGreen(), 255))
             pics[count] = pic1
-            print(count)
             stAngle += pi/72
             count += 1
             
@@ -50,7 +49,6 @@ class Ship:
                         pic1._surface.set_at((int(t), int(l)), (col.getRed(), col.getBlue(), col.getGreen(), 255))
             pics[count] = pic1
             stAngle += pi/72
-            print(count)
             count +=1
     
     def move(self, direction):

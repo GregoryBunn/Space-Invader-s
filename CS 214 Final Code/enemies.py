@@ -1,6 +1,7 @@
 from stddraw import picture
 from picture import Picture
 pic = Picture('Aliens.png')
+boss = Picture('Boss0.png')
 class Enemy:
     def __init__(self, x, y, hitBox, state):
         self._x = x
@@ -25,5 +26,41 @@ class Enemy:
         return self._y
     def getX(self):
         return self._x
+    def get_hitBox(self):
+        return self._hitBox
     def setState(self, state):
         self._state = state
+
+class Boss:
+    def __init__(self, x, y, htp, hitBox, state):
+        self._x = x
+        self._y = y
+        self._htp = htp
+        self._hitBox = hitBox
+        self._state = state
+
+    def move(self, dir, spd, scale):
+        self._x += spd*dir
+        picture(boss, self._x, self._y)
+        if self._x <= -scale+self._hitBox:
+            return 1
+        elif self._x >= scale-self._hitBox:
+            return 1
+    
+    def moveDown(self):
+        self._y -= 0.4
+        picture(boss, self._x, self._y)
+    def get_x(self):
+        return self._x
+    def get_y(self):
+        return self._y
+    def get_hitBox(self):
+        return self._hitBox
+    def get_state(self):
+        return self._state
+    def set_state(self, state):
+        self._state = state
+    def get_htps(self):
+        return self._htp
+    def hit(self):
+        self._htp -= 1

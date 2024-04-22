@@ -12,8 +12,7 @@ def mainGame(scale, players):
     y = scale - scale*0.1
     dir = 1
     changeDir = 0
-    fireRate = 10
-    limit = 0
+    fireRate = 20
     gameState = True
     #______________________________________________________________________________________________#
     '''
@@ -163,14 +162,14 @@ def mainGame(scale, players):
             i = 0
             while i < len(bullets):
                 distance = sqrt((aliens[j].getX() - bullets[i].getX())**2 + (aliens[j].getY() - bullets[i].getY())**2)
-                if distance <= (scale*0.075+0.05):
+                if distance <= (scale*aliens[j].get_hitBox()+0.05):
                     if bullets[i].getOwner() == '1':
                         s0.inscreaseScore()
                     elif bullets[i].getOwner() == '2':
                         s1.inscreaseScore()
                     bullets[i].setState(False)
                     aliens[j].setState(False)
-                    flag = True
+                   # flag = True
                 i += 1
             j += 1
 
@@ -202,3 +201,81 @@ def mainGame(scale, players):
                 stddraw.show(1000/90 - (frameEND-frameST)*1000)
         except Exception: 
             stddraw.show(1000/90)
+
+
+def boss(scale):
+    bullets = []
+    changeDir = 0
+    dir = 1
+    gameState = True
+    fireRate = 40
+    s0 = Ship(0, -1.8, pi/2, 0, 37, 0)
+    boss = enemies.Boss(0, scale - scale*0.1, 10, 0.3, True)
+    while gameState:
+        stddraw.clear(stddraw.BLACK)
+        if changeDir == 1:
+            changeDir = 0
+            boss.moveDown()
+            dir *= -1
+        else:
+            check = boss.move(dir, 0.01, scale)
+            if check == 1:
+                changeDir = 1
+
+        keys = stddraw.getKeysPressed()
+        if keys[stddraw.K_e]:
+            s0.rotate(1)
+        elif keys[stddraw.K_q]:
+            s0.rotate(-1)
+        elif keys[stddraw.K_w]:
+            s0.setAngle(pi/2)
+            s0.setPos(37)
+        if keys[stddraw.K_a]:
+            if s0.getX() > (-scale+0.2):
+                s0.move(-1)
+            else:
+                s0.rotate()
+        elif keys[stddraw.K_d]:
+            if s0.getX() < (scale-0.2):
+                s0.move(1)
+            else:
+                s0.rotate()
+        else:
+            s0.rotate()
+
+        if keys[stddraw.K_SPACE] and s0.getFireRate() <= 0:
+            bullet = Bullet(s0.getX(), s0.getY(), s0.getAngle(), '1',  True)
+            bullets.append(bullet)
+            s0.setFireRate(fireRate)
+        else: s0.setFireRate(s0.getFireRate()-1)
+
+        i = 0
+        while i != len(bullets):
+            bullets[i].move()
+            if bullets[i].getX() > 2 or bullets[i].getX() < -2 or bullets[i].getY() > 2 or bullets[i].getY() < -2:
+                del bullets[i]
+            else:
+                i += 1
+        
+        i = 0
+        while i < len(bullets):
+            distance = sqrt((boss.get_x() - bullets[i].getX())**2 + (boss.get_y() - bullets[i].getY())**2)
+            if distance <= (scale*boss.get_hitBox()+0.05):
+                s0.inscreaseScore()
+                bullets[i].setState(False)
+                boss.hit()
+                if boss.get_htps() == 0:
+                    boss.set_state(False)
+            i += 1
+        
+        if boss.get_state() == False:
+            del boss
+            return
+        i = 0
+        while i < len(bullets):
+            if bullets[i].getState() == False:
+                del bullets[i]
+            else:
+                i += 1
+        
+        stddraw.show(1000/90)
