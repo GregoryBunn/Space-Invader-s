@@ -68,15 +68,20 @@ class Boss:
         self._htp -= 1
     
 class enBullet:
-    def __init__(self, x, y):
+    def __init__(self, x, y, state):
         self._x = x
         self._y = y
+        self._state = state
     def move(self):
         self._y -= 0.01
-        stddraw.setPenColor(stddraw.BLUE)
+        stddraw.setPenColor(stddraw.GREEN)
         stddraw.setPenRadius(0.01)
         stddraw.line(self._x, self._y, self._x, (self._y-0.1))
     def get_x(self):
         return self._x
     def get_y(self):
         return self._y
+    def set_state(self, state):
+        self._state = state
+    def get_state(self):
+        return self._state

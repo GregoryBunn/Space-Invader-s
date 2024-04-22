@@ -3,7 +3,7 @@ from ship import Ship, Bullet
 from math import pi, sqrt
 #Scale is just incase we all used different scale when programming but we can talk about what scale we want to use when we are all together
 #I used scale of '2' when i coded mine so it would work inbetween -2 and 2
-def mainGame(scale, players, en, spd, sc):
+def mainGame(scale, players, en, spd, sc, htp):
     #initializing all variables
     aliens = []
     bullets = []
@@ -43,10 +43,10 @@ def mainGame(scale, players, en, spd, sc):
     #You'll see that this function 'mainGame' takes in players aswell and that is because on the start screen if you press the number 2 key
     #it will be 2 player, making a second ship. this happens in the 'game.py' file
     if players == 2:
-        s1 = Ship(0.4, -1.8, pi/2, 0, 37, 0.1, 1, sc)
-        s0 = Ship(-0.4, -1.8, pi/2, 0, 37, 0.1, 1, sc)
+        s1 = Ship(0.4, -1.8, pi/2, 0, 37, 0.1, htp, sc)
+        s0 = Ship(-0.4, -1.8, pi/2, 0, 37, 0.1, htp, sc)
     elif players == 1:
-        s0 = Ship(0, -1.8, pi/2, 0, 37, 0.1, 1, sc)
+        s0 = Ship(0, -1.8, pi/2, 0, 37, 0.1, htp, sc)
 
     while gameState:
         stddraw.clear(stddraw.BLACK)
@@ -54,6 +54,7 @@ def mainGame(scale, players, en, spd, sc):
         #Shows the win screen
         if len(aliens) == 0:
             sc = s0.getScore()
+            health = s0.get_htp()
             del s0
             for i in range(len(bullets)):
                 del bullets[0]
@@ -65,14 +66,14 @@ def mainGame(scale, players, en, spd, sc):
                 screens.winScreen()
             #return 1 so that in the 'game.py' file, we can see if they have won a game and then make it more difficult later on
             #So for now it doesn't do much but is there for code to use later on.
-            return 1, sc
+            return 1, sc, health
         frameST = time.time()
 
         rand = random.randint(0, 200)
         if rand == 50:
             shootingEnemy = int(random.random()*(len(aliens)-1))
             bul = test
-            bul = enemies.enBullet(aliens[shootingEnemy].getX(),aliens[shootingEnemy].getY())
+            bul = enemies.enBullet(aliens[shootingEnemy].getX(),aliens[shootingEnemy].getY(), True)
             enBullets.append(bul)
             test += 1
         for i in range(len(enBullets)):
@@ -188,13 +189,35 @@ def mainGame(scale, players, en, spd, sc):
                 i += 1
             j += 1
         i = 0
+
+
         while i < len(enBullets):
             distance = sqrt((enBullets[i].get_x() - s0.getX())**2 + (enBullets[i].get_y() - s0.getY())**2)
             if distance <= s0.get_hitBox() + 0.05:
-                stddraw.clear()
-                time.sleep(2)
-                return 0, 0
+                s0.set_htp(s0.get_htp() - 1)
+                print(s0.get_htp())
+                enBullets[i].set_state(False)
             i += 1
+        i = 0
+        while i <len(enBullets):
+            if enBullets[i].get_state() == False:
+                del enBullets[i]
+            else:
+                i += 1
+
+        if s0.get_htp() == 0:
+            del s0
+            screens.loseScreen()
+            time.sleep(1)
+            while stddraw.hasNextKeyTyped():
+                print(stddraw.hasNextKeyTyped())
+                stddraw.nextKeyTyped()
+            print('exit')
+            while not stddraw.hasNextKeyTyped():
+                print(stddraw.hasNextKeyTyped())
+                screens.loseScreen()
+            return 0, 0, 0
+            
         i = 0
         while i < len(aliens):
             if aliens[i].getState() == False:
@@ -214,11 +237,12 @@ def mainGame(scale, players, en, spd, sc):
         for i in range(len(aliens)):
             if aliens[i].getY() <= s0.getY() + aliens[i].get_hitBox():
                 del s0
-                while stddraw.hasNextKeyTyped():
-                    stddraw.nextKeyTyped()
                 screens.loseScreen()
                 time.sleep(1)
-                while not stddraw.hasNextKeyTyped: screens.loseScreen()
+                while stddraw.hasNextKeyTyped():
+                    stddraw.nextKeyTyped()
+                while not stddraw.hasNextKeyTyped(): screens.loseScreen()
+                return 0, 0, 0
         
         frameEND = time.time()
         '''
@@ -254,7 +278,7 @@ def boss(scale, htps):
             time.sleep(1)
             while not stddraw.hasNextKeyTyped():
                 screens.loseScreen()
-            return 0, 0
+            return 0, 0, 0
         if changeDir == 1:
             changeDir = 0
             boss.moveDown()
@@ -267,7 +291,7 @@ def boss(scale, htps):
         rand = random.randint(0, 200)
         if rand == 50 and timer <= 0:
             dir *= -1
-            timer = 10
+            timer = 75
         timer -= 1
 
 
@@ -319,13 +343,15 @@ def boss(scale, htps):
         
         if boss.get_state() == False:
             del boss
+            health = s0.get_htp()
+            del s0
             while stddraw.hasNextKeyTyped():
                 stddraw.nextKeyTyped()
             screens.winScreen()
             time.sleep(1)
             while not stddraw.hasNextKeyTyped():
                 screens.winScreen()
-            return 1, 0
+            return 1, 0, health
         i = 0
         while i < len(bullets):
             if bullets[i].getState() == False:

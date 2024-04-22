@@ -5,7 +5,7 @@ def main():
     scale = 2
     outcome = 0
     wl = None
-    en = 0
+    htp = 2
     spd = 0
     score = 0
     stddraw.setXscale(-scale, scale)
@@ -28,17 +28,19 @@ def main():
             spd = 0
             wl = None
             score = 0
+            htp = 2
         if outcome < 3:
-                temp, score = gameModes.mainGame(scale, players, outcome, spd, score)
+                temp, score, htp = gameModes.mainGame(scale, players, outcome, spd, score, htp)
                 if temp == 1:
                     spd += 0.01
                     outcome += 1
                 elif temp == 0:
+                    htp = 2
                     outcome = 0
                     spd = 0
                     score = 0
         else:
-            wl = gameModes.boss(scale, 10)
+            wl = gameModes.boss(scale, 2)
             outcome = 0
 
 

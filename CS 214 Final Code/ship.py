@@ -1,6 +1,6 @@
 from math import sin, cos, pi
 from picture import Picture
-from stddraw import picture, filledCircle, setPenColor, WHITE
+from stddraw import picture, filledCircle, setPenColor, RED
 pic = Picture('Ship1.png')
 pics = [None]*74
 
@@ -122,7 +122,7 @@ class Bullet:
     def move(self):
         self._y += 0.06*sin(self._angle)
         self._x += 0.06*cos(self._angle)
-        setPenColor(WHITE)
+        setPenColor(RED)
         filledCircle(self._x, self._y, 0.05)
     '''
     on initialization, _ makes a variable private so it can't be accessed outside of this file (self._x = x).
