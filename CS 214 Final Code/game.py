@@ -4,6 +4,10 @@ from ship import Ship
 def main():
     scale = 2
     outcome = 0
+    wl = None
+    en = 0
+    spd = 0
+    score = 0
     stddraw.setXscale(-scale, scale)
     stddraw.setYscale(-scale, scale)
     a = threading.Thread(target=Ship.create)
@@ -20,10 +24,19 @@ def main():
     else:
         players = 1
     while True:
+        if wl == 0:
+            spd = 0
         if outcome < 3:
-            outcome += gameModes.mainGame(scale, players)
+                temp, score = gameModes.mainGame(scale, players, outcome, spd, score)
+                if temp == 1:
+                    spd += 0.01
+                    outcome += 1
+                elif temp == 0:
+                    outcome = 0
+                    spd = 0
+                    score = 0
         else:
-            gameModes.boss(scale, 15)
+            wl = gameModes.boss(scale, 5)
             outcome = 0
 
 

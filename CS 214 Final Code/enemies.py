@@ -42,9 +42,9 @@ class Boss:
     def move(self, dir, spd, scale):
         self._x += spd*dir
         picture(boss, self._x, self._y)
-        if self._x <= -scale+self._hitBox:
+        if self._x <= -scale+self._hitBox+0.2:
             return 1
-        elif self._x >= scale-self._hitBox:
+        elif self._x >= scale-(self._hitBox+0.2):
             return 1
     
     def moveDown(self):

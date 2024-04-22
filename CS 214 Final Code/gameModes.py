@@ -3,11 +3,13 @@ from ship import Ship, Bullet
 from math import pi, sqrt
 #Scale is just incase we all used different scale when programming but we can talk about what scale we want to use when we are all together
 #I used scale of '2' when i coded mine so it would work inbetween -2 and 2
-def mainGame(scale, players):
+def mainGame(scale, players, en, spd, sc):
     #initializing all variables
     aliens = []
     bullets = []
     numEnemies = 3
+    if en != 0:
+        numEnemies += en
     spacing = scale*0.2
     y = scale - scale*0.1
     dir = 1
@@ -37,16 +39,17 @@ def mainGame(scale, players):
     #You'll see that this function 'mainGame' takes in players aswell and that is because on the start screen if you press the number 2 key
     #it will be 2 player, making a second ship. this happens in the 'game.py' file
     if players == 2:
-        s1 = Ship(0.4, -1.8, pi/2, 0, 37, 0)
-        s0 = Ship(-0.4, -1.8, pi/2, 0, 37, 0)
+        s1 = Ship(0.4, -1.8, pi/2, 0, 37, sc)
+        s0 = Ship(-0.4, -1.8, pi/2, 0, 37, sc)
     elif players == 1:
-        s0 = Ship(0, -1.8, pi/2, 0, 37, 0)
+        s0 = Ship(0, -1.8, pi/2, 0, 37, sc)
 
     while gameState:
         stddraw.clear(stddraw.BLACK)
 
         #Shows the win screen
         if len(aliens) == 0:
+            sc = s0.getScore()
             del s0
             for i in range(len(bullets)):
                 del bullets[0]
@@ -58,7 +61,7 @@ def mainGame(scale, players):
                 screens.winScreen()
             #return 1 so that in the 'game.py' file, we can see if they have won a game and then make it more difficult later on
             #So for now it doesn't do much but is there for code to use later on.
-            return 1
+            return 1, sc
         frameST = time.time()
 
 
@@ -72,7 +75,7 @@ def mainGame(scale, players):
             dir *= -1
         else:
             for i in range(len(aliens)):
-                check = aliens[i].move(dir, 0.01, scale)
+                check = aliens[i].move(dir, 0.01+spd, scale)
                 if check == 1:
                     changeDir = 1
 
@@ -188,6 +191,16 @@ def mainGame(scale, players):
             score.displayScore(s0.getScore())
         elif players == 2:
             score.displayScore(s0.getScore(), s1.getScore())
+        
+        for i in range(len(aliens)):
+            if aliens[i].getY() <= s0.getY() + aliens[i].get_hitBox():
+                del s0
+                while stddraw.hasNextKeyTyped():
+                    stddraw.nextKeyTyped()
+                screens.loseScreen()
+                time.sleep(1)
+                while not stddraw.hasNextKeyTyped: screens.loseScreen()
+        
         frameEND = time.time()
         '''
         The next few lines of code does the math inorder to have a consistent frame rate throughout the game
@@ -211,7 +224,7 @@ def boss(scale, htps):
     lose = False
     fireRate = 50
     s0 = Ship(0, -1.8, pi/2, 0, 37, 0)
-    boss = enemies.Boss(0, scale - scale*0.2, htps, 0.3, True)
+    boss = enemies.Boss(0, scale - scale*0.2, htps, 0.18, True)
     while gameState:
         stddraw.clear(stddraw.BLACK)
         if lose == True:
@@ -221,6 +234,7 @@ def boss(scale, htps):
             time.sleep(1)
             while not stddraw.hasNextKeyTyped():
                 screens.loseScreen()
+            return 0
         if changeDir == 1:
             changeDir = 0
             boss.moveDown()
@@ -282,7 +296,13 @@ def boss(scale, htps):
         
         if boss.get_state() == False:
             del boss
-            return
+            while stddraw.hasNextKeyTyped():
+                stddraw.nextKeyTyped()
+            screens.winScreen()
+            time.sleep(1)
+            while not stddraw.hasNextKeyTyped():
+                screens.winScreen()
+            return 1
         i = 0
         while i < len(bullets):
             if bullets[i].getState() == False:
@@ -290,7 +310,7 @@ def boss(scale, htps):
             else:
                 i += 1
         
-        if sqrt((boss.get_y() - s0.getY())**2) <= boss.get_hitBox():
+        if boss.get_y() < s0.getY() + 0.1:
             lose = True 
         
         stddraw.show(1000/90)
