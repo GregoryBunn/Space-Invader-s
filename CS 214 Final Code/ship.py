@@ -94,7 +94,7 @@ class Ship:
         return self._score
     def inscreaseScore(self):
         self._score += 1
-    def resetScore(self):
+    def reset_Score(self):
         self._score = 0
     def get_htp(self):
         return self._htp
