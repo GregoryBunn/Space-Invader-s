@@ -74,7 +74,7 @@ class GameLoop:
         
         #Get the time it took the run the update code
         frameEND = time.time()
-        print(f'proccess time: {frameST-frameEND}')
+        #print(f'proccess time: {frameST-frameEND}')
 
 
         #show Graphics
