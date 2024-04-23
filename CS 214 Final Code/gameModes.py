@@ -195,7 +195,6 @@ def mainGame(scale, players, en, spd, sc, htp):
             distance = sqrt((enBullets[i].get_x() - s0.getX())**2 + (enBullets[i].get_y() - s0.getY())**2)
             if distance <= s0.get_hitBox() + 0.05:
                 s0.set_htp(s0.get_htp() - 1)
-                print(s0.get_htp())
                 enBullets[i].set_state(False)
             i += 1
         i = 0
@@ -209,13 +208,8 @@ def mainGame(scale, players, en, spd, sc, htp):
             del s0
             screens.loseScreen()
             time.sleep(1)
-            while stddraw.hasNextKeyTyped():
-                print(stddraw.hasNextKeyTyped())
-                stddraw.nextKeyTyped()
-            print('exit')
-            while not stddraw.hasNextKeyTyped():
-                print(stddraw.hasNextKeyTyped())
-                screens.loseScreen()
+            while stddraw.hasNextKeyTyped(): stddraw.nextKeyTyped()
+            while not stddraw.hasNextKeyTyped(): screens.loseScreen()
             return 0, 0, 0
             
         i = 0
@@ -239,8 +233,7 @@ def mainGame(scale, players, en, spd, sc, htp):
                 del s0
                 screens.loseScreen()
                 time.sleep(1)
-                while stddraw.hasNextKeyTyped():
-                    stddraw.nextKeyTyped()
+                while stddraw.hasNextKeyTyped(): stddraw.nextKeyTyped()
                 while not stddraw.hasNextKeyTyped(): screens.loseScreen()
                 return 0, 0, 0
         
@@ -272,13 +265,11 @@ def boss(scale, htps):
     while gameState:
         stddraw.clear(stddraw.BLACK)
         if lose == True:
-            while stddraw.hasNextKeyTyped():
-                stddraw.nextKeyTyped()
             screens.loseScreen()
             time.sleep(1)
-            while not stddraw.hasNextKeyTyped():
-                screens.loseScreen()
-            return 0, 0, 0
+            while stddraw.hasNextKeyTyped(): stddraw.nextKeyTyped()
+            while not stddraw.hasNextKeyTyped(): screens.loseScreen()
+            return 0
         if changeDir == 1:
             changeDir = 0
             boss.moveDown()
@@ -291,7 +282,7 @@ def boss(scale, htps):
         rand = random.randint(0, 200)
         if rand == 50 and timer <= 0:
             dir *= -1
-            timer = 75
+            timer = 200
         timer -= 1
 
 
@@ -345,12 +336,10 @@ def boss(scale, htps):
             del boss
             health = s0.get_htp()
             del s0
-            while stddraw.hasNextKeyTyped():
-                stddraw.nextKeyTyped()
             screens.winScreen()
             time.sleep(1)
-            while not stddraw.hasNextKeyTyped():
-                screens.winScreen()
+            while stddraw.hasNextKeyTyped(): stddraw.nextKeyTyped()
+            while not stddraw.hasNextKeyTyped(): screens.winScreen()
             return 1, 0, health
         i = 0
         while i < len(bullets):
