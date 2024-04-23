@@ -96,8 +96,8 @@ class GameLoop:
                 x = self.enemys.Enemylist[enemy].x
                 y = self.enemys.Enemylist[enemy].y
 
-
-                self.Missiles_list.add_missile(Missile(x,y,0,0,2))
+                MissileSize = 5
+                self.Missiles_list.add_missile(Missile(x,y,0,0,2,MissileSize))
 
     #Process input type 0
     def Process_inputType0(self):
@@ -143,7 +143,8 @@ class GameLoop:
                     x = self.PlayersList.Players[0].x+(10*math.sin(d))
                     y = self.PlayersList.Players[0].y+(10*math.cos(d))
                     AimDir = self.PlayersList.Players[0].aimDir
-                    self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0))
+                    MissileSize = 2.5
+                    self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0,MissileSize))
                 else:
                     pass
 
@@ -166,7 +167,8 @@ class GameLoop:
                         x = self.PlayersList.Players[1].x+(10*math.sin(d))
                         y = self.PlayersList.Players[1].y+(10*math.cos(d))
                         AimDir = self.PlayersList.Players[1].aimDir
-                        self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,1))
+                        MissileSize = 2.5
+                        self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,1,MissileSize))
 
                     
                         
@@ -231,7 +233,8 @@ class GameLoop:
                 x = self.PlayersList.Players[0].x+(10*math.sin(d))
                 y = self.PlayersList.Players[0].y+(10*math.cos(d))
                 AimDir = self.PlayersList.Players[0].aimDir
-                self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0))
+                MissileSize = 2.5
+                self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0,MissileSize))
             else:
                 pass
         #process second player input if there is one
@@ -273,7 +276,8 @@ class GameLoop:
                     x = self.PlayersList.Players[1].x+(10*math.sin(d))
                     y = self.PlayersList.Players[1].y+(10*math.cos(d))
                     AimDir = self.PlayersList.Players[1].aimDir
-                    self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0))
+                    MissileSize = 2.5
+                    self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0,MissileSize))
                 else:
                     pass
             
@@ -299,7 +303,7 @@ class GameLoop:
         
     #create the play screen background
     def createPlayscreen(self):
-        stddraw.clear(stddraw.GRAY)#form color
+        stddraw.clear(stddraw.BLACK)#form color
         #scale form
         stddraw.setXscale(-self.screenX,self.screenY)
         stddraw.setYscale(-self.screenY,self.screenY)
