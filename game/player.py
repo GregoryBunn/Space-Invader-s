@@ -126,7 +126,7 @@ class Player:
             stddraw.text(80,-90,"score: "+str(self.score))
 
     def draw_missileTimer(self,playerNum):
-        stddraw.setPenColor(stddraw.WHITE)
+        stddraw.setPenColor(stddraw.DARK_GRAY)
         
         if playerNum == 0:
             stddraw.rectangle(-99 ,-80,5,25)
