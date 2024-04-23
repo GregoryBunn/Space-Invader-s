@@ -5,23 +5,29 @@ import math
 
 
 class Missile:
-    def __init__(self,x:float,y:float,dir:float,typ:int,owner:int):
+    def __init__(self,x:float,y:float,dir:float,typ:int,owner:int,size:int):
         self.x = x #missile x
         self.y = y #missile y
         self.dir = dir #missile direction
         self.typ = typ #type of missile
         self.owner = owner #missile owner
         self.speed = 4 #missile speed
+        self.size = size
 
     #draw Missile 
     def drawMissile(self):
-        #creates missile of type 0 and type 1
-        if self.typ == 0 or self.typ == 1:
+        #creates missile of type 1
+        if self.typ == 1:
             #set pen color
-            stddraw.setPenColor(stddraw.BLACK)
+            stddraw.setPenColor(stddraw.RED)
 
             #draw missile
-            stddraw.filledCircle(self.x,self.y,1)
+            stddraw.filledCircle(self.x,self.y,2.5)
+        #create missile of type 0
+        if self.typ == 0:
+            stddraw.setPenColor(stddraw.GREEN)
+            stddraw.setPenRadius(0.5)
+            stddraw.line(self.x, self.y, self.x, (self.y-5)) 
     
     def moveMissile(self):
 
