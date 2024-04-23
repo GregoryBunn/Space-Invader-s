@@ -1,5 +1,7 @@
 import stddraw
 import math
+from stddraw import picture
+from picture import Picture
 
 
 class Player:
@@ -23,21 +25,22 @@ class Player:
         y = self.y
         size = self.size
         aimDir = self.aimDir
-
-        #Create circle
-        stddraw.setPenColor(stddraw.YELLOW)
-        stddraw.filledCircle(x,y,size)
-
+        #Create player
+        player = Picture('Ship1.png')
+        picture(player, self.x, self.y)
         #aim settings
         stddraw.setPenColor(stddraw.GREEN)
         stddraw.setPenRadius(1)
-
         #calculation of aim coordinates
         aimX = x + size*(math.sin(aimDir))
         aimY = y + size*(math.cos(aimDir))
-
         #create aim
         stddraw.line(x,y,aimX,aimY)
+
+
+        #Advanced graphics
+        
+
 
     def  movePlayer(self):
         screenX = 100
