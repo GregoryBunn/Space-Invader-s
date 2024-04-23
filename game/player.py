@@ -83,7 +83,7 @@ class Player:
             stddraw.text(80,-90,"score: "+str(self.score))
 
     def draw_missileTimer(self,playerNum):
-        stddraw.setPenColor(stddraw.BLACK)
+        stddraw.setPenColor(stddraw.WHITE)
         
         if playerNum == 0:
             stddraw.rectangle(-99 ,-80,5,25)
@@ -168,7 +168,7 @@ class PlayerList:
                     dist = (distx**2 + disty**2)**0.5 
                     
                     #test if missile hit player
-                    if dist < player.size + 1: #+1 if for missile size
+                    if dist < player.size + Missiles_list.missiles[mc].size: # + for missile size
                         #remove Missile
                         Missiles_list.remove_missile(Missiles_list.missiles[mc])
 
