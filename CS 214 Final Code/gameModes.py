@@ -97,24 +97,24 @@ def mainGame(scale, players, en, spd, sc, htp):
 
         #keyboard inputs
         keys = stddraw.getKeysPressed()
-        if keys[stddraw.K_e]:
+        if keys[stddraw.K_e]: 
             s0.rotate(1)
-        elif keys[stddraw.K_q]:
+        elif keys[stddraw.K_q]: 
             s0.rotate(-1)
         elif keys[stddraw.K_w]:
             s0.setAngle(pi/2)
             s0.setPos(37)
         if keys[stddraw.K_a]:
-            if s0.getX() > (-scale+0.2):
+            if s0.getX() > (-scale+0.2): 
                 s0.move(-1)
-            else:
+            else: 
                 s0.rotate()
         elif keys[stddraw.K_d]:
             if s0.getX() < (scale-0.2):
                 s0.move(1)
-            else:
+            else: 
                 s0.rotate()
-        else:
+        else: 
             s0.rotate()
         
         #The movement for the second player on if a second player is chosen, otherwise it does nothing
