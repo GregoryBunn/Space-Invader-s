@@ -2,7 +2,11 @@ import stddraw
 import math
 from stddraw import picture
 from picture import Picture
-from color import Color # type: ignore
+from color import Color 
+
+
+
+
 
 
 class Player:
@@ -22,31 +26,8 @@ class Player:
         self.picture = Picture('Ship1.png')#Image of player
 
     def RotatePlayer(self):
-        theta = self.aimDir
-        pict = self.picture
-        w: int = pict.width()
-        h: int = pict.height()
-        cx: int = w // 2
-        cy: int = h // 2
-        cosMinusTheta: float = math.cos(-theta)
-        sinMinusTheta: float = math.sin(-theta)
-        target: Picture = Picture(w, h)
-
-        for tx in range(w):
-            for ty in range(h):
-                deltaX: int = tx - cx
-                deltaY: int = ty - cy
-                # The formulas in the tutorial for getting the target
-                # location from the source location can be swapped around 
-                # to get the source location from the target location
-                # if we realise that we must then rotate by -theta instead.              
-                sx: int = int(deltaX*cosMinusTheta - deltaY*sinMinusTheta + cx)
-                sy: int = int(deltaX*sinMinusTheta + deltaY*cosMinusTheta + cy)
-                col: Color = stddraw.BLACK
-                if ((sx >= 0) and (sx < w) and (sy >= 0) and (sy < h)):
-                    col = pict.get(sx, sy)
-                target.set(tx, ty, col)
-        self.picture = target
+        pass
+       
 
 
 
