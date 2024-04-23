@@ -47,7 +47,7 @@ def main():
                     spd = 0
                     score = 0
         else:
-            wl = gameModes.boss(scale, 2)
+            wl = gameModes.boss(scale, 15)
             outcome = 0
 
 
