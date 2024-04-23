@@ -74,7 +74,7 @@ class Game:
 def main():
 
     #Create new instance of gamesettigns
-    settings_game = GameSettings(screenXsize=512,screenYsize=512,players=1,inputType=0,level=1)
+    settings_game = GameSettings(screenXsize=512,screenYsize=512,players=1,inputType=1,level=1)
 
     #initialize game
     game = Game(settings=settings_game)
