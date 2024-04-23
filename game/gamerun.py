@@ -45,6 +45,9 @@ class GameLoop:
         stddraw.clear() #clear screen
         self.createPlayscreen() #create new screen
 
+        #draw players and their score
+        self.PlayersList.draw_ScorePlayers()
+
         #Move enemys
         self.enemys.Move_Enemys()
 
@@ -66,8 +69,7 @@ class GameLoop:
         #check if players have been hit
         self.PlayersList.hitmarks_Players(self.Missiles_list)
 
-        #draw players and their score
-        self.PlayersList.draw_ScorePlayers()
+        
 
         #draw and move missiles
         self.Missiles_list.move_drawMissiles()

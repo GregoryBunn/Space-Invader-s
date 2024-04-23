@@ -23,11 +23,12 @@ class Player:
         self.time = time #time since last missile
         self.missileTime = missileTime #time between missiles
         self.lives = lives#player lives
-        self.picture = Picture('Ship1.png')#Image of player
         self.picList = pictures
+        self.picture = self.picList[24]
 
-    def RotatePlayer(self):
-        pass
+    def RotatePlayer(self,aimdir):
+        pos = int((aimdir/(math.pi/2))*24) + 24
+        self.picture = self.picList[pos]
        
 
 
@@ -40,16 +41,15 @@ class Player:
         size = self.size
         aimDir = self.aimDir
         #Create player
-        player = Picture('Ship1.png')
 
 
         #rotate if needed
         if self.aimChange != 0:
-            #self.RotatePlayer()
-            pass
+            self.RotatePlayer(aimDir)
+            
             #change angle
         
-        picture(player, self.x, self.y)
+        picture(self.picture, self.x, self.y)
         #aim settings
         stddraw.setPenColor(stddraw.GREEN)
         stddraw.setPenRadius(1)

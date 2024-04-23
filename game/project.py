@@ -87,6 +87,7 @@ def createPlayerPicture(num,lis,pic):
     cy = heigth // 2
     while angle < pi/2:
         rotatedpic = Picture(width, heigth)
+        #rotatedpic = Picture('invis.png')
         cosMinusTheta = math.cos(-angle)
         sinMinusTheta = math.sin(-angle)
         for tx in range(width):
@@ -95,14 +96,12 @@ def createPlayerPicture(num,lis,pic):
                 dY: int = ty - cy             
                 sx = int(dX*cosMinusTheta - dY*sinMinusTheta + cx)
                 sy = int(dX*sinMinusTheta + dY*cosMinusTheta + cy)
-                col: Color = stddraw.BLACK
+                col = stddraw.BLACK
                 if ((sx >= 0) and (sx < width) and (sy >= 0) and (sy < heigth)):
                     col = pic.get(sx, sy)
                 rotatedpic.set(tx, ty, col)
         angle += pi/48 
         lis.append(rotatedpic)
-        #picture(rotatedpic, 0.5, 0.5)
-        #stddraw.show(20)
 
 
 def main():
@@ -113,8 +112,8 @@ def main():
     picture_list1 = []
     picture_list2 = []
     #create thread for player pictures and start them
-    player1TH = threading.Thread(target=createPlayerPicture, args=(0, picture_list1, Picture('Ship1.png')))
-    player2TH = threading.Thread(target=createPlayerPicture, args=(1, picture_list2, Picture('Ship1.png')))
+    player1TH = threading.Thread(target=createPlayerPicture, args=(0, picture_list1, Picture('Ship1A.png')))
+    player2TH = threading.Thread(target=createPlayerPicture, args=(1, picture_list2, Picture('Ship2A.png')))
     player1TH.start()
     player2TH.start()
     
