@@ -4,7 +4,7 @@ Main project
 
 '''
 
-from home import HomeScreen,EndScreen
+from home import HomeScreen,EndScreen,PlayerSelect
 from gamerun import GameLoop
 import time
 
@@ -30,6 +30,9 @@ class Game:
         #game settings
         self.settings = settings
 
+        #self playerchoose screen initialized GREG
+        self.Select_Screen = PlayerSelect(self.settings)
+
         #Game homescreen initialized
         self.home_screen = HomeScreen(self.settings)
 
@@ -38,6 +41,9 @@ class Game:
     
     #starts game
     def run(self):
+
+        #createPlayerChoose screen GREG
+        self.Select_Screen.run()
 
         #create homscreen
         self.home_screen.run()
@@ -68,7 +74,7 @@ class Game:
 def main():
 
     #Create new instance of gamesettigns
-    settings_game = GameSettings(screenXsize=512,screenYsize=512,players=2,inputType=0,level=1)
+    settings_game = GameSettings(screenXsize=512,screenYsize=512,players=1,inputType=0,level=1)
 
     #initialize game
     game = Game(settings=settings_game)
