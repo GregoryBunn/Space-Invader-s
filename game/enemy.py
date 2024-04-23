@@ -1,4 +1,6 @@
 import stddraw
+from stddraw import picture
+from picture import Picture
  
 class EnemySettings:
     def __init__(self,x,y):
@@ -12,7 +14,7 @@ class Enemy:
     proces enemy movements
     Test
     '''
-    def __init__(self,x,y,typ,size,dir,speed,powerup):
+    def __init__(self,x,y,typ,size,dir,speed,powerup,hitBox):
         self.x = x
         self.y = y
         self.typ = typ
@@ -20,12 +22,18 @@ class Enemy:
         self.dir = dir
         self.speed = speed
         self.powerup = powerup
+        self.hitBox = hitBox
 
        
     #Draw type 0 enemy
     def drawBasicEnemy(self):
-        stddraw.setPenColor(stddraw.RED) #set pen color
-        stddraw.filledCircle(self.x,self.y,self.size) #Draw red Circle
+        #stddraw.setPenColor(stddraw.RED) #set pen color
+        #stddraw.filledCircle(self.x,self.y,self.size) #Draw red Circle
+
+        #graphics
+        basic = Picture('Aliens.png')
+        boss = Picture('Boss0.png')
+        picture(basic, self.x, self.y)
 
     #move single enemy sideways
     def moveEnemySideways(self):
@@ -103,8 +111,9 @@ class EnemyList:
                 dir = 1
                 speed = 1
                 PowerupType = 1
+                hitbox = 1
                 #Add Enemy to list
-                self.add_Enemy(Enemy(xCor,yCor,typ,size,dir,speed,PowerupType))
+                self.add_Enemy(Enemy(xCor,yCor,typ,size,dir,speed,PowerupType,hitbox))
 
     def Move_Enemys(self):
         moveDown = False
@@ -175,6 +184,7 @@ class EnemyList:
         
     #check if any of the enemy's have been hit
     def hitmarks(self,Missiles_list,playerlist,powerups):
+
         nextM = True #boolean to increase missile count
 
         #itterate through all missiles and enemy locations
@@ -195,7 +205,7 @@ class EnemyList:
                     #need to add missile radius
 
                     #test if missile hit enemy
-                    if dist < self.Enemylist[ec].size + 1: #+1 if for missile size
+                    if dist < self.Enemylist[ec].size + Missiles_list.missiles[mc].size: # + if for missile size
 
                         #increase player score
                         if Missiles_list.missiles[mc].owner == 0:
