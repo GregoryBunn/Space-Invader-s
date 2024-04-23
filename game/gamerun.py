@@ -75,7 +75,7 @@ class GameLoop:
         print(f'proccess time: {en-st}')
 
         #show Graphics
-        stddraw.show(50)
+        stddraw.show(5)
 
         #move Player & aim Player + update Time since last missile/player
         self.PlayersList.move_aim_timeUpdate()
@@ -289,7 +289,6 @@ class GameLoop:
             self.Update_game()
             self.counter_Attack()
 
-            #self.Missiles_list.add_missile(Missile(0,0,0,0,2))
 
             if self.game_settings.inputType == 0:
                 self.Process_inputType0()
@@ -299,7 +298,7 @@ class GameLoop:
     #create Players
     def create_players(self):
         for i in range(self.game_settings.players):
-            self.PlayersList.add_player(Player(0+(i*10),-80,0,0,0,1.7,8,0,50,50,1))
+            self.PlayersList.add_player(Player(0+(i*10),-80,0,0,0,1.7,8,0,50,100,1))
         
     #create the play screen background
     def createPlayscreen(self):

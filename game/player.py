@@ -223,8 +223,8 @@ class PlayerList:
 
     def activate_Powerup(self,typ,player):
         if typ == 1:
-            if player.missileTime < 6:
-                player.missileTime = 1
+            if player.missileTime < 75:
+                player.missileTime = 70
             else:
                 player.missileTime -= 5
         
