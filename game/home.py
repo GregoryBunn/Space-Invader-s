@@ -129,39 +129,39 @@ class EndScreen:
     
     #create screen
     def display(self):
-        stddraw.clear(stddraw.GRAY) #Create gray form
-        stddraw.setFontFamily('Arial') #set font
+        stddraw.clear(stddraw.BLACK) #Create gray form
+        #stddraw.setFontFamily('Arial') #set font
         stddraw.setFontSize(40) #set font size
         stddraw.setPenColor(stddraw.WHITE) #set font color
 
 
         #check if player won or lose
         if self.settings.result:
-            stddraw.text(0,0,"You win")
+            stddraw.text(0,0,"Next Level")
             
         else:
             stddraw.text(0,0,"Better luck next time")
 
     #run Endscreen
     def run(self):
+        #clear key list if there is one
+        while stddraw.hasNextKeyTyped():
+            stddraw.nextKeyTyped()
 
         #create screen
         self.display()
-
         #Variable to exit end screen
         start = False
         timer = 50
         time = 0
         #Loop for end screen
         while start == False:
-            
             #check if enough time has passed after end
             if time == timer*100:
                 return True#start new game
 
             #check for a key input
             if stddraw.hasNextKeyTyped():
-
                 #exit loop
                 start = True
 

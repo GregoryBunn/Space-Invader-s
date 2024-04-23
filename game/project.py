@@ -72,10 +72,18 @@ class Game:
             game = GameLoop(self.settings)
             game.run()
 
+        
+            if self.settings.result == True and self.settings.level ==3:
+                self.end_screen.run()
+            elif self.settings.result == True:
+                self.end_screen.run()
+                self.settings.level += 1
+            elif self.settings.result == False:
+                self.end_screen.run()
+            
 
 
             #Run End
-            active = self.end_screen.run()
    
 
 def createPlayerPicture(num,lis,pic):

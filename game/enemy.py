@@ -32,7 +32,7 @@ class Enemy:
 
         #graphics
         basic = Picture('Aliens.png')
-        boss = Picture('Boss0.png')
+        #boss = Picture('Boss0.png')
         picture(basic, self.x, self.y)
 
     #move single enemy sideways

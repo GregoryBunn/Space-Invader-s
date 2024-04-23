@@ -23,8 +23,13 @@ class GameLoop:
         #create enemy class
         self.enemys = EnemyList() 
 
-        #create basic enemy settings
-        self.Enemy_settingss = EnemySettings(8,3)
+        if self.game_settings.level == 1:
+            #create level 1 enemy settings
+            self.Enemy_settingss = EnemySettings(5,3)
+        elif self.game_settings.level ==2:
+            #create level 2 enemy settings
+            self.Enemy_settingss = EnemySettings(8,3)
+
 
         #Variable to indicate an active game
         self.play = True
