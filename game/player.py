@@ -76,12 +76,20 @@ class Player:
     
     def drawScore(self,PlayerNum):
         stddraw.setFontSize(20)
-        stddraw.setPenColor(stddraw.BLACK)
-        stddraw.text((170*PlayerNum)-85 ,-90,"score: "+str(self.score))
+        stddraw.setPenColor(stddraw.WHITE)
+        if PlayerNum == 0:
+            stddraw.text(-80 ,-90,"score: "+str(self.score))
+        else:
+            stddraw.text(80,-90,"score: "+str(self.score))
 
     def draw_missileTimer(self,playerNum):
         stddraw.setPenColor(stddraw.BLACK)
-        stddraw.rectangle((170*playerNum)-95 ,-80,5,25)
+        
+        if playerNum == 0:
+            stddraw.rectangle(-99 ,-80,5,25)
+        else:
+            stddraw.rectangle(94 ,-80,5,25) 
+        
         if self.time <= self.missileTime:
             stddraw.setPenColor(stddraw.RED)
         elif self.time > self.missileTime and self.time < self.missileTime*2:
@@ -98,7 +106,10 @@ class Player:
 
         h = h/(self.missileTime*2) * 25
 
-        stddraw.filledRectangle((170*playerNum)-94 ,-80,2,h)
+        if playerNum == 0:
+            stddraw.filledRectangle(-98 ,-80,2,h)
+        else:
+            stddraw.filledRectangle(95 ,-80,2,h) 
        
 
 
