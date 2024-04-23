@@ -6,7 +6,13 @@ Main project
 
 from home import HomeScreen,EndScreen,PlayerSelect
 from gamerun import GameLoop
+import threading
 import time
+import stddraw
+from stddraw import picture
+from picture import Picture
+from color import Color 
+import math
 
 
 
@@ -40,7 +46,7 @@ class Game:
         self.end_screen = EndScreen(self.settings)
     
     #starts game
-    def run(self):
+    def run(self,p1,p2):
 
         #createPlayerChoose screen GREG
         self.Select_Screen.run()
@@ -50,6 +56,10 @@ class Game:
 
         #indicates active game
         active = True
+
+        #Wait for the player threads to complete
+        p1.join()
+        p2.join()
 
         #games main loop(continues rounds)
         while active:
@@ -64,12 +74,34 @@ class Game:
 
             #Run End
             active = self.end_screen.run()
+   
 
+def createPlayerPicture(num,lis,pic):
+    pi = math.pi
+    angle = -pi/2
+    width = pic.width()
+    heigth = pic.height()
+    cx = width // 2
+    cy = heigth // 2
+    while angle < pi/2:
+        rotatedpic = Picture(width, heigth)
+        cosMinusTheta = math.cos(-angle)
+        sinMinusTheta = math.sin(-angle)
+        for tx in range(width):
+            for ty in range(heigth):
+                dX: int = tx - cx
+                dY: int = ty - cy             
+                sx = int(dX*cosMinusTheta - dY*sinMinusTheta + cx)
+                sy = int(dX*sinMinusTheta + dY*cosMinusTheta + cy)
+                col: Color = stddraw.BLACK
+                if ((sx >= 0) and (sx < width) and (sy >= 0) and (sy < heigth)):
+                    col = pic.get(sx, sy)
+                rotatedpic.set(tx, ty, col)
+        angle += pi/48 
+        lis.append(rotatedpic)
+        #picture(rotatedpic, 0.5, 0.5)
+        #stddraw.show(20)
 
-
-
-
-    
 
 def main():
 
@@ -79,8 +111,18 @@ def main():
     #initialize game
     game = Game(settings=settings_game)
 
+    #Picture list
+    picture_list1 = []
+    picture_list2 = []
+    #create thread for player pictures and start them
+    player1TH = threading.Thread(target=createPlayerPicture(0,picture_list1,Picture('Ship1.png')))
+    player1TH.start()
+    player2TH = threading.Thread(target=createPlayerPicture(1,picture_list2,Picture('Ship1.png')))
+    player2TH.start()
+    
+
     #run game
-    game.run()
+    game.run(player1TH,player2TH)
     
     
         
