@@ -108,7 +108,7 @@ class GameLoop:
             key = stddraw.nextKeyTyped()
 
             if key == "d":#move right
-                        self.PlayersList.Players[0].moveDir = 1
+                self.PlayersList.Players[0].moveDir = 1
             elif key == "a":#move left
                 self.PlayersList.Players[0].moveDir = -1
 
@@ -118,9 +118,6 @@ class GameLoop:
 
             elif key == "x":#exit
                 self.play = False
-
-            elif key == "x":#exit
-                    self.play = False
 
             elif key == "e":#rotate right
                 self.PlayersList.Players[0].aimChange = 0.07
@@ -195,10 +192,50 @@ class GameLoop:
                 elif key == "i":#stop rotate   
                     self.PlayersList.Players[1].aimChange = 0
 
+
     #Process input type 1                
     def Process_inputType1(self):
-        pass
-        #code for other input type
+
+        #keyboard inputs
+        keys = stddraw.getKeysPressed()
+            
+        
+        if keys[stddraw.K_e]: 
+            self.PlayersList.Players[0].aimChange = 0.07
+        elif keys[stddraw.K_q]: 
+            self.PlayersList.Players[0].aimChange = -0.07
+        else:
+             self.PlayersList.Players[0].aimChange = 0
+ 
+        if keys[stddraw.K_w]:
+            pass
+            #set angle to straight
+        if keys[stddraw.K_a]:
+            self.PlayersList.Players[0].moveDir = -1
+        elif keys[stddraw.K_d]:
+            self.PlayersList.Players[0].moveDir = 1
+        else: 
+           
+            self.PlayersList.Players[0].moveDir = 0
+        if keys[stddraw.K_SPACE]:
+            #check if missile is allowed
+            if self.PlayersList.Players[0].isAllowed():
+
+
+                #get direction of new missile
+                d = self.PlayersList.Players[0].aimDir
+        
+
+                #add missile
+                missiletype = 1#Type of missile
+                x = self.PlayersList.Players[0].x+(10*math.sin(d))
+                y = self.PlayersList.Players[0].y+(10*math.cos(d))
+                AimDir = self.PlayersList.Players[0].aimDir
+                self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0))
+            else:
+                pass
+
+            
 
     #run
     def run(self):
@@ -211,13 +248,15 @@ class GameLoop:
 
             if self.game_settings.inputType == 0:
                 self.Process_inputType0()
+            elif self.game_settings.inputType == 1:
+                self.Process_inputType1()
 
     #create Players
     def create_players(self):
         for i in range(self.game_settings.players):
             self.PlayersList.add_player(Player(0+(i*10),-80,0,0,0,1.7,8,0,50,50,1))
         
-    #create the play screen
+    #create the play screen background
     def createPlayscreen(self):
         stddraw.clear(stddraw.GRAY)#form color
         #scale form
