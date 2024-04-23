@@ -234,7 +234,48 @@ class GameLoop:
                 self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0))
             else:
                 pass
+        #process second player input if there is one
+        if self.game_settings.players == 2:
+        
 
+            #keyboard inputs
+            keys = stddraw.getKeysPressed()
+                
+            
+            if keys[stddraw.K_o]: 
+                self.PlayersList.Players[1].aimChange = 0.07
+            elif keys[stddraw.K_u]: 
+                self.PlayersList.Players[1].aimChange = -0.07
+            else:
+                self.PlayersList.Players[1].aimChange = 0
+    
+            if keys[stddraw.K_i]:
+                pass
+                #set angle to straight
+            if keys[stddraw.K_j]:
+                self.PlayersList.Players[1].moveDir = -1
+            elif keys[stddraw.K_l]:
+                self.PlayersList.Players[1].moveDir = 1
+            else: 
+            
+                self.PlayersList.Players[1].moveDir = 0
+            if keys[stddraw.K_n]:
+                #check if missile is allowed
+                if self.PlayersList.Players[1].isAllowed():
+
+
+                    #get direction of new missile
+                    d = self.PlayersList.Players[1].aimDir
+            
+
+                    #add missile
+                    missiletype = 1#Type of missile
+                    x = self.PlayersList.Players[1].x+(10*math.sin(d))
+                    y = self.PlayersList.Players[1].y+(10*math.cos(d))
+                    AimDir = self.PlayersList.Players[1].aimDir
+                    self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0))
+                else:
+                    pass
             
 
     #run
