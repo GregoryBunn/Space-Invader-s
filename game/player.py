@@ -10,7 +10,7 @@ from color import Color
 
 
 class Player:
-    def __init__(self,x : float,y : float,aimchange : float,aimDirection : float,moveDirection : float,moveSpeed : float,size : int,score : int,time : int,missileTime:int,lives:int):
+    def __init__(self,x : float,y : float,aimchange : float,aimDirection : float,moveDirection : float,moveSpeed : float,size : int,score : int,time : int,missileTime:int,lives:int,pictures):
         
         self.x = x #player x coordinate
         self.y = y #player y coordinate
@@ -24,6 +24,7 @@ class Player:
         self.missileTime = missileTime #time between missiles
         self.lives = lives#player lives
         self.picture = Picture('Ship1.png')#Image of player
+        self.picList = pictures
 
     def RotatePlayer(self):
         pass

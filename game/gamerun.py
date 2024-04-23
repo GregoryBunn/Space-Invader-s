@@ -315,7 +315,11 @@ class GameLoop:
     #create Players
     def create_players(self):
         for i in range(self.game_settings.players):
-            self.PlayersList.add_player(Player(0+(i*10),-80,0,0,0,1.7,8,0,50,100,1))
+            if i == 0:
+                p = self.game_settings.player1List
+            else:
+                p = self.game_settings.player2List
+            self.PlayersList.add_player(Player(0+(i*10),-80,0,0,0,1.7,8,0,50,100,1,p))
         
     #create the play screen background
     def createPlayscreen(self):

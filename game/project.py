@@ -19,7 +19,7 @@ import math
 #game settings
 class GameSettings:
     #has three parameters
-    def __init__(self,screenXsize,screenYsize,players,inputType,level : int):
+    def __init__(self,screenXsize,screenYsize,players,inputType,level : int,p1,p2):
         #initialize parameters
         self.screen_x = 100
         self.screen_y = 100
@@ -29,6 +29,8 @@ class GameSettings:
         self.x = screenXsize
         self.y = screenYsize
         self.level = level
+        self.player1List = p1
+        self.player2List = p2
 
 class Game:
     #initialized with settings
@@ -105,21 +107,23 @@ def createPlayerPicture(num,lis,pic):
 
 def main():
 
-    #Create new instance of gamesettigns
-    settings_game = GameSettings(screenXsize=512,screenYsize=512,players=1,inputType=1,level=1)
-
-    #initialize game
-    game = Game(settings=settings_game)
+    
 
     #Picture list
     picture_list1 = []
     picture_list2 = []
     #create thread for player pictures and start them
-    player1TH = threading.Thread(target=createPlayerPicture(0,picture_list1,Picture('Ship1.png')))
+    player1TH = threading.Thread(target=createPlayerPicture, args=(0, picture_list1, Picture('Ship1.png')))
+    player2TH = threading.Thread(target=createPlayerPicture, args=(1, picture_list2, Picture('Ship1.png')))
     player1TH.start()
-    player2TH = threading.Thread(target=createPlayerPicture(1,picture_list2,Picture('Ship1.png')))
     player2TH.start()
     
+    #Create new instance of gamesettigns
+    settings_game = GameSettings(screenXsize=512,screenYsize=512,players=1,inputType=1,level=1,p1=picture_list1,p2=picture_list2)
+
+    #initialize game
+    game = Game(settings=settings_game)
+
 
     #run game
     game.run(player1TH,player2TH)
