@@ -1,4 +1,4 @@
-import gameModes, stddraw, threading, screens, enemies
+import gameModes, stddraw, threading, screens
 from ship import Ship
 
 def main():
@@ -46,6 +46,7 @@ def main():
                     outcome = 0
                     spd = 0
                     score = 0
+                elif temp == 2: return
         else:
             wl = gameModes.boss(scale, 15)
             outcome = 0

@@ -1,4 +1,4 @@
-import screens, stddraw, enemies, time, threading, score, random
+import screens, stddraw, enemies, time, threading, score, random, gameFuncs
 from ship import Ship, Bullet
 from math import pi, sqrt
 #Scale is just incase we all used different scale when programming but we can talk about what scale we want to use when we are all together
@@ -20,6 +20,7 @@ def mainGame(scale, players, en, spd, sc, htp):
     fireRate = 20
     rand = None
     gameState = True
+    exit = 0
     #______________________________________________________________________________________________#
     '''
     centers the enemies when starting the game, we can decide if we want to do this later on.
@@ -97,72 +98,14 @@ def mainGame(scale, players, en, spd, sc, htp):
 
         #keyboard inputs
         keys = stddraw.getKeysPressed()
-        if keys[stddraw.K_e]: 
-            s0.rotate(1)
-        elif keys[stddraw.K_q]: 
-            s0.rotate(-1)
-        elif keys[stddraw.K_w]:
-            s0.setAngle(pi/2)
-            s0.setPos(37)
-        if keys[stddraw.K_a]:
-            if s0.getX() > (-scale+0.2): 
-                s0.move(-1)
-            else: 
-                s0.rotate()
-        elif keys[stddraw.K_d]:
-            if s0.getX() < (scale-0.2):
-                s0.move(1)
-            else: 
-                s0.rotate()
-        else: 
-            s0.rotate()
+        exit = gameFuncs.keyBoardProccess(keys, s0, scale, bullets, fireRate)
         
+        if exit == 1:
+            return 2, 0, 0
+
         #The movement for the second player on if a second player is chosen, otherwise it does nothing
         if players == 2:
-            if keys[stddraw.K_o]:
-                s1.rotate(1)
-            elif keys[stddraw.K_u]:
-                s1.rotate(-1)
-            elif keys[stddraw.K_i]:
-                s1.setAngle(pi/2)
-                s1.setPos(37)
-            if keys[stddraw.K_j]:
-                if s1.getX() > (-scale+0.2):
-                    s1.move(-1)
-                else:
-                    s1.rotate()
-            elif keys[stddraw.K_l]:
-                if s1.getX() < (scale-0.2):
-                    s1.move(1)
-                else:
-                    s1.rotate()
-            else:
-                s1.rotate()
-
-
-
-
-
-
-        #shooting for the first player
-        if keys[stddraw.K_SPACE] and s0.getFireRate() <= 0:
-            bullet = Bullet(s0.getX(), s0.getY(), s0.getAngle(), '1',  True)
-            bullets.append(bullet)
-            s0.setFireRate(fireRate)
-        else: s0.setFireRate(s0.getFireRate()-1)
-
-        #Shooting for the second player
-        if players == 2:
-            if keys[stddraw.K_n] and s1.getFireRate() <= 0:
-                bullet = Bullet(s1.getX(), s1.getY(), s1.getAngle(), '2',  True)
-                bullets.append(bullet)
-                s1.setFireRate(fireRate)
-            else: s1.setFireRate(s1.getFireRate()-1)
-
-
-
-
-
+           gameFuncs.keyBoardProccessP2(keys, s1, scale, bullets, fireRate)
 
         #interaction between the enemies and bullets. 
         i = 0
@@ -287,31 +230,10 @@ def boss(scale, htps):
 
 
         keys = stddraw.getKeysPressed()
-        if keys[stddraw.K_e]:
-            s0.rotate(1)
-        elif keys[stddraw.K_q]:
-            s0.rotate(-1)
-        elif keys[stddraw.K_w]:
-            s0.setAngle(pi/2)
-            s0.setPos(37)
-        if keys[stddraw.K_a]:
-            if s0.getX() > (-scale+0.2):
-                s0.move(-1)
-            else:
-                s0.rotate()
-        elif keys[stddraw.K_d]:
-            if s0.getX() < (scale-0.2):
-                s0.move(1)
-            else:
-                s0.rotate()
-        else:
-            s0.rotate()
+        exit = gameFuncs.keyBoardProccess(keys, s0, scale, bullets, fireRate)
+        if exit == 1:
+            return 2, 0, 0
 
-        if keys[stddraw.K_SPACE] and s0.getFireRate() <= 0:
-            bullet = Bullet(s0.getX(), s0.getY(), s0.getAngle(), '1',  True)
-            bullets.append(bullet)
-            s0.setFireRate(fireRate)
-        else: s0.setFireRate(s0.getFireRate()-1)
 
         i = 0
         while i != len(bullets):
@@ -349,6 +271,6 @@ def boss(scale, htps):
                 i += 1
         
         if boss.get_y() < s0.getY() + 0.1:
-            lose = True 
+            lose = True
         
         stddraw.show(1000/90)
