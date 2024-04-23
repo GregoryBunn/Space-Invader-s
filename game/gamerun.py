@@ -40,7 +40,7 @@ class GameLoop:
 
     #Update game variables and draw screen
     def Update_game(self):
-        st = time.time()
+        frameST = time.time()
         #Create graphics
         stddraw.clear() #clear screen
         self.createPlayscreen() #create new screen
@@ -71,11 +71,28 @@ class GameLoop:
 
         #draw and move missiles
         self.Missiles_list.move_drawMissiles()
-        en = time.time()
-        print(f'proccess time: {en-st}')
+        
+        #Get the time it took the run the update code
+        frameEND = time.time()
+        print(f'proccess time: {frameST-frameEND}')
+
 
         #show Graphics
-        stddraw.show(5)
+        '''
+        The next few lines of code does the math inorder to have a consistent frame rate throughout the game
+        '''
+        try:
+            totTime = (frameEND - frameST)*1000
+            #stddraw.text(1.8, 1.8, '%.0f' % (fps))
+            if totTime > 24:
+                stddraw.show(0)
+            else:
+                stddraw.show(24 - totTime)
+        except Exception: 
+            stddraw.show(24)
+
+        
+        
 
         #move Player & aim Player + update Time since last missile/player
         self.PlayersList.move_aim_timeUpdate()
