@@ -194,11 +194,9 @@ class EnemyList:
             pass
 
 
-        elif self.Enemylist[ec].powerup == 1:
-            #type 1 powerup
-            powerups.add_powerup(Powerup(x,y,powerupTyp))
         else:
-            pass#other powerups
+            #add powerup
+            powerups.add_powerup(Powerup(x,y,powerupTyp))
         
     #check if any of the enemy's have been hit
     def hitmarks(self,Missiles_list,playerlist,powerups):
@@ -259,8 +257,14 @@ class Powerup:
     def move_down(self):
         POWERUP_SPEED = 1
         self.y -= POWERUP_SPEED
-    def drawType1(self):
-        stddraw.setPenColor(stddraw.PINK)
+    def drawType(self):
+        if self.typ == 1:
+            stddraw.setPenColor(stddraw.PINK)
+        elif self.typ == 2:
+            stddraw.setPenColor(stddraw.BLUE)
+        elif self.typ == 3:
+            stddraw.setPenColor(stddraw.DARK_GREEN)
+
         stddraw.filledCircle(self.x,self.y,2)
 
     def checkPowerupBound(self):
@@ -294,6 +298,4 @@ class Powerup_List:
             powerup.move_down()
             if not powerup.checkPowerupBound():
                 self.remove_powerup(powerup)
-            if powerup.typ == 1:
-
-                powerup.drawType1()
+            powerup.drawType()

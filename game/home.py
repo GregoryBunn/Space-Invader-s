@@ -16,7 +16,7 @@ class PlayerSelect:
 
         #set font
         stddraw.setFontFamily('OCR A Extended')
-
+        
         #screen display
         stddraw.clear(stddraw.BLACK)
         stddraw.setPenColor(stddraw.WHITE)

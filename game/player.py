@@ -262,6 +262,15 @@ class PlayerList:
                 player.missileTime = 70
             else:
                 player.missileTime -= 5
+        if typ == 2:
+            if player.lives < 3:
+                player.lives += 1
+
+        if typ == 3:
+            if player.moveSpeed < 2.5:
+                player.moveSpeed += 0.5
+            
+
         
 
 
