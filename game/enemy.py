@@ -3,9 +3,14 @@ from stddraw import picture
 from picture import Picture
  
 class EnemySettings:
-    def __init__(self,x,y):
+    def __init__(self,x,y,hitbox,speed,typ,powerup,size):
             self.countx = x
             self.county = y
+            self.hitBox = hitbox
+            self.speed= speed
+            self.typ = typ
+            self.powerup = powerup
+            self.size = size
             
 
 class Enemy:
@@ -34,6 +39,10 @@ class Enemy:
         basic = Picture('Aliens.png')
         #boss = Picture('Boss0.png')
         picture(basic, self.x, self.y)
+
+    def drawBoss(self):
+        boss = Picture('Boss0.png')
+        picture(boss, self.x, self.y)
 
     #move single enemy sideways
     def moveEnemySideways(self):
@@ -106,12 +115,12 @@ class EnemyList:
             for x in range(settings.countx):
                 xCor = -90+x*(15)
                 yCor = 90 - y*(15)
-                typ = 0
-                size = 6
+                typ = settings.typ
+                size = settings.size#6
                 dir = 1
-                speed = 1
-                PowerupType = 1
-                hitbox = 1
+                speed = settings.speed #1
+                PowerupType = settings.powerup#1
+                hitbox = settings.hitBox#1
                 #Add Enemy to list
                 self.add_Enemy(Enemy(xCor,yCor,typ,size,dir,speed,PowerupType,hitbox))
 
@@ -132,6 +141,8 @@ class EnemyList:
             
             if enemy.typ ==0:#if enemy is of type 0 enemy
                 enemy.drawBasicEnemy()#draw enemy
+            if enemy.typ == 1:
+                enemy.drawBoss()
     
 
     #check if the game should end
