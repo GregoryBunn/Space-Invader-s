@@ -57,6 +57,8 @@ class GameLoop:
         #draw players and their score
         self.PlayersList.draw_ScorePlayers()
 
+
+
         #Move enemys
         self.enemys.Move_Enemys()
 
@@ -330,7 +332,7 @@ class GameLoop:
                 p = self.game_settings.player1List
             else:
                 p = self.game_settings.player2List
-            self.PlayersList.add_player(Player(0+(i*10),-80,0,0,0,1.7,8,0,50,100,1,p))
+            self.PlayersList.add_player(Player(0+(i*10),-80,0,0,0,1.7,8,0,50,100,3,p))
         
     #create the play screen background
     def createPlayscreen(self):

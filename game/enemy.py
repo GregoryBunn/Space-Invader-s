@@ -152,6 +152,8 @@ class EnemyList:
         if len(players_list.Players) == 0:
             settings.result = False
             return False
+        
+        
             
 
         #if no enemys are left
@@ -164,6 +166,11 @@ class EnemyList:
         
         #itterate through players
         for player in players_list.Players:
+
+            if player.lives ==0:
+                #settings.result = False
+                return False
+
             #itterate throung enemys
             for enemy in self.Enemylist:
                 #check if enemy touches shooter

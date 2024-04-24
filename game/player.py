@@ -103,9 +103,20 @@ class Player:
         stddraw.setFontSize(20)
         stddraw.setPenColor(stddraw.WHITE)
         if PlayerNum == 0:
-            stddraw.text(-80 ,-90,"score: "+str(self.score))
+            stddraw.text(-80 ,-85,"score: "+str(self.score))
         else:
-            stddraw.text(80,-90,"score: "+str(self.score))
+            stddraw.text(80,-85,"score: "+str(self.score))
+
+    def drawLives(self,PlayerNum):
+        
+        stddraw.setPenColor(stddraw.WHITE)
+        stddraw.text(-82+(PlayerNum*152), -95, "Lives: ")
+        #checks player lives and draws images
+        stddraw.setPenColor(stddraw.RED)
+        for i in range(self.lives): stddraw.filledCircle((-68 + i*6.1)+(PlayerNum*152), -96, 3)
+        
+        
+
 
     def draw_missileTimer(self,playerNum):
         stddraw.setPenColor(stddraw.DARK_GRAY)
@@ -165,8 +176,7 @@ class PlayerList:
             player.drawPlayer()
             player.drawScore(c)
             player.draw_missileTimer(c)
-
-            
+            player.drawLives(c)
             c+=1#increase player num
 
     def move_aim_timeUpdate(self):
