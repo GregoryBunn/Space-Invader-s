@@ -270,7 +270,6 @@ class GameLoop:
         #process second player input if there is one
         if self.game_settings.players == 2:
         
-#test
             #keyboard inputs
             keys = stddraw.getKeysPressed()
                 

@@ -1,7 +1,10 @@
 
 '''
 Main project
-
+sound:
+The Final Boss Battle : alperomeresin
+8-bit Air Fight : moodmode
+ 
 '''
 
 from home import HomeScreen,EndScreen,PlayerSelect
