@@ -87,7 +87,7 @@ class GameLoop:
         
         #Get the time it took the run the update code
         frameEND = time.time()
-        #print(f'proccess time: {frameST-frameEND}')
+        #print(f'proccess time: {frameEND-frameST}')
 
 
         #show Graphics
@@ -307,7 +307,7 @@ class GameLoop:
                     y = self.PlayersList.Players[1].y+(10*math.cos(d))
                     AimDir = self.PlayersList.Players[1].aimDir
                     MissileSize = 2.5
-                    self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0,MissileSize))
+                    self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,1,MissileSize))
                 else:
                     pass
             

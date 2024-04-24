@@ -76,7 +76,9 @@ class Game:
 
         
             if self.settings.result == True and self.settings.level ==3:
+                self.settings.level += 1
                 self.end_screen.run()
+                self.settings.level = 1
             elif self.settings.result == True:
                 self.settings.level += 1
                 self.end_screen.run()

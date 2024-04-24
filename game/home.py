@@ -16,7 +16,7 @@ class PlayerSelect:
 
         #set font
         stddraw.setFontFamily('OCR A Extended')
-        
+
         #screen display
         stddraw.clear(stddraw.BLACK)
         stddraw.setPenColor(stddraw.WHITE)
@@ -129,18 +129,33 @@ class EndScreen:
     
     #create screen
     def display(self):
-        stddraw.clear(stddraw.BLACK) #Create gray form
+        stddraw.clear(stddraw.BLACK) #Create Black form
         #stddraw.setFontFamily('Arial') #set font
-        stddraw.setFontSize(40) #set font size
+        
         stddraw.setPenColor(stddraw.WHITE) #set font color
 
-
-        #check if player won or lose
-        if self.settings.result:
-            stddraw.text(0,0,"Next Level")
-            
+        Finallevel = 4
+        if self.settings.level == Finallevel:
+            stddraw.setFontSize(40) #set font size
+            stddraw.text(0,0,"You Win!!!")
+            stddraw.setFontSize(15)
+            stddraw.text(0,-50,"Game will restart shortly")
+            stddraw.text(0,-60,"Press [x] to exit game")
         else:
-            stddraw.text(0,0,"Better luck next time")
+            #check if player won or lose
+            if self.settings.result:
+                stddraw.setFontSize(40) #set font size
+                stddraw.text(0,0,"Next Level")
+                stddraw.setFontSize(15) #set font size
+                stddraw.text(0,-50,"Next level starting soon...")
+                stddraw.text(0,-60,"Press [x] to exit game")
+                
+            else:
+                stddraw.setFontSize(35)
+                stddraw.text(0,0,"Better luck next time")
+                stddraw.setFontSize(15) #set font size
+                stddraw.text(0,-50,"New game starting soon...")
+                stddraw.text(0,-60,"Press [x] to exit game")
 
     #run Endscreen
     def run(self):
