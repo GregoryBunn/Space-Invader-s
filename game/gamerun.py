@@ -25,13 +25,13 @@ class GameLoop:
 
         if self.game_settings.level == 1:
             #create level 1 enemy settings
-            self.Enemy_settingss = EnemySettings(5,3,1,1,0,3,6)
+            self.Enemy_settingss = EnemySettings(5,3,1,1,0,6)
         elif self.game_settings.level ==2:
             #create level 2 enemy settings
-            self.Enemy_settingss = EnemySettings(8,3,1,1,0,1,6)
+            self.Enemy_settingss = EnemySettings(8,3,1,1,0,6)
         elif self.game_settings.level == 3:
             #create level 3 enemy settings
-            self.Enemy_settingss = EnemySettings(1,1,1,1,1,1,12)
+            self.Enemy_settingss = EnemySettings(1,1,1,1,1,12)
             
 
 
@@ -118,8 +118,8 @@ class GameLoop:
             intensity = 5- self.level 
             if intensity < 1: intensity = 1 #Intensity between 1 and 4
 
-            #check if enough time has passed since previous counter attack
-            if self.timer % (10*intensity)==0:
+            #check if enough time has passed since previous counter attack and if there is enemys
+            if self.timer % (10*intensity)==0 and len(self.enemys.Enemylist)>0 :
                 #get random enemy
                 enemy = random.randint(0,len(self.enemys.Enemylist)-1)
                 #get enemy location

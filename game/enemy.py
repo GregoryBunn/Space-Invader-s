@@ -1,15 +1,16 @@
 import stddraw
 from stddraw import picture
 from picture import Picture
+import random
  
 class EnemySettings:
-    def __init__(self,x,y,hitbox,speed,typ,powerup,size):
+    def __init__(self,x,y,hitbox,speed,typ,size):
             self.countx = x
             self.county = y
             self.hitBox = hitbox
             self.speed= speed
             self.typ = typ
-            self.powerup = powerup
+            #self.powerup = powerup
             self.size = size
             
 
@@ -119,7 +120,15 @@ class EnemyList:
                 size = settings.size#6
                 dir = 1
                 speed = settings.speed #1
-                PowerupType = settings.powerup#1
+                p = random.random()
+                if p < 0.2:
+                    PowerupType = 1
+                elif p < 0.4:
+                    PowerupType = 2
+                elif p < 0.6:
+                    PowerupType = 3
+                else:
+                    PowerupType = 0
                 hitbox = settings.hitBox#1
                 #Add Enemy to list
                 self.add_Enemy(Enemy(xCor,yCor,typ,size,dir,speed,PowerupType,hitbox))
@@ -168,7 +177,7 @@ class EnemyList:
         for player in players_list.Players:
 
             if player.lives ==0:
-                #settings.result = False
+                settings.result = False
                 return False
 
             #itterate throung enemys

@@ -72,6 +72,8 @@ class Game:
             game = GameLoop(self.settings)
             game.run()
 
+            
+
         
             if self.settings.result == True and self.settings.level ==3:
                 self.end_screen.run()
@@ -79,7 +81,10 @@ class Game:
                 self.settings.level += 1
                 self.end_screen.run()
             elif self.settings.result == False:
+                self.settings.level = 1
                 self.end_screen.run()
+
+
             
 
 
