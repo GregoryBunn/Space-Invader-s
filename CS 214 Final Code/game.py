@@ -30,7 +30,7 @@ def main():
     elif keys[stddraw.K_1]:
         players = 1
     while not stddraw.hasNextKeyTyped():
-        screens.startScreen()
+        screens.startScreen(players)
     
     #If you choose 1 player then the s1 - the second player - is none
     #If you chose 2 player then s1 is made an object and will therefore not be 'None' so all the if statements will work for the second player
