@@ -1,4 +1,4 @@
-import screens, stddraw, enemies, time, threading, score, random, gameFuncs
+import screens, stddraw, enemies, time, threading, score, random, gameFuncs, game
 from ship import Ship, Bullet
 from math import pi, sqrt
 #Scale is just incase we all used different scale when programming but we can talk about what scale we want to use when we are all together
@@ -60,12 +60,6 @@ def mainGame(scale, en, spd, s0, s1, lv):
             #display autoloading level screen
             sc = s0.getScore()
             screens.levelScreen(sc, lv)
-            """
-            screens.winScreen()
-            time.sleep(1)
-            while not stddraw.hasNextKeyTyped():
-                screens.winScreen()
-            """
             #Return 1 so that in the 'game.py' file, we can see that the player(s) have won
             return 1
 
