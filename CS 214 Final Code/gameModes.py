@@ -207,7 +207,7 @@ def mainGame(scale, en, spd, s0, s1, lv):
             stddraw.show(1000/90)
 
 
-def boss(scale, htps, s0, s1):
+def boss(scale, htps, s0, s1, lv):
     bullets = []
     changeDir = 0
     dir = 1
@@ -272,10 +272,10 @@ def boss(scale, htps, s0, s1):
         
         if boss.get_state() == False:
             del boss
-            screens.winScreen()
-            time.sleep(1)
             while stddraw.hasNextKeyTyped(): stddraw.nextKeyTyped()
-            while not stddraw.hasNextKeyTyped(): screens.winScreen()
+            #display autoloading level screen
+            sc = s0.getScore()
+            screens.levelScreen(sc, lv)
             return 1
         i = 0
         while i < len(bullets):
