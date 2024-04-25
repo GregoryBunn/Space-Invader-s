@@ -4,7 +4,7 @@ from math import pi
 
 def main():
     scale = 2
-    wave = 2
+    wave = 0
     numEn = 0
     wl = None
     htp = 2
