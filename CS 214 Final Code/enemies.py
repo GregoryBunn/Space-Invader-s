@@ -66,6 +66,11 @@ class Boss:
         return self._htp
     def hit(self):
         self._htp -= 1
+        
+    def show_life(self):
+        stddraw.setPenColor(stddraw.RED)
+        px = self._htp/7 
+        stddraw.line(-1.8, 1.8, px, 1.8)
     
 class enBullet:
     def __init__(self, x, y, state):

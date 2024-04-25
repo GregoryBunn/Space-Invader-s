@@ -148,7 +148,6 @@ def mainGame(scale, en, spd, s0, s1, lv):
         
         
         i = 0
-
         #check if player is hit by aliens
         while i < len(enBullets):
             distance = sqrt((enBullets[i].get_x() - s0.getX())**2 + (enBullets[i].get_y() - s0.getY())**2)
@@ -219,6 +218,7 @@ def boss(scale, htps, s0, s1):
     boss = enemies.Boss(0, scale - scale*0.2, htps, 0.18, True)
     while gameState:
         stddraw.clear(stddraw.BLACK)
+        boss.show_life()
         if lose == True:
             screens.loseScreen()
             time.sleep(1)

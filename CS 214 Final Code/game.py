@@ -4,7 +4,7 @@ from math import pi
 
 def main():
     scale = 2
-    wave = 0
+    wave = 2
     numEn = 0
     wl = None
     htp = 2
@@ -77,7 +77,7 @@ def main():
         else:
             #wl is the outcome for the boss level. if its 1, you win
             #if it's 0 then you lose and the game resets
-            wl = gameModes.boss(scale, 15, s0, s1)
+            wl = gameModes.boss(scale, 13, s0, s1)
             wave = 0
 
 
