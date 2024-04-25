@@ -7,7 +7,7 @@ def main():
     wave = 0
     numEn = 0
     wl = None
-    htp = 2
+    htp = 3
     spd = 0
     lvl = 1
      

@@ -66,7 +66,7 @@ class Boss:
         return self._htp
     def hit(self):
         self._htp -= 1
-        
+    #display boss health bar    
     def show_life(self):
         stddraw.setPenColor(stddraw.RED)
         px = self._htp/7 

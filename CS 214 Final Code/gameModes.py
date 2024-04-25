@@ -1,4 +1,4 @@
-import screens, stddraw, enemies, time, threading, score, random, gameFuncs, game
+import screens, stddraw, enemies, time, threading, display, random, gameFuncs, game
 from ship import Ship, Bullet
 from math import pi, sqrt
 #Scale is just incase we all used different scale when programming but we can talk about what scale we want to use when we are all together
@@ -187,10 +187,12 @@ def mainGame(scale, en, spd, s0, s1, lv):
         
         #display player score(s)
         if s1 == None:
-            score.displayScore(s0.getScore())
+            display.displayScore(s0.getScore())
         else:
-            score.displayScore(s0.getScore(), s1.getScore())
+            display.displayScore(s0.getScore(), s1.getScore())
 
+        #display player lives
+        display.displayLife(s0, s1)
         
         frameEND = time.time()
         '''
