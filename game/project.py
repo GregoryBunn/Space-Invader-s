@@ -16,6 +16,7 @@ from stddraw import picture
 from picture import Picture
 from color import Color 
 import math
+from music import Music_class
 
 
 
@@ -122,6 +123,8 @@ def createPlayerPicture(num,lis,pic):
         lis.append(rotatedpic)
 
 
+
+
 def main():
 
     
@@ -132,6 +135,8 @@ def main():
     #create thread for player pictures and start them
     player1TH = threading.Thread(target=createPlayerPicture, args=(0, picture_list1, Picture('Ship1A.png')))
     player2TH = threading.Thread(target=createPlayerPicture, args=(1, picture_list2, Picture('Ship2A.png')))
+    music = threading.Thread(target=Music_class.PlaySong(),args=(None))
+    music.start()
     player1TH.start()
     player2TH.start()
     

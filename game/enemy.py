@@ -53,7 +53,7 @@ class Enemy:
         self.x += self.dir*self.speed
 
         #check if enemy has reached side
-        if self.x < -screenX+8 or self.x > screenX-8:
+        if self.x < -screenX + self.size or self.x > screenX-self.size:
             return True
         else:
             return False
@@ -114,9 +114,14 @@ class EnemyList:
     def Make_Basic_EnemyGrid(self,settings:EnemySettings):
         for y in range(settings.county):
             for x in range(settings.countx):
+                typ = settings.typ
+                
                 xCor = -90+x*(15)
                 yCor = 90 - y*(15)
-                typ = settings.typ
+                #adjustment for bos enemy
+                if typ == 1:
+                    xCor += 10
+                    yCor -= 10
                 size = settings.size#6
                 dir = 1
                 speed = settings.speed #1
