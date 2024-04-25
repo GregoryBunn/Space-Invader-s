@@ -3,7 +3,7 @@ from ship import Ship, Bullet
 from math import pi, sqrt
 #Scale is just incase we all used different scale when programming but we can talk about what scale we want to use when we are all together
 #I used scale of '2' when i coded mine so it would work inbetween -2 and 2
-def mainGame(scale, en, spd, s0, s1):
+def mainGame(scale, en, spd, s0, s1, lv):
     #initializing all variables
     aliens = []
     bullets = []
@@ -57,10 +57,15 @@ def mainGame(scale, en, spd, s0, s1):
                 del bullets[0]
             while stddraw.hasNextKeyTyped():
                 stddraw.nextKeyTyped()
+            #display autoloading level screen
+            sc = s0.getScore()
+            screens.levelScreen(sc, lv)
+            """
             screens.winScreen()
             time.sleep(1)
             while not stddraw.hasNextKeyTyped():
                 screens.winScreen()
+            """
             #Return 1 so that in the 'game.py' file, we can see that the player(s) have won
             return 1
 

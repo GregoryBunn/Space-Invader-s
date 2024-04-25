@@ -63,3 +63,14 @@ def playerSelect():
 
         #show screen if nothing is pressed
         stddraw.show(0)
+
+def levelScreen(score, level):
+    stddraw.clear(stddraw.BLACK)
+    stddraw.setPenColor(stddraw.WHITE)
+    stddraw.setFontSize(45)
+    stddraw.text(0, 1.4, "Next Level!")
+    stddraw.setFontSize(30)
+    stddraw.text(0, 0, "Current level: "+ str(level))
+    stddraw.setFontSize(30)
+    stddraw.text(0, -0.4, "Current score: "+ str(score))
+    stddraw.show(2000)
