@@ -1,20 +1,36 @@
 import winsound
-import time
+import threading
 
-class Music_class:
-    def __init__(self):
-        self.song = "song1.wav"
-        self.Play = True
-        self.bullet = ""
-        self.Enemyhit = ""
-        self.Playerhit = ""
+'''
+hit: 080997_Bullet
+Pixabay
 
-    def playSong(self):
-        while self.Play:
-            winsound.PlaySound("song1.wav", winsound.SND_ASYNC)
-            time.sleep(0.1)
-    def stopSong(self):
-        self.Play = False
-    def PlaySong(self):
-        self.Play = False
+blaster BLASTER 2
+Pixabay
+
+'''
+
+
+def playSong():
+    song = "song1.wav"
+    winsound.PlaySound(song, winsound.SND_ASYNC)
+def ShootSound():
+    bullet = "bullet.wav"
+    winsound.PlaySound(bullet, winsound.SND_ASYNC)
+def hitEnemy():
+    Enemyhit = "EnemyHit"
+    winsound.PlaySound(Enemyhit, winsound.SND_ASYNC)
+def hitPlayer():
+    Playerhit = ""
+    pass
+    
         
+def bullet():
+    bulletTH = threading.Thread(target=ShootSound(),args=(None))
+    bulletTH.start()
+def Enemy():
+    EnemyTH = threading.Thread(target=hitEnemy(),args=(None))
+    EnemyTH.start()
+def Player():
+    PlayerTH = threading.Thread(target=hitPlayer(),args=(None))
+    PlayerTH.start()

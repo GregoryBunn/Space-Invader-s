@@ -4,6 +4,7 @@ import math
 from missile import Missile,MissileList
 from enemy import EnemySettings,EnemyList,Powerup,Powerup_List
 import random, time
+import music
 
 
 class GameLoop:
@@ -169,6 +170,7 @@ class GameLoop:
             
 
                     #add missile
+                    music.bullet()
                     missiletype = 1#Type of missile
                     x = self.PlayersList.Players[0].x+(10*math.sin(d))
                     y = self.PlayersList.Players[0].y+(10*math.cos(d))
@@ -193,6 +195,7 @@ class GameLoop:
                 
 
                         #add missile
+                        music.bullet()
                         missiletype = 1#Type of missile
                         x = self.PlayersList.Players[1].x+(10*math.sin(d))
                         y = self.PlayersList.Players[1].y+(10*math.cos(d))
@@ -259,6 +262,7 @@ class GameLoop:
         
 
                 #add missile
+                music.bullet()
                 missiletype = 1#Type of missile
                 x = self.PlayersList.Players[0].x+(10*math.sin(d))
                 y = self.PlayersList.Players[0].y+(10*math.cos(d))
@@ -301,6 +305,7 @@ class GameLoop:
             
 
                     #add missile
+                    music.bullet()
                     missiletype = 1#Type of missile
                     x = self.PlayersList.Players[1].x+(10*math.sin(d))
                     y = self.PlayersList.Players[1].y+(10*math.cos(d))
