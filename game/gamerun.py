@@ -262,13 +262,21 @@ class GameLoop:
         
 
                 #add missile
-                music.bullet()
-                missiletype = 1#Type of missile
+                music.bullet()#play missile sound
+                #test for super missile
+                if self.PlayersList.Players[0].time >= self.PlayersList.Players[0].missileTime*2:
+                    missiletype = 2#Super missile
+                    MissileSize = 5
+                else:
+                    missiletype = 1#Basic missile 
+                    MissileSize = 2.5
                 x = self.PlayersList.Players[0].x+(10*math.sin(d))
                 y = self.PlayersList.Players[0].y+(10*math.cos(d))
                 AimDir = self.PlayersList.Players[0].aimDir
-                MissileSize = 2.5
+               
                 self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0,MissileSize))
+                #make missile timer 0
+                self.PlayersList.Players[0].time = 0
             else:
                 pass
         #process second player input if there is one
@@ -306,12 +314,21 @@ class GameLoop:
 
                     #add missile
                     music.bullet()
-                    missiletype = 1#Type of missile
+                    #test for super missile
+                    if self.PlayersList.Players[1].time >= self.PlayersList.Players[1].missileTime*2:
+                        missiletype = 2#Super missile
+                        MissileSize = 5
+                    else:
+                        missiletype = 1#Basic missile 
+                        MissileSize = 2.5
+
                     x = self.PlayersList.Players[1].x+(10*math.sin(d))
                     y = self.PlayersList.Players[1].y+(10*math.cos(d))
                     AimDir = self.PlayersList.Players[1].aimDir
                     MissileSize = 2.5
                     self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,1,MissileSize))
+                    #make missile timer 0
+                    self.PlayersList.Players[1].time = 0
                 else:
                     pass
             

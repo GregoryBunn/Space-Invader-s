@@ -16,13 +16,22 @@ class Missile:
 
     #draw Missile 
     def drawMissile(self):
-        #creates missile of type 1
+
+        if self.typ == 2:
+            #set pen color
+            stddraw.setPenColor(stddraw.BLUE)
+
+            #draw missile
+            stddraw.filledCircle(self.x,self.y,self.size)
+
+
+        #creates missile of type 1S
         if self.typ == 1:
             #set pen color
             stddraw.setPenColor(stddraw.RED)
 
             #draw missile
-            stddraw.filledCircle(self.x,self.y,2.5)
+            stddraw.filledCircle(self.x,self.y,self.size)
         #create missile of type 0
         if self.typ == 0:
             stddraw.setPenColor(stddraw.GREEN)

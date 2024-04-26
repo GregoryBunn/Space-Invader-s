@@ -49,6 +49,16 @@ class Enemy:
     def drawBoss(self):
         boss = Picture('Boss0.png')
         picture(boss, self.x, self.y)
+        self.drawBossHealth()
+
+    def drawBossHealth(self):
+        stddraw.setPenColor(stddraw.RED)
+        stddraw.rectangle(-80,95,160,4)
+        stddraw.setPenColor(stddraw.BLACK)
+        #boss starting health
+        w = 158 - (self.hitBox*16)
+        if w < 0:w=0
+        stddraw.rectangle(-79,96,w,2)
 
     #move single enemy sideways
     def moveEnemySideways(self):
