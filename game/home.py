@@ -212,6 +212,15 @@ class EndScreen:
         if self.settings.level == Finallevel:
             stddraw.setFontSize(40) #set font size
             stddraw.text(0,0,"You Win!!!")
+            stddraw.text(0,-20,"Score: " + str(self.settings.score))
+            
+            if self.settings.score > self.settings.highScore:
+                stddraw.text(0,-30,"You set the high score!!" )
+            else:
+
+                stddraw.setFontSize(15)
+                stddraw.text(0,-30,"HighScore: " + str(self.settings.highScore))
+            #set new high score
             stddraw.setFontSize(15)
             stddraw.text(0,-50,"Game will restart shortly")
             stddraw.text(0,-60,"Press [x] to exit game")
@@ -227,7 +236,15 @@ class EndScreen:
             else:
                 stddraw.setFontSize(35)
                 stddraw.text(0,0,"Better luck next time")
+                stddraw.text(0,-20,"Score: " + str(self.settings.score))
+                
+               
+
                 stddraw.setFontSize(15) #set font size
+                stddraw.text(0,-30,"HighScore: " + str(self.settings.highScore))
+                if self.settings.score > self.settings.highScore:
+                    #set new highscore
+                    stddraw.text(0,-35,"You set the high score!!" )
                 stddraw.text(0,-50,"New game starting soon...")
                 stddraw.text(0,-60,"Press [x] to exit game")
 

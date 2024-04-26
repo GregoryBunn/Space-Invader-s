@@ -33,6 +33,8 @@ class GameSettings:
         self.level = level
         self.player1List = p1
         self.player2List = p2
+        self.score = 0
+        self.highScore = 0
 
 class Game:
     #initialized with settings

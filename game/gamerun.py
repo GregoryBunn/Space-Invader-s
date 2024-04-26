@@ -72,7 +72,7 @@ class GameLoop:
         self.play = self.enemys.Check_for_End(self.game_settings,self.PlayersList)
 
         #check if enemys have been hit
-        self.enemys.hitmarks(self.Missiles_list,self.PlayersList,self.powerups)
+        self.enemys.hitmarks(self.Missiles_list,self.PlayersList,self.powerups,self.game_settings)
 
         #move Powerups and draw them
         self.powerups.move_draw_Powerups()

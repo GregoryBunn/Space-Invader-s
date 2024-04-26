@@ -10,7 +10,6 @@ class EnemySettings:
             self.hitBox = hitbox
             self.speed= speed
             self.typ = typ
-            #self.powerup = powerup
             self.size = size
             
 
@@ -228,7 +227,7 @@ class EnemyList:
             powerups.add_powerup(Powerup(x,y,powerupTyp))
         
     #check if any of the enemy's have been hit
-    def hitmarks(self,Missiles_list,playerlist,powerups):
+    def hitmarks(self,Missiles_list,playerlist,powerups,settings):
 
         nextM = True #boolean to increase missile count
 
@@ -254,7 +253,9 @@ class EnemyList:
 
                         #test enemy hitpoints
                         if self.Enemylist[ec].hitBox == 0:
-                            #increase player score
+                            #increase Total score
+                            settings.score += 1
+                            #increse player scores
                             if Missiles_list.missiles[mc].owner == 0:
                                 playerlist.Players[0].score += 1
                             else:
