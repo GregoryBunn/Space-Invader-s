@@ -16,21 +16,19 @@ def playSong():
     winsound.PlaySound(song, winsound.SND_ASYNC)
 def ShootSound():
     bullet = "bullet.wav"
-    winsound.PlaySound(bullet, winsound.SND_ASYNC)
 def hitEnemy():
-    Enemyhit = "EnemyHit"
-    winsound.PlaySound(Enemyhit, winsound.SND_ASYNC)
+    Enemyhit = "EnemyHit.wav"
 def hitPlayer():
     Playerhit = ""
-    pass
+
     
         
 def bullet():
-    bulletTH = threading.Thread(target=ShootSound(),args=(None))
-    bulletTH.start()
+    pass
+    
 def Enemy():
-    EnemyTH = threading.Thread(target=hitEnemy(),args=(None))
-    EnemyTH.start()
+    pass
+    
 def Player():
-    PlayerTH = threading.Thread(target=hitPlayer(),args=(None))
-    PlayerTH.start()
+    pass
+    
