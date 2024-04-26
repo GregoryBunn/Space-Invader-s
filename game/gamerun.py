@@ -164,25 +164,7 @@ class GameLoop:
                 sys.exit()
 
             elif key == " ":#shoot
-                
-                #check if missile is allowed
-                if self.PlayersList.Players[0].isAllowed():
-
-
-                    #get direction of new missile
-                    d = self.PlayersList.Players[0].aimDir
-            
-
-                    #add missile
-                    music.bullet()
-                    missiletype = 1#Type of missile
-                    x = self.PlayersList.Players[0].x+(10*math.sin(d))
-                    y = self.PlayersList.Players[0].y+(10*math.cos(d))
-                    AimDir = self.PlayersList.Players[0].aimDir
-                    MissileSize = 2.5
-                    self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0,MissileSize))
-                else:
-                    pass
+                self.fireMissile(0)
 
             #process second player input if there is one
             if self.game_settings.players == 2:
@@ -190,28 +172,8 @@ class GameLoop:
 
                 if key == ";":#shoot
                     
-                    #check if missile is allowed
-                    if self.PlayersList.Players[1].isAllowed():
+                    self.fireMissile(1)
 
-
-                        #get direction of new missile
-                        d = self.PlayersList.Players[1].aimDir
-                
-
-                        #add missile
-                        music.bullet()
-                        missiletype = 1#Type of missile
-                        x = self.PlayersList.Players[1].x+(10*math.sin(d))
-                        y = self.PlayersList.Players[1].y+(10*math.cos(d))
-                        AimDir = self.PlayersList.Players[1].aimDir
-                        MissileSize = 2.5
-                        self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,1,MissileSize))
-
-                    
-                        
-
-                    else: #if missile is not allowed
-                        pass
 
                 elif key == "l":#move right
                         self.PlayersList.Players[1].moveDir = 1
@@ -259,32 +221,9 @@ class GameLoop:
         else:   
             self.PlayersList.Players[0].moveDir = 0
         if keys[stddraw.K_SPACE]:
-            #check if missile is allowed
-            if self.PlayersList.Players[0].isAllowed():
+            self.fireMissile(0)
 
 
-                #get direction of new missile
-                d = self.PlayersList.Players[0].aimDir
-        
-
-                #add missile
-                music.bullet()#play missile sound
-                #test for super missile
-                if self.PlayersList.Players[0].time >= self.PlayersList.Players[0].missileTime*2:
-                    missiletype = 2#Super missile
-                    MissileSize = 5
-                else:
-                    missiletype = 1#Basic missile 
-                    MissileSize = 2.5
-                x = self.PlayersList.Players[0].x+(10*math.sin(d))
-                y = self.PlayersList.Players[0].y+(10*math.cos(d))
-                AimDir = self.PlayersList.Players[0].aimDir
-               
-                self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0,MissileSize))
-                #make missile timer 0
-                self.PlayersList.Players[0].time = 0
-            else:
-                pass
         #process second player input if there is one
         if self.game_settings.players == 2:
         
@@ -307,36 +246,12 @@ class GameLoop:
             elif keys[stddraw.K_l]:
                 self.PlayersList.Players[1].moveDir = 1
             else: 
-            
                 self.PlayersList.Players[1].moveDir = 0
+
             if keys[stddraw.K_n]:
-                #check if missile is allowed
-                if self.PlayersList.Players[1].isAllowed():
+                self.fireMissile(1)
 
 
-                    #get direction of new missile
-                    d = self.PlayersList.Players[1].aimDir
-            
-
-                    #add missile
-                    music.bullet()
-                    #test for super missile
-                    if self.PlayersList.Players[1].time >= self.PlayersList.Players[1].missileTime*2:
-                        missiletype = 2#Super missile
-                        MissileSize = 5
-                    else:
-                        missiletype = 1#Basic missile 
-                        MissileSize = 2.5
-
-                    x = self.PlayersList.Players[1].x+(10*math.sin(d))
-                    y = self.PlayersList.Players[1].y+(10*math.cos(d))
-                    AimDir = self.PlayersList.Players[1].aimDir
-                    MissileSize = 2.5
-                    self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,1,MissileSize))
-                    #make missile timer 0
-                    self.PlayersList.Players[1].time = 0
-                else:
-                    pass
             
 
     #run
@@ -367,3 +282,31 @@ class GameLoop:
         #scale form
         stddraw.setXscale(-self.screenX,self.screenY)
         stddraw.setYscale(-self.screenY,self.screenY)
+
+    def fireMissile(self,p):
+        #check if missile is allowed
+        if self.PlayersList.Players[p].isAllowed():
+
+
+            #get direction of new missile
+            d = self.PlayersList.Players[p].aimDir
+    
+
+            #add missile
+            music.bullet()#play missile sound
+            #test for super missile
+            if self.PlayersList.Players[p].time >= self.PlayersList.Players[p].missileTime*2:
+                missiletype = 2#Super missile
+                MissileSize = 5
+            else:
+                missiletype = 1#Basic missile 
+                MissileSize = 2.5
+            x = self.PlayersList.Players[p].x+(10*math.sin(d))
+            y = self.PlayersList.Players[p].y+(10*math.cos(d))
+            AimDir = self.PlayersList.Players[p].aimDir
+            
+            self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0,MissileSize))
+            #make missile timer 0
+            self.PlayersList.Players[p].time = 0
+
+        
