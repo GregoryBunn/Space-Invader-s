@@ -10,11 +10,9 @@ The Final Boss Battle : alperomeresin
 from home import HomeScreen,EndScreen,PlayerSelect
 from gamerun import GameLoop
 import threading
-import time
 import stddraw
 from stddraw import picture
 from picture import Picture
-from color import Color 
 import math
 import music 
 

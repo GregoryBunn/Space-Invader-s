@@ -1,8 +1,6 @@
 import stddraw
 import math
 from stddraw import picture
-from picture import Picture
-from color import Color 
 
 
 

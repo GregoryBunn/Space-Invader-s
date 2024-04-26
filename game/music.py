@@ -1,11 +1,10 @@
 import winsound
-import threading
 
 '''
 hit: 080997_Bullet
 Pixabay
 
-blaster BLASTER 2
+blaster: BLASTER 2
 Pixabay
 
 '''

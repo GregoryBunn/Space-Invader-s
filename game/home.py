@@ -1,6 +1,5 @@
 import stddraw
 import sys
-#from gamerun import GameLoop
 
 
 class PlayerSelect:
@@ -50,7 +49,7 @@ class PlayerSelect:
                 key = stddraw.nextKeyTyped()
 
                 #enter play screen
-                if key == "q":
+                if key == "x":
                     #quit
                     sys.exit()
 

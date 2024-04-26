@@ -2,9 +2,10 @@ import stddraw
 from player import Player,PlayerList
 import math
 from missile import Missile,MissileList
-from enemy import EnemySettings,EnemyList,Powerup,Powerup_List
+from enemy import EnemySettings,EnemyList,Powerup_List
 import random, time
 import music
+import sys
 
 
 class GameLoop:
@@ -14,6 +15,7 @@ class GameLoop:
         self.game_settings = game_settings
         self.timer = 0
         self.level = game_settings.level
+
 
         #create player class
         self.PlayersList = PlayerList()
@@ -158,6 +160,8 @@ class GameLoop:
 
             elif key == "w":#stop rotate   
                 self.PlayersList.Players[0].aimChange = 0
+            elif key == "x":#exit
+                sys.exit()
 
             elif key == " ":#shoot
                 
@@ -226,6 +230,7 @@ class GameLoop:
 
                 elif key == "i":#stop rotate   
                     self.PlayersList.Players[1].aimChange = 0
+                
 
 
     #Process input type 1                
@@ -249,8 +254,9 @@ class GameLoop:
             self.PlayersList.Players[0].moveDir = -1
         elif keys[stddraw.K_d]:
             self.PlayersList.Players[0].moveDir = 1
-        else: 
-           
+        elif keys[stddraw.K_x]:
+            sys.exit()
+        else:   
             self.PlayersList.Players[0].moveDir = 0
         if keys[stddraw.K_SPACE]:
             #check if missile is allowed
