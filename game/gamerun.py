@@ -308,7 +308,7 @@ class GameLoop:
             y = self.PlayersList.Players[p].y+(10*math.cos(d))
             AimDir = self.PlayersList.Players[p].aimDir
             
-            self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0,MissileSize))
+            self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,p,MissileSize))
             #make missile timer 0
             self.PlayersList.Players[p].time = 0
 

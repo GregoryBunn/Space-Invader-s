@@ -258,8 +258,10 @@ class EnemyList:
                             #increse player scores
                             if Missiles_list.missiles[mc].owner == 0:
                                 playerlist.Players[0].score += 1
+                
                             else:
                                 playerlist.Players[1].score +=1
+                        
 
                             #create Powerup if enemy has one
                             self.Create_powerup(ec,powerups)#ec = enemy Number
