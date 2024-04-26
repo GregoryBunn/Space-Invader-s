@@ -1,11 +1,40 @@
 import stddraw
 import sys
 
+"""
+File that handles the diffrent static screens
+classes include:
+PlayerSelect
+Homescreen
+Endscreen
+
+"""
 
 class PlayerSelect:
+    """
+    Handles the player selection process on the  first title screen of the game, 
+    where the number of players are chosen.
+
+    Attributes:
+        settings (object): object that stores game settings.
+
+    Methods:
+        displayPlayerSelect(): Draws the graphical screen for playerselect.
+        run(): Runs the screen and checks for any input.
+    """
     def __init__(self,settings):
+        """
+        Initializes the PlayerSelect with the given settings.
+
+        Args:
+            settings: game settings.
+        """
         self.settings = settings
     def displayPlayerSelect(self):
+
+        """
+        Create and draw the player select screen
+        """
         #get screen size
         x = self.settings.screen_x
         y = self.settings.screen_y
@@ -31,6 +60,9 @@ class PlayerSelect:
         
     #run the select screen
     def run(self):
+        """
+        run the player select screen and check for any input
+        """
         #create the select screen
         self.displayPlayerSelect()
         
@@ -71,13 +103,32 @@ class PlayerSelect:
 
 
 class HomeScreen:
+    """
+    The main menu screen of the game
+
+    Attributes:
+        settings (object): object that stores game settings.
+
+    Methods:
+        display(): Renders the main menu screen.
+        run(): Calls display and Manages the input logic for menu selection.
+    """
 
     def __init__(self,settings):
-        #class initialized with settings
+        """
+        Initializes the Homescreen with the given settings.
+
+        Args:
+            settings (object): game settings.
+        """
         self.settings = settings
 
     #Create homescreen
     def displayHome(self):
+
+        """
+        Create the graphics and draws them
+        """
         stddraw.clear(stddraw.BLACK)
         stddraw.setPenColor(stddraw.WHITE)
         stddraw.setFontSize(40)
@@ -95,6 +146,12 @@ class HomeScreen:
 
     #run the home screen
     def run(self):
+
+        """
+        Call the display function 
+        Handels the input logic
+        """
+
         #create the home screen
         self.displayHome()
         
@@ -122,12 +179,30 @@ class HomeScreen:
 
 #end screen class
 class EndScreen:
+    """
+    Displays the end game screen based on the result of the game..
+
+    Attributes:
+        settings (object): game settings.
+
+    Methods:
+        display(): Creates the end game screen.
+        run(): Manages the end game input, determining if the game should restart or close.
+    """
     def __init__(self,settings):
-        #class initialized with settings
+        """
+        Initializes the Endscreen with the given settings.
+
+        Args:
+            settings (object): game settings.
+        """
         self.settings = settings
     
     #create screen
     def display(self):
+        """
+        Create and display the endscreen
+        """
         stddraw.clear(stddraw.BLACK) #Create Black form
         #stddraw.setFontFamily('Arial') #set font
         
@@ -158,6 +233,9 @@ class EndScreen:
 
     #run Endscreen
     def run(self):
+        """
+        run the endscreen by calling display and handle any input
+        """
         #clear key list if there is one
         while stddraw.hasNextKeyTyped():
             stddraw.nextKeyTyped()
