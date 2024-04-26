@@ -282,6 +282,9 @@ class GameLoop:
         #scale form
         stddraw.setXscale(-self.screenX,self.screenY)
         stddraw.setYscale(-self.screenY,self.screenY)
+        stddraw.setFontSize(15)
+        stddraw.setPenColor(stddraw.WHITE)
+        stddraw.text(0,-95,"Total score: "+str(self.game_settings.score))
 
     def fireMissile(self,p):
         #check if missile is allowed

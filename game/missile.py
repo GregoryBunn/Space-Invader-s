@@ -60,8 +60,14 @@ class Missile:
 
         #Check if missile x is in the screen bounds
         if self.x > screenX-6 or self.x < -screenX+6:
-            #remove missile
-            return False
+            #super missile bounce of wall
+            if self.typ == 2 and abs(self.dir)< math.pi/2.1:
+                self.dir = -self.dir
+                return True
+            else:
+
+                #remove missile
+                return False
         
         #Check if missile y is in the screen bounds
         elif self.y > screenY-8 or self.y < -screenY+8:
@@ -82,11 +88,11 @@ class MissileList:
             self.missiles.remove(missile)
     def move_drawMissiles(self):
         for missile in self.missiles[:]:
-            missile.moveMissile()
             missile.drawMissile()
+            missile.moveMissile()
             if not missile.checkMissileBounds():
                 self.missiles.remove(missile)
-
+            
         
 
 

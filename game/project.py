@@ -17,7 +17,6 @@ import math
 import music 
 
 
-
 #game settings
 class GameSettings:
     #has three parameters
@@ -34,7 +33,24 @@ class GameSettings:
         self.player1List = p1
         self.player2List = p2
         self.score = 0
-        self.highScore = 0
+        self.txt = "highscore.txt"
+        self.highScore = self.getHighScore()
+
+    def getHighScore(self):   
+        f = open(self.txt, "r")
+        score = f.read()
+        f.close()
+        if len(score) > 0:
+            return int(score)
+        else:
+            return 0
+    def setHighScore(self,score):
+        self.highScore = score
+        self.writeHighScore()
+    def writeHighScore(self):
+        f = open(self.txt,"w")
+        f.write(str(self.highScore))
+        f.close()
 
 class Game:
     #initialized with settings
@@ -89,6 +105,7 @@ class Game:
             elif self.settings.result == False:
                 self.settings.level = 1
                 self.end_screen.run()
+                self.settings.score = 0
 
 
             
