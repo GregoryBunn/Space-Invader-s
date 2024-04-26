@@ -37,8 +37,13 @@ class Enemy:
         #stddraw.filledCircle(self.x,self.y,self.size) #Draw red Circle
 
         #graphics
-        basic = Picture('Aliens.png')
-        #boss = Picture('Boss0.png')
+        if self.hitBox == 1:
+            #draw enemy with one life
+            basic = Picture('Aliens.png')
+        else:
+            #draw enemy with 2 lives
+            basic = Picture("Aliens.png")
+            pass
         picture(basic, self.x, self.y)
 
     def drawBoss(self):
@@ -237,18 +242,23 @@ class EnemyList:
                     #test if missile hit enemy
                     if dist < self.Enemylist[ec].size + Missiles_list.missiles[mc].size: # + if for missile size
 
-                        #increase player score
-                        if Missiles_list.missiles[mc].owner == 0:
-                            playerlist.Players[0].score += 1
+                        #test enemy hitpoints
+                        if self.Enemylist[ec].hitBox == 0:
+                            #increase player score
+                            if Missiles_list.missiles[mc].owner == 0:
+                                playerlist.Players[0].score += 1
+                            else:
+                                playerlist.Players[1].score +=1
+
+                            #create Powerup if enemy has one
+                            self.Create_powerup(ec,powerups)#ec = enemy Number
+  
+                            #remove enemy
+                            self.remove_Enemy(self.Enemylist[ec])
+
                         else:
-                            playerlist.Players[1].score +=1
+                            self.Enemylist[ec].hitBox -= 1
 
-                        #create Powerup if enemy has one
-                        self.Create_powerup(ec,powerups)#ec = enemy Number
-
-
-                        #remove enemy
-                        self.remove_Enemy(self.Enemylist[ec])
                         #remove Missile
                         Missiles_list.remove_missile(Missiles_list.missiles[mc])
                             

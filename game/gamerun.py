@@ -26,13 +26,13 @@ class GameLoop:
 
         if self.game_settings.level == 1:
             #create level 1 enemy settings
-            self.Enemy_settingss = EnemySettings(5,3,1,1,0,6)
+            self.Enemy_settingss = EnemySettings(5,3,0,1,0,6)
         elif self.game_settings.level ==2:
             #create level 2 enemy settings
             self.Enemy_settingss = EnemySettings(8,3,1,1,0,6)
         elif self.game_settings.level == 3:
             #create level 3 enemy settings
-            self.Enemy_settingss = EnemySettings(1,1,1,1,1,12)
+            self.Enemy_settingss = EnemySettings(1,1,10,1,1,12)
             
 
 
