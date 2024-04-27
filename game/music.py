@@ -14,8 +14,13 @@ Pixabay
 
 
 def playSong():
+    musicTH = threading.Thread(target=song(),args=(None))
+    musicTH.start()
+    
+def song():
     song = "song1.wav"
     winsound.PlaySound(song, winsound.SND_ASYNC)
+
 def ShootSound():
     bullet = "bullet1"
     stdaudio.playFile(bullet)

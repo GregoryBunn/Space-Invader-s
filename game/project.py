@@ -128,13 +128,18 @@ def createPlayerPicture(num,lis,pic):
         sinMinusTheta = math.sin(-angle)
         for tx in range(width):
             for ty in range(heigth):
-                dX: int = tx - cx
-                dY: int = ty - cy             
-                sx = int(dX*cosMinusTheta - dY*sinMinusTheta + cx)
-                sy = int(dX*sinMinusTheta + dY*cosMinusTheta + cy)
-                col = stddraw.BLACK
-                if ((sx >= 0) and (sx < width) and (sy >= 0) and (sy < heigth)):
-                    col = pic.get(sx, sy)
+                if ty < heigth//2:
+                    dX: int = tx - cx
+                    dY: int = ty - cy             
+                    sx = int(dX*cosMinusTheta - dY*sinMinusTheta + cx)
+                    sy = int(dX*sinMinusTheta + dY*cosMinusTheta + cy)
+                    col = stddraw.BLACK
+                    if ((sx >= 0) and (sx < width) and (sy >= 0) and (sy < heigth)):
+                        col = pic.get(sx, sy)
+                else:
+                    col = pic.get(tx,ty)
+
+                
                 rotatedpic.set(tx, ty, col)
         angle += pi/48 
         lis.append(rotatedpic)
@@ -153,8 +158,8 @@ def main():
     player1TH = threading.Thread(target=createPlayerPicture, args=(0, picture_list1, Picture('Ship1A.png')))
     player2TH = threading.Thread(target=createPlayerPicture, args=(1, picture_list2, Picture('Ship2A.png')))
 
-    musicTH = threading.Thread(target=music.playSong(),args=(None))
-    musicTH.start()
+   
+    music.playSong()
     player1TH.start()
     player2TH.start()
     
