@@ -103,7 +103,7 @@ class Game:
                 self.settings.level += 1
                 self.end_screen.run()
             elif self.settings.result == False:
-                self.settings.level = 1
+                #self.settings.level = 1
                 self.end_screen.run()
                 self.settings.score = 0
 
@@ -128,7 +128,7 @@ def createPlayerPicture(num,lis,pic):
         sinMinusTheta = math.sin(-angle)
         for tx in range(width):
             for ty in range(heigth):
-                if ty < heigth//2:
+                if ty < heigth//2:#//2 unsures only the turret rotates
                     dX: int = tx - cx
                     dY: int = ty - cy             
                     sx = int(dX*cosMinusTheta - dY*sinMinusTheta + cx)
@@ -136,6 +136,8 @@ def createPlayerPicture(num,lis,pic):
                     col = stddraw.BLACK
                     if ((sx >= 0) and (sx < width) and (sy >= 0) and (sy < heigth)):
                         col = pic.get(sx, sy)
+
+                        #Make sure nothing else then the turret is rotated
                         if (sx < 10) or (sx > 50):
                             col = stddraw.BLACK
                         
