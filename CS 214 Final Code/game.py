@@ -7,8 +7,9 @@ def main():
     wave = 0
     numEn = 0
     wl = None
-    htp = 2
+    htp = 3
     spd = 0
+    lvl = 1
      
     #game setup?
     stddraw.setXscale(-scale, scale)
@@ -29,7 +30,7 @@ def main():
     elif keys[stddraw.K_1]:
         players = 1
     while not stddraw.hasNextKeyTyped():
-        screens.startScreen()
+        screens.startScreen(players)
     
     #If you choose 1 player then the s1 - the second player - is none
     #If you chose 2 player then s1 is made an object and will therefore not be 'None' so all the if statements will work for the second player
@@ -56,12 +57,13 @@ def main():
                 #if you win a game, the game returns 1. so if outcome is 1 it will change everything acordingly 
                 #the same if you lose, outcome will be 0 and this will handle everything accordingly
                 #If you click 'x' then you quite the game and outcome will be 'exit' which will just return and then take you out of the game
-                outcome = gameModes.mainGame(scale, numEn, spd, s0, s1)
+                outcome = gameModes.mainGame(scale, numEn, spd, s0, s1, lvl)
                 print(outcome)
                 if outcome == 1:
                     spd += 0.01
                     numEn += 1
                     wave += 1
+                    lvl += 1
                 elif outcome == 0:
                     s0.set_htp(2)
                     s0.reset_Score()
@@ -75,7 +77,7 @@ def main():
         else:
             #wl is the outcome for the boss level. if its 1, you win
             #if it's 0 then you lose and the game resets
-            wl = gameModes.boss(scale, 15, s0, s1)
+            wl = gameModes.boss(scale, 13, s0, s1, lvl)
             wave = 0
 
 

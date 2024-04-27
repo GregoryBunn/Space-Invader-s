@@ -1,9 +1,9 @@
-import screens, stddraw, enemies, time, threading, score, random, gameFuncs
+import screens, stddraw, enemies, time, threading, display, random, gameFuncs, game
 from ship import Ship, Bullet
 from math import pi, sqrt
 #Scale is just incase we all used different scale when programming but we can talk about what scale we want to use when we are all together
 #I used scale of '2' when i coded mine so it would work inbetween -2 and 2
-def mainGame(scale, en, spd, s0, s1):
+def mainGame(scale, en, spd, s0, s1, lv):
     #initializing all variables
     aliens = []
     bullets = []
@@ -57,10 +57,9 @@ def mainGame(scale, en, spd, s0, s1):
                 del bullets[0]
             while stddraw.hasNextKeyTyped():
                 stddraw.nextKeyTyped()
-            screens.winScreen()
-            time.sleep(1)
-            while not stddraw.hasNextKeyTyped():
-                screens.winScreen()
+            #display autoloading level screen
+            sc = s0.getScore()
+            screens.levelScreen(sc, lv)
             #Return 1 so that in the 'game.py' file, we can see that the player(s) have won
             return 1
 
@@ -149,7 +148,6 @@ def mainGame(scale, en, spd, s0, s1):
         
         
         i = 0
-
         #check if player is hit by aliens
         while i < len(enBullets):
             distance = sqrt((enBullets[i].get_x() - s0.getX())**2 + (enBullets[i].get_y() - s0.getY())**2)
@@ -189,10 +187,12 @@ def mainGame(scale, en, spd, s0, s1):
         
         #display player score(s)
         if s1 == None:
-            score.displayScore(s0.getScore())
+            display.displayScore(s0.getScore())
         else:
-            score.displayScore(s0.getScore(), s1.getScore())
+            display.displayScore(s0.getScore(), s1.getScore())
 
+        #display player lives
+        display.displayLife(s0, s1)
         
         frameEND = time.time()
         '''
@@ -209,7 +209,7 @@ def mainGame(scale, en, spd, s0, s1):
             stddraw.show(1000/90)
 
 
-def boss(scale, htps, s0, s1):
+def boss(scale, htps, s0, s1, lv):
     bullets = []
     changeDir = 0
     dir = 1
@@ -220,6 +220,7 @@ def boss(scale, htps, s0, s1):
     boss = enemies.Boss(0, scale - scale*0.2, htps, 0.18, True)
     while gameState:
         stddraw.clear(stddraw.BLACK)
+        boss.show_life()
         if lose == True:
             screens.loseScreen()
             time.sleep(1)
@@ -273,10 +274,10 @@ def boss(scale, htps, s0, s1):
         
         if boss.get_state() == False:
             del boss
-            screens.winScreen()
-            time.sleep(1)
             while stddraw.hasNextKeyTyped(): stddraw.nextKeyTyped()
-            while not stddraw.hasNextKeyTyped(): screens.winScreen()
+            #display autoloading level screen
+            sc = s0.getScore()
+            screens.levelScreen(sc, lv)
             return 1
         i = 0
         while i < len(bullets):

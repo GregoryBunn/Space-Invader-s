@@ -2,8 +2,10 @@ import stddraw
 from player import Player,PlayerList
 import math
 from missile import Missile,MissileList
-from enemy import EnemySettings,EnemyList,Powerup,Powerup_List
+from enemy import EnemySettings,EnemyList,Powerup_List
 import random, time
+import music
+import sys
 
 
 class GameLoop:
@@ -13,6 +15,7 @@ class GameLoop:
         self.game_settings = game_settings
         self.timer = 0
         self.level = game_settings.level
+
 
         #create player class
         self.PlayersList = PlayerList()
@@ -25,13 +28,13 @@ class GameLoop:
 
         if self.game_settings.level == 1:
             #create level 1 enemy settings
-            self.Enemy_settingss = EnemySettings(5,3,1,1,0,6)
+            self.Enemy_settingss = EnemySettings(5,3,0,1,0,6)
         elif self.game_settings.level ==2:
             #create level 2 enemy settings
             self.Enemy_settingss = EnemySettings(8,3,1,1,0,6)
         elif self.game_settings.level == 3:
             #create level 3 enemy settings
-            self.Enemy_settingss = EnemySettings(1,1,1,1,1,12)
+            self.Enemy_settingss = EnemySettings(1,1,10,1.5,1,12)
             
 
 
@@ -69,7 +72,7 @@ class GameLoop:
         self.play = self.enemys.Check_for_End(self.game_settings,self.PlayersList)
 
         #check if enemys have been hit
-        self.enemys.hitmarks(self.Missiles_list,self.PlayersList,self.powerups)
+        self.enemys.hitmarks(self.Missiles_list,self.PlayersList,self.powerups,self.game_settings)
 
         #move Powerups and draw them
         self.powerups.move_draw_Powerups()
@@ -157,26 +160,11 @@ class GameLoop:
 
             elif key == "w":#stop rotate   
                 self.PlayersList.Players[0].aimChange = 0
+            elif key == "x":#exit
+                sys.exit()
 
             elif key == " ":#shoot
-                
-                #check if missile is allowed
-                if self.PlayersList.Players[0].isAllowed():
-
-
-                    #get direction of new missile
-                    d = self.PlayersList.Players[0].aimDir
-            
-
-                    #add missile
-                    missiletype = 1#Type of missile
-                    x = self.PlayersList.Players[0].x+(10*math.sin(d))
-                    y = self.PlayersList.Players[0].y+(10*math.cos(d))
-                    AimDir = self.PlayersList.Players[0].aimDir
-                    MissileSize = 2.5
-                    self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0,MissileSize))
-                else:
-                    pass
+                self.fireMissile(0)
 
             #process second player input if there is one
             if self.game_settings.players == 2:
@@ -184,27 +172,8 @@ class GameLoop:
 
                 if key == ";":#shoot
                     
-                    #check if missile is allowed
-                    if self.PlayersList.Players[1].isAllowed():
+                    self.fireMissile(1)
 
-
-                        #get direction of new missile
-                        d = self.PlayersList.Players[1].aimDir
-                
-
-                        #add missile
-                        missiletype = 1#Type of missile
-                        x = self.PlayersList.Players[1].x+(10*math.sin(d))
-                        y = self.PlayersList.Players[1].y+(10*math.cos(d))
-                        AimDir = self.PlayersList.Players[1].aimDir
-                        MissileSize = 2.5
-                        self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,1,MissileSize))
-
-                    
-                        
-
-                    else: #if missile is not allowed
-                        pass
 
                 elif key == "l":#move right
                         self.PlayersList.Players[1].moveDir = 1
@@ -223,6 +192,7 @@ class GameLoop:
 
                 elif key == "i":#stop rotate   
                     self.PlayersList.Players[1].aimChange = 0
+                
 
 
     #Process input type 1                
@@ -246,27 +216,14 @@ class GameLoop:
             self.PlayersList.Players[0].moveDir = -1
         elif keys[stddraw.K_d]:
             self.PlayersList.Players[0].moveDir = 1
-        else: 
-           
+        elif keys[stddraw.K_x]:
+            sys.exit()
+        else:   
             self.PlayersList.Players[0].moveDir = 0
         if keys[stddraw.K_SPACE]:
-            #check if missile is allowed
-            if self.PlayersList.Players[0].isAllowed():
+            self.fireMissile(0)
 
 
-                #get direction of new missile
-                d = self.PlayersList.Players[0].aimDir
-        
-
-                #add missile
-                missiletype = 1#Type of missile
-                x = self.PlayersList.Players[0].x+(10*math.sin(d))
-                y = self.PlayersList.Players[0].y+(10*math.cos(d))
-                AimDir = self.PlayersList.Players[0].aimDir
-                MissileSize = 2.5
-                self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,0,MissileSize))
-            else:
-                pass
         #process second player input if there is one
         if self.game_settings.players == 2:
         
@@ -289,26 +246,12 @@ class GameLoop:
             elif keys[stddraw.K_l]:
                 self.PlayersList.Players[1].moveDir = 1
             else: 
-            
                 self.PlayersList.Players[1].moveDir = 0
+
             if keys[stddraw.K_n]:
-                #check if missile is allowed
-                if self.PlayersList.Players[1].isAllowed():
+                self.fireMissile(1)
 
 
-                    #get direction of new missile
-                    d = self.PlayersList.Players[1].aimDir
-            
-
-                    #add missile
-                    missiletype = 1#Type of missile
-                    x = self.PlayersList.Players[1].x+(10*math.sin(d))
-                    y = self.PlayersList.Players[1].y+(10*math.cos(d))
-                    AimDir = self.PlayersList.Players[1].aimDir
-                    MissileSize = 2.5
-                    self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,1,MissileSize))
-                else:
-                    pass
             
 
     #run
@@ -339,3 +282,34 @@ class GameLoop:
         #scale form
         stddraw.setXscale(-self.screenX,self.screenY)
         stddraw.setYscale(-self.screenY,self.screenY)
+        stddraw.setFontSize(15)
+        stddraw.setPenColor(stddraw.WHITE)
+        stddraw.text(0,-95,"Total score: "+str(self.game_settings.score))
+
+    def fireMissile(self,p):
+        #check if missile is allowed
+        if self.PlayersList.Players[p].isAllowed():
+
+
+            #get direction of new missile
+            d = self.PlayersList.Players[p].aimDir
+    
+
+            #add missile
+            music.bullet()#play missile sound
+            #test for super missile
+            if self.PlayersList.Players[p].time >= self.PlayersList.Players[p].missileTime*2:
+                missiletype = 2#Super missile
+                MissileSize = 5
+            else:
+                missiletype = 1#Basic missile 
+                MissileSize = 2.5
+            x = self.PlayersList.Players[p].x+(10*math.sin(d))
+            y = self.PlayersList.Players[p].y+(10*math.cos(d))
+            AimDir = self.PlayersList.Players[p].aimDir
+            
+            self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,p,MissileSize))
+            #make missile timer 0
+            self.PlayersList.Players[p].time = 0
+
+        

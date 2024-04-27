@@ -10,13 +10,11 @@ The Final Boss Battle : alperomeresin
 from home import HomeScreen,EndScreen,PlayerSelect
 from gamerun import GameLoop
 import threading
-import time
 import stddraw
 from stddraw import picture
 from picture import Picture
-from color import Color 
 import math
-
+import music 
 
 
 #game settings
@@ -34,6 +32,25 @@ class GameSettings:
         self.level = level
         self.player1List = p1
         self.player2List = p2
+        self.score = 0
+        self.txt = "highscore.txt"
+        self.highScore = self.getHighScore()
+
+    def getHighScore(self):   
+        f = open(self.txt, "r")
+        score = f.read()
+        f.close()
+        if len(score) > 0:
+            return int(score)
+        else:
+            return 0
+    def setHighScore(self,score):
+        self.highScore = score
+        self.writeHighScore()
+    def writeHighScore(self):
+        f = open(self.txt,"w")
+        f.write(str(self.highScore))
+        f.close()
 
 class Game:
     #initialized with settings
@@ -88,6 +105,7 @@ class Game:
             elif self.settings.result == False:
                 self.settings.level = 1
                 self.end_screen.run()
+                self.settings.score = 0
 
 
             
@@ -110,16 +128,26 @@ def createPlayerPicture(num,lis,pic):
         sinMinusTheta = math.sin(-angle)
         for tx in range(width):
             for ty in range(heigth):
-                dX: int = tx - cx
-                dY: int = ty - cy             
-                sx = int(dX*cosMinusTheta - dY*sinMinusTheta + cx)
-                sy = int(dX*sinMinusTheta + dY*cosMinusTheta + cy)
-                col = stddraw.BLACK
-                if ((sx >= 0) and (sx < width) and (sy >= 0) and (sy < heigth)):
-                    col = pic.get(sx, sy)
+                if ty < heigth//2:
+                    dX: int = tx - cx
+                    dY: int = ty - cy             
+                    sx = int(dX*cosMinusTheta - dY*sinMinusTheta + cx)
+                    sy = int(dX*sinMinusTheta + dY*cosMinusTheta + cy)
+                    col = stddraw.BLACK
+                    if ((sx >= 0) and (sx < width) and (sy >= 0) and (sy < heigth)):
+                        col = pic.get(sx, sy)
+                        if (sx < 10) or (sx > 50):
+                            col = stddraw.BLACK
+                        
+                else:
+                    col = pic.get(tx,ty)
+
+                
                 rotatedpic.set(tx, ty, col)
         angle += pi/48 
         lis.append(rotatedpic)
+
+
 
 
 def main():
@@ -132,6 +160,9 @@ def main():
     #create thread for player pictures and start them
     player1TH = threading.Thread(target=createPlayerPicture, args=(0, picture_list1, Picture('Ship1A.png')))
     player2TH = threading.Thread(target=createPlayerPicture, args=(1, picture_list2, Picture('Ship2A.png')))
+
+   
+    music.playSong()
     player1TH.start()
     player2TH.start()
     

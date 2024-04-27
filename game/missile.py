@@ -16,13 +16,22 @@ class Missile:
 
     #draw Missile 
     def drawMissile(self):
-        #creates missile of type 1
+
+        if self.typ == 2:
+            #set pen color
+            stddraw.setPenColor(stddraw.BLUE)
+
+            #draw missile
+            stddraw.filledCircle(self.x,self.y,self.size)
+
+
+        #creates missile of type 1S
         if self.typ == 1:
             #set pen color
             stddraw.setPenColor(stddraw.RED)
 
             #draw missile
-            stddraw.filledCircle(self.x,self.y,2.5)
+            stddraw.filledCircle(self.x,self.y,self.size)
         #create missile of type 0
         if self.typ == 0:
             stddraw.setPenColor(stddraw.GREEN)
@@ -51,8 +60,14 @@ class Missile:
 
         #Check if missile x is in the screen bounds
         if self.x > screenX-6 or self.x < -screenX+6:
-            #remove missile
-            return False
+            #super missile bounce of wall
+            if self.typ == 2 and abs(self.dir)< math.pi/2.1:
+                self.dir = -self.dir
+                return True
+            else:
+
+                #remove missile
+                return False
         
         #Check if missile y is in the screen bounds
         elif self.y > screenY-8 or self.y < -screenY+8:
@@ -73,11 +88,11 @@ class MissileList:
             self.missiles.remove(missile)
     def move_drawMissiles(self):
         for missile in self.missiles[:]:
-            missile.moveMissile()
             missile.drawMissile()
+            missile.moveMissile()
             if not missile.checkMissileBounds():
                 self.missiles.remove(missile)
-
+            
         
 
 

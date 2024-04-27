@@ -1,8 +1,6 @@
 import stddraw
 import math
 from stddraw import picture
-from picture import Picture
-from color import Color 
 
 
 
@@ -156,7 +154,6 @@ class Player:
     #check if player is allowed to fire a missile
     def isAllowed(self):
         if self.time > self.missileTime:
-            self.time = 0
             return True
         else:
             return False
@@ -258,16 +255,16 @@ class PlayerList:
 
     def activate_Powerup(self,typ,player):
         if typ == 1:
-            if player.missileTime < 75:
-                player.missileTime = 70
+            if player.missileTime < 45:
+                player.missileTime = 45
             else:
-                player.missileTime -= 5
+                player.missileTime -= 10
         if typ == 2:
             if player.lives < 3:
                 player.lives += 1
 
         if typ == 3:
-            if player.moveSpeed < 2.5:
+            if player.moveSpeed < 3.5:
                 player.moveSpeed += 0.5
             
 

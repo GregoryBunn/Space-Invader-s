@@ -10,7 +10,6 @@ class EnemySettings:
             self.hitBox = hitbox
             self.speed= speed
             self.typ = typ
-            #self.powerup = powerup
             self.size = size
             
 
@@ -37,13 +36,28 @@ class Enemy:
         #stddraw.filledCircle(self.x,self.y,self.size) #Draw red Circle
 
         #graphics
-        basic = Picture('Aliens.png')
-        #boss = Picture('Boss0.png')
+        if self.hitBox == 1:
+            #draw enemy with one life
+            basic = Picture('Alien2.png')
+        else:
+            #draw enemy with 0 lives
+            basic = Picture("Alien1.png")
+            pass
         picture(basic, self.x, self.y)
 
     def drawBoss(self):
         boss = Picture('Boss0.png')
         picture(boss, self.x, self.y)
+        self.drawBossHealth()
+
+    def drawBossHealth(self):
+        stddraw.setPenColor(stddraw.RED)
+        stddraw.rectangle(-80,95,160,4)
+        stddraw.setPenColor(stddraw.BLACK)
+        #boss starting health
+        w = 158 - (self.hitBox*16)
+        if w < 0:w=0
+        stddraw.rectangle(-79,96,w,2)
 
     #move single enemy sideways
     def moveEnemySideways(self):
@@ -53,7 +67,7 @@ class Enemy:
         self.x += self.dir*self.speed
 
         #check if enemy has reached side
-        if self.x < -screenX+8 or self.x > screenX-8:
+        if self.x < -screenX + self.size or self.x > screenX-self.size:
             return True
         else:
             return False
@@ -114,9 +128,14 @@ class EnemyList:
     def Make_Basic_EnemyGrid(self,settings:EnemySettings):
         for y in range(settings.county):
             for x in range(settings.countx):
+                typ = settings.typ
+                
                 xCor = -90+x*(15)
                 yCor = 90 - y*(15)
-                typ = settings.typ
+                #adjustment for bos enemy
+                if typ == 1:
+                    xCor += 10
+                    yCor -= 10
                 size = settings.size#6
                 dir = 1
                 speed = settings.speed #1
@@ -208,7 +227,7 @@ class EnemyList:
             powerups.add_powerup(Powerup(x,y,powerupTyp))
         
     #check if any of the enemy's have been hit
-    def hitmarks(self,Missiles_list,playerlist,powerups):
+    def hitmarks(self,Missiles_list,playerlist,powerups,settings):
 
         nextM = True #boolean to increase missile count
 
@@ -232,18 +251,27 @@ class EnemyList:
                     #test if missile hit enemy
                     if dist < self.Enemylist[ec].size + Missiles_list.missiles[mc].size: # + if for missile size
 
-                        #increase player score
-                        if Missiles_list.missiles[mc].owner == 0:
-                            playerlist.Players[0].score += 1
+                        #test enemy hitpoints
+                        if self.Enemylist[ec].hitBox == 0:
+                            #increase Total score
+                            settings.score += 1
+                            #increse player scores
+                            if Missiles_list.missiles[mc].owner == 0:
+                                playerlist.Players[0].score += 1
+                
+                            else:
+                                playerlist.Players[1].score +=1
+                        
+
+                            #create Powerup if enemy has one
+                            self.Create_powerup(ec,powerups)#ec = enemy Number
+  
+                            #remove enemy
+                            self.remove_Enemy(self.Enemylist[ec])
+
                         else:
-                            playerlist.Players[1].score +=1
+                            self.Enemylist[ec].hitBox -= 1
 
-                        #create Powerup if enemy has one
-                        self.Create_powerup(ec,powerups)#ec = enemy Number
-
-
-                        #remove enemy
-                        self.remove_Enemy(self.Enemylist[ec])
                         #remove Missile
                         Missiles_list.remove_missile(Missiles_list.missiles[mc])
                             
