@@ -1,6 +1,9 @@
 import stddraw
 import math
 from stddraw import picture
+import music
+import time
+
 
 
 
@@ -208,6 +211,8 @@ class PlayerList:
                         player._lives -= 1
 
                         
+                        music.Player()
+                        time.sleep(0.5)
                         
 
                         #Don't have to increase mc (new missile in old position because of pop)

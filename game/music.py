@@ -4,15 +4,19 @@ import threading
 
 
 '''
-hit: 080997_Bullet
-Pixabay
+Shoot : Pixabay
+080997_Bullet
 
-blaster: BLASTER 2
-Pixabay
 
-sound: Pixabay
-The Final Boss Battle : alperomeresin
+
+
+Song: Pixabay
 8-bit Air Fight : moodmode
+
+Live lost: Pixabay
+negative_beeps
+
+
 
 '''
 
@@ -26,25 +30,20 @@ def song():
     winsound.PlaySound(song, winsound.SND_ASYNC)
 
 def ShootSound():
-    bullet = "bullet1"
+    bullet = "blast"
     stdaudio.playFile(bullet)
-def hitEnemy():
-    Enemyhit = "EnemyHit.wav"
+
 def hitPlayer():
-    Playerhit = ""
+    Playerhit = "Life"
+    stdaudio.playFile(Playerhit)
 
     
         
 def bullet():
     bulletTH = threading.Thread(target=ShootSound)
     bulletTH.start()
-    #ShootSound()
 
-    
-
-    
-def Enemy():
-    pass
     
 def Player():
-    pass
+    PlayerTH = threading.Thread(target=hitPlayer)
+    PlayerTH.start()
