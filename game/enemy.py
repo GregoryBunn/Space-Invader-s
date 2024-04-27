@@ -4,6 +4,17 @@ from picture import Picture
 import random
  
 class EnemySettings:
+    """
+    Configures settings for enemy behavior in the game, such as initial positions, speed, and hitbox sizes.
+
+    Attributes:
+        _countx (int): Number of enemies horizontally.
+        _county (int): Number of enemies vertically.
+        _hitBox (int): Indicates the durability of enemies.
+        _speed (int): Movement speed of enemies.
+        _typ (int): Type of enemy which can affect appearance and behavior.
+        _size (int): Size of the enemy used for drawing and collision detection.
+    """
     def __init__(self,x,y,hitbox,speed,typ,size):
             self._countx = x
             self._county = y
@@ -14,11 +25,21 @@ class EnemySettings:
             
 
 class Enemy:
-    '''
-    Handels individual enemy functions:
-    proces enemy movements
-    Test
-    '''
+    
+    """
+    Represents a single enemy in the game, handling its movement, drawing, and interactions with other game elements.
+
+    Attributes:
+        _x (float): The x-coordinate of the enemy.
+        _y (float): The y-coordinate of the enemy.
+        _typ (int): The type of enemy that influences its behavior and graphical representation.
+        _size (int): The size of the enemy, affecting its appearance and collision detection.
+        _dir (int): The direction of movement, where positive and negative values indicate right and left movement respectively.
+        _speed (int): The speed at which the enemy moves.
+        _powerup (int): Indicates if the enemy has a powerup that can be released upon destruction.
+        _hitBox (int): The health or durability of the enemy, determining how many hits it can take before being destroyed.
+    """
+    
     def __init__(self,x,y,typ,size,dir,speed,powerup,hitBox):
         self._x = x
         self._y = y
@@ -112,6 +133,18 @@ class Enemy:
 
 
 class EnemyList:
+    """
+    Manages a collection of enemy objects, handling their creation, movement, and rendering.
+
+    Methods:
+        add_Enemy(enemy_class: Enemy): Adds a new enemy to the list.
+        remove_Enemy(enemy_class: Enemy): Removes an enemy from the list.
+        Make_Basic_EnemyGrid(settings: EnemySettings): Initializes a grid of enemies based on specified settings.
+        Move_Enemys(): Moves all enemies in the list and handles their interaction with game boundaries.
+        Draw_Enemys(): Draws all enemies in the list.
+        Check_for_End(settings, players_list): Checks the game state to determine if the game should end.
+        hitmarks(Missiles_list, playerlist, powerups, settings): Checks and handles collisions between missiles and enemies.
+    """
 
     def __init__(self):
         self._Enemylist = []#create list of enemys
@@ -286,6 +319,19 @@ class EnemyList:
 
 
 class Powerup:
+    """
+    Represents a power-up that can be collected by the player during gameplay.
+
+    Attributes:
+        _x (float): The x-coordinate of the powerup.
+        _y (float): The y-coordinate of the powerup.
+        _typ (int): The type of powerup, affecting its effects and appearance.
+
+    Methods:
+        move_down(): Moves the powerup downwards at a constant speed.
+        drawType(): Draws the powerup on the screen based on its type.
+        checkPowerupBound(): Checks if the powerup is within the screen boundaries.
+    """
     def __init__(self,x,y,typ):
         self._x = x
         self._y = y
@@ -322,6 +368,14 @@ class Powerup:
             return True
 
 class Powerup_List:
+    """
+    Manages a list of powerups in the game, handling their movement, rendering, and removal.
+
+    Methods:
+        add_powerup(powerup: Powerup): Adds a new powerup to the list.
+        remove_powerup(powerup: Powerup): Removes a powerup from the list.
+        move_draw_Powerups(): Moves all powerups in the list and draws them; removes powerups that are out of bounds.
+    """
     def __init__(self):
         self._List_Powerups = []
     def add_powerup(self,powerup : Powerup):
