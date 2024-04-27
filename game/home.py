@@ -143,7 +143,8 @@ class HomeScreen:
             stddraw.text(0, -30, "[X] to quit")
             stddraw.setFontSize(35)
             stddraw.text(0, -70, "Press any key to start")
-            stddraw.show(0)
+            stddraw.setFontSize(16)
+            stddraw.text(0, -90, "Press [X] to exit")
         else:
             stddraw.clear(stddraw.BLACK)
             stddraw.setPenColor(stddraw.WHITE)
@@ -167,7 +168,6 @@ class HomeScreen:
             stddraw.text(0, -70, "Press any key to start")
             stddraw.setFontSize(16)
             stddraw.text(0, -90, "Press [X] to exit")
-            stddraw.show(0)
 
     #run the home screen
     def run(self):
