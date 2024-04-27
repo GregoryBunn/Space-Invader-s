@@ -127,23 +127,8 @@ class HomeScreen:
     def displayHome(self):
 
         """
-        Create the graphics and draws them
+        Create the graphics depending on number of players and draws them
         """
-        stddraw.clear(stddraw.BLACK)
-        stddraw.setPenColor(stddraw.WHITE)
-        stddraw.setFontSize(40)
-        stddraw.text(0, 90, "COSMIC CONQUISTADORS")
-        stddraw.setFontSize(35)
-        stddraw.text(0, 40, "Instructions:")
-        stddraw.setFontSize(20)
-        stddraw.text(0, 15, "[A] move left, [D] move right")
-        stddraw.text(0, 0, "[Q] rotate left, [E] rotate right")
-        stddraw.text(0, -15, "[Space] to shoot")
-        stddraw.text(0, -30, "[H] for help")
-        stddraw.text(0, -45, "[X] to quit")
-        stddraw.setFontSize(35)
-        stddraw.text(0, -70, "Press any key to start")
-
         if self.settings.players==1:
             stddraw.clear(stddraw.BLACK)
             stddraw.setPenColor(stddraw.WHITE)
