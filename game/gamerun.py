@@ -74,7 +74,7 @@ class GameLoop:
         #check if enemys have been hit
         self.enemys.hitmarks(self.Missiles_list,self.PlayersList,self.powerups,self.game_settings)
 
-        #move Powerups and draw them
+        #move Powerups and draw them=
         self.powerups.move_draw_Powerups()
 
         #check if player hit powerup
@@ -97,17 +97,19 @@ class GameLoop:
         '''
         The next few lines of code does the math inorder to have a consistent frame rate throughout the game
         '''
+        #Code added by Greg
+        #______________________________________________________________________________________________________
         try:
-            totTime = (frameEND - frameST)*1000
-            #stddraw.text(1.8, 1.8, '%.0f' % (fps))
-            if totTime > 24:
+            fps = 1/(frameEND - frameST)
+            stddraw.setPenColor(stddraw.WHITE)
+            stddraw.text(90, 90, '%.0f' % (fps))
+            if fps < 30:
                 stddraw.show(0)
             else:
-                stddraw.show(24 - totTime)
+                stddraw.show(1000/30 - (frameEND-frameST)*1000)
         except Exception: 
-            stddraw.show(24)
-
-        
+            stddraw.show(1000/30)
+        #_______________________________________________________________________________________________________
         
 
         #move Player & aim Player + update Time since last missile/player

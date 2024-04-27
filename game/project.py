@@ -14,13 +14,9 @@ Methods:
 
 from home import HomeScreen,EndScreen,PlayerSelect
 from gamerun import GameLoop
-import threading
-import stddraw
+import threading, stddraw, math, music
 from stddraw import picture
 from picture import Picture
-import math
-import music 
-
 
 #game settings
 class GameSettings:
@@ -177,7 +173,7 @@ def main():
     settings_game = GameSettings(screenXsize=512,screenYsize=512,players=1,inputType=1,level=1,p1=picture_list1,p2=picture_list2)
 
     #initialize game
-    game = Game(settings=settings_game)
+    game = Game(settings_game)
 
 
     #run game

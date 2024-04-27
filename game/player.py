@@ -10,19 +10,19 @@ from stddraw import picture
 class Player:
     def __init__(self,x : float,y : float,aimchange : float,aimDirection : float,moveDirection : float,moveSpeed : float,size : int,score : int,time : int,missileTime:int,lives:int,pictures):
         
-        self.x = x #player x coordinate
-        self.y = y #player y coordinate
-        self.aimChange = aimchange #player facing direction change
-        self.aimDir = aimDirection #player facing Direction
-        self.moveDir = moveDirection #Direction of player movement
-        self.moveSpeed = moveSpeed #speed of player
-        self.size = size #size of player
-        self.score = score #current score of the player
-        self.time = time #time since last missile
-        self.missileTime = missileTime #time between missiles
-        self.lives = lives#player lives
-        self.picList = pictures
-        self.picture = self.picList[24]
+        self._x = x #player x coordinate
+        self._y = y #player y coordinate
+        self._aimChange = aimchange #player facing direction change
+        self._aimDir = aimDirection #player facing Direction
+        self._moveDir = moveDirection #Direction of player movement
+        self._moveSpeed = moveSpeed #speed of player
+        self._size = size #size of player
+        self._score = score #current score of the player
+        self._time = time #time since last missile
+        self._missileTime = missileTime #time between missiles
+        self._lives = lives#player lives
+        self._picList = pictures
+        self._picture = self._picList[24]
 
     def RotatePlayer(self,aimdir):
         pos = int((aimdir/(math.pi/2))*24) + 24
