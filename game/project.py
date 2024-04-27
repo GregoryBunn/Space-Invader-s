@@ -239,6 +239,7 @@ def main():
     #create thread for player pictures and start them
 
     #Threading was done by Greg
+    #Custom Ship design by David Van Heerden
     player1TH = threading.Thread(target=createPlayerPicture, args=( picture_list1, Picture('Ship1A.png')))
     player2TH = threading.Thread(target=createPlayerPicture, args=( picture_list2, Picture('Ship2A.png')))
 
