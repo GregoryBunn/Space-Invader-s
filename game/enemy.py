@@ -176,7 +176,7 @@ class EnemyList:
     def Check_for_End(self,settings,players_list):
 
         #test if any players are left
-        if len(players_list.Players) == 0:
+        if len(players_list._Players) == 0:
             settings.result = False
             return False
         
@@ -192,7 +192,7 @@ class EnemyList:
         
         
         #itterate through players
-        for player in players_list.Players:
+        for player in players_list._Players:
 
             if player._lives ==0:
                 settings.result = False
@@ -256,10 +256,10 @@ class EnemyList:
                             settings.score += 1
                             #increse player scores
                             if Missiles_list.missiles[mc].owner == 0:
-                                playerlist.Players[0]._score += 1
+                                playerlist._Players[0]._score += 1
                 
                             else:
-                                playerlist.Players[1]._score +=1
+                                playerlist._Players[1]._score +=1
                         
 
                             #create Powerup if enemy has one
@@ -287,33 +287,33 @@ class EnemyList:
 
 class Powerup:
     def __init__(self,x,y,typ):
-        self.x = x
-        self.y = y
-        self.typ = typ
+        self._x = x
+        self._y = y
+        self._typ = typ
     def move_down(self):
         POWERUP_SPEED = 1
-        self.y -= POWERUP_SPEED
+        self._y -= POWERUP_SPEED
     def drawType(self):
-        if self.typ == 1:
+        if self._typ == 1:
             stddraw.setPenColor(stddraw.PINK)
-        elif self.typ == 2:
+        elif self._typ == 2:
             stddraw.setPenColor(stddraw.BLUE)
-        elif self.typ == 3:
+        elif self._typ == 3:
             stddraw.setPenColor(stddraw.DARK_GREEN)
 
-        stddraw.filledCircle(self.x,self.y,2)
+        stddraw.filledCircle(self._x,self._y,2)
 
     def checkPowerupBound(self):
         screenX = 100
         screenY = 100
 
         #Check if missile x is in the screen bounds
-        if self.x > screenX-6 or self.x < -screenX+6:
+        if self._x > screenX-6 or self._x < -screenX+6:
             #remove missile
             return False
         
         #Check if missile y is in the screen bounds
-        elif self.y > screenY-8 or self.y < -screenY+8:
+        elif self._y > screenY-8 or self._y < -screenY+8:
             #remove missile
             return False
         
