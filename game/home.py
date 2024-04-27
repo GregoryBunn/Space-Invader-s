@@ -81,7 +81,7 @@ class PlayerSelect:
                 key = stddraw.nextKeyTyped()
 
                 #enter play screen
-                if key == "x":
+                if key == "q":
                     #quit
                     sys.exit()
 
@@ -194,7 +194,7 @@ class HomeScreen:
                 start = True
 
                 #enter play screen
-                if stddraw.nextKeyTyped() == "q":
+                if stddraw.nextKeyTyped() == "x":
                     #quit
                     sys.exit()
 
