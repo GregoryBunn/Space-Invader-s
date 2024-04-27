@@ -5,12 +5,12 @@ import random
  
 class EnemySettings:
     def __init__(self,x,y,hitbox,speed,typ,size):
-            self.countx = x
-            self.county = y
-            self.hitBox = hitbox
-            self.speed= speed
-            self.typ = typ
-            self.size = size
+            self._countx = x
+            self._county = y
+            self._hitBox = hitbox
+            self._speed= speed
+            self._typ = typ
+            self._size = size
             
 
 class Enemy:
@@ -20,14 +20,14 @@ class Enemy:
     Test
     '''
     def __init__(self,x,y,typ,size,dir,speed,powerup,hitBox):
-        self.x = x
-        self.y = y
-        self.typ = typ
-        self.size = size
-        self.dir = dir
-        self.speed = speed
-        self.powerup = powerup
-        self.hitBox = hitBox
+        self._x = x
+        self._y = y
+        self._typ = typ
+        self._size = size
+        self._dir = dir
+        self._speed = speed
+        self._powerup = powerup
+        self._hitBox = hitBox
 
        
     #Draw type 0 enemy
@@ -36,18 +36,18 @@ class Enemy:
         #stddraw.filledCircle(self.x,self.y,self.size) #Draw red Circle
 
         #graphics
-        if self.hitBox == 1:
+        if self._hitBox == 1:
             #draw enemy with one life
             basic = Picture('Alien2.png')
         else:
             #draw enemy with 0 lives
             basic = Picture("Alien1.png")
             pass
-        picture(basic, self.x, self.y)
+        picture(basic, self._x, self._y)
 
     def drawBoss(self):
         boss = Picture('Boss0.png')
-        picture(boss, self.x, self.y)
+        picture(boss, self._x, self._y)
         self.drawBossHealth()
 
     def drawBossHealth(self):
@@ -55,7 +55,7 @@ class Enemy:
         stddraw.rectangle(-80,95,160,4)
         stddraw.setPenColor(stddraw.BLACK)
         #boss starting health
-        w = 158 - (self.hitBox*16)
+        w = 158 - (self._hitBox*16)
         if w < 0:w=0
         stddraw.rectangle(-79,96,w,2)
 
@@ -64,10 +64,10 @@ class Enemy:
         screenX = 100 #screen size x
 
         #move enemy left or right       
-        self.x += self.dir*self.speed
+        self._x += self._dir*self._speed
 
         #check if enemy has reached side
-        if self.x < -screenX + self.size or self.x > screenX-self.size:
+        if self._x < -screenX + self._size or self._x > screenX-self._size:
             return True
         else:
             return False
@@ -75,13 +75,13 @@ class Enemy:
     #move enemy down
     def moveEnemyDown(self): 
         #change direction
-        self.dir *= -1
+        self._dir *= -1
         #move down
-        self.y -= self.size*2
+        self._y -= self._size*2
 
     #check if enemy is below shooter
     def checkEnemyBelowShooter(self,settings,player):
-        if self.y < player._y:
+        if self._y < player._y:
             #player looses-result = Fales
             settings.result = False
             return True #stop game
@@ -91,11 +91,11 @@ class Enemy:
     #check if enemy touches player
     def checkEnemyTouchShooter(self,settings,player):
         #calculate distance between player and enemy
-        distx = abs(self.x - player._x)
-        disty = abs(self.y - player._y)
+        distx = abs(self._x - player._x)
+        disty = abs(self._y - player._y)
         dist = (distx**2 + disty**2)**0.5
         #test if enemy is touching player
-        if dist < self.size + player._size:
+        if dist < self._size + player._size:
             #player looses result = Fales
             settings.result = False
             return True #stop game
@@ -114,21 +114,21 @@ class Enemy:
 class EnemyList:
 
     def __init__(self):
-        self.Enemylist = []#create list of enemys
+        self._Enemylist = []#create list of enemys
 
     def add_Enemy(self,enemy_class:Enemy):
         #add enemy to list
-        self.Enemylist.append(enemy_class)
+        self._Enemylist.append(enemy_class)
 
     def remove_Enemy(self,enemy_class:Enemy):
         #remove enemy from list
-        if enemy_class in self.Enemylist:
-            self.Enemylist.remove(enemy_class)
+        if enemy_class in self._Enemylist:
+            self._Enemylist.remove(enemy_class)
 
     def Make_Basic_EnemyGrid(self,settings:EnemySettings):
-        for y in range(settings.county):
-            for x in range(settings.countx):
-                typ = settings.typ
+        for y in range(settings._county):
+            for x in range(settings._countx):
+                typ = settings._typ
                 
                 xCor = -90+x*(15)
                 yCor = 90 - y*(15)
@@ -136,9 +136,9 @@ class EnemyList:
                 if typ == 1:
                     xCor += 10
                     yCor -= 10
-                size = settings.size#6
+                size = settings._size#6
                 dir = 1
-                speed = settings.speed #1
+                speed = settings._speed #1
                 p = random.random()
                 if p < 0.2:
                     PowerupType = 1
@@ -148,27 +148,27 @@ class EnemyList:
                     PowerupType = 3
                 else:
                     PowerupType = 0
-                hitbox = settings.hitBox#1
+                hitbox = settings._hitBox#1
                 #Add Enemy to list
                 self.add_Enemy(Enemy(xCor,yCor,typ,size,dir,speed,PowerupType,hitbox))
 
     def Move_Enemys(self):
         moveDown = False
-        for enemy in self.Enemylist:
+        for enemy in self._Enemylist:
             if enemy.moveEnemySideways():
                 moveDown = True
         if moveDown == True:
-            for enemy in self.Enemylist:
+            for enemy in self._Enemylist:
                 enemy.moveEnemyDown()
 
     #Draw enemys
     def Draw_Enemys(self):
         #itterate through list of enemys
-        for enemy in self.Enemylist:
+        for enemy in self._Enemylist:
             
-            if enemy.typ ==0:#if enemy is of type 0 enemy
+            if enemy._typ ==0:#if enemy is of type 0 enemy
                 enemy.drawBasicEnemy()#draw enemy
-            if enemy.typ == 1:
+            if enemy._typ == 1:
                 enemy.drawBoss()
     
 
@@ -184,7 +184,7 @@ class EnemyList:
             
 
         #if no enemys are left
-        if len(self.Enemylist) == 0:
+        if len(self._Enemylist) == 0:
             #game is won
             settings.result = True
 
@@ -199,7 +199,7 @@ class EnemyList:
                 return False
 
             #itterate throung enemys
-            for enemy in self.Enemylist:
+            for enemy in self._Enemylist:
                 #check if enemy touches shooter
                 if enemy.checkEnemyTouchShooter(settings,player):
                     return False #stop game
@@ -213,10 +213,10 @@ class EnemyList:
     
     #powerup
     def Create_powerup(self,ec,powerups):
-        x = self.Enemylist[ec].x
-        y = self.Enemylist[ec].y
-        powerupTyp = self.Enemylist[ec].powerup
-        if self.Enemylist[ec].powerup == 0:
+        x = self._Enemylist[ec]._x
+        y = self._Enemylist[ec]._y
+        powerupTyp = self._Enemylist[ec]._powerup
+        if self._Enemylist[ec]._powerup == 0:
             #No powerup
             pass
 
@@ -238,20 +238,20 @@ class EnemyList:
             #check if missile is from a player
             if Missiles_list.missiles[mc].owner != 2:
 
-                while (ec < len(self.Enemylist)):
+                while (ec < len(self._Enemylist)):
 
                     #calculate distance between missile and enemy
-                    distx = abs(Missiles_list.missiles[mc].x - self.Enemylist[ec].x)
-                    disty = abs(Missiles_list.missiles[mc].y - self.Enemylist[ec].y)
+                    distx = abs(Missiles_list.missiles[mc].x - self._Enemylist[ec]._x)
+                    disty = abs(Missiles_list.missiles[mc].y - self._Enemylist[ec]._y)
                     dist = (distx**2 + disty**2)**0.5 
 
                     #need to add missile radius
 
                     #test if missile hit enemy
-                    if dist < self.Enemylist[ec].size + Missiles_list.missiles[mc].size: # + if for missile size
+                    if dist < self._Enemylist[ec]._size + Missiles_list.missiles[mc].size: # + if for missile size
 
                         #test enemy hitpoints
-                        if self.Enemylist[ec].hitBox == 0:
+                        if self._Enemylist[ec]._hitBox == 0:
                             #increase Total score
                             settings.score += 1
                             #increse player scores
@@ -266,10 +266,10 @@ class EnemyList:
                             self.Create_powerup(ec,powerups)#ec = enemy Number
   
                             #remove enemy
-                            self.remove_Enemy(self.Enemylist[ec])
+                            self.remove_Enemy(self._Enemylist[ec])
 
                         else:
-                            self.Enemylist[ec].hitBox -= 1
+                            self._Enemylist[ec]._hitBox -= 1
 
                         #remove Missile
                         Missiles_list.remove_missile(Missiles_list.missiles[mc])

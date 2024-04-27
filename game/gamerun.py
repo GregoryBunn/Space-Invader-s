@@ -144,12 +144,12 @@ class GameLoop:
             if intensity < 1: intensity = 1 #Intensity between 1 and 4
 
             #check if enough time has passed since previous counter attack and if there is enemys
-            if self.timer % (10*intensity)==0 and len(self.enemys.Enemylist)>0 :
+            if self.timer % (10*intensity)==0 and len(self.enemys._Enemylist)>0 :
                 #get random enemy
-                enemy = random.randint(0,len(self.enemys.Enemylist)-1)
+                enemy = random.randint(0,len(self.enemys._Enemylist)-1)
                 #get enemy location
-                x = self.enemys.Enemylist[enemy].x
-                y = self.enemys.Enemylist[enemy].y
+                x = self.enemys._Enemylist[enemy]._x
+                y = self.enemys._Enemylist[enemy]._y
 
                 MissileSize = 5
                 self.Missiles_list.add_missile(Missile(x,y,0,0,2,MissileSize))
