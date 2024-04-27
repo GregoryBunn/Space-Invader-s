@@ -32,13 +32,13 @@ class Missile:
             owner (int): The identifier of the missile's owner.
             size (int): The size of the missile.
         """
-        self.x = x #missile x
-        self.y = y #missile y
-        self.dir = dir #missile direction
-        self.typ = typ #type of missile
-        self.owner = owner #missile owner
-        self.speed = 4 #missile speed
-        self.size = size
+        self._x = x #missile x
+        self._y = y #missile y
+        self._dir = dir #missile direction
+        self._typ = typ #type of missile
+        self._owner = owner #missile owner
+        self._speed = 4 #missile speed
+        self._size = size
 
     #draw Missile 
     def drawMissile(self):
@@ -47,26 +47,26 @@ class Missile:
         Type 0 missiles are drawn green, type 1 are red, and type 2 are blue.
         """
 
-        if self.typ == 2:
+        if self._typ == 2:
             #set pen color
             stddraw.setPenColor(stddraw.BLUE)
 
             #draw missile
-            stddraw.filledCircle(self.x,self.y,self.size)
+            stddraw.filledCircle(self._x,self._y,self._size)
 
 
         #creates missile of type 1S
-        if self.typ == 1:
+        if self._typ == 1:
             #set pen color
             stddraw.setPenColor(stddraw.RED)
 
             #draw missile
-            stddraw.filledCircle(self.x,self.y,self.size)
+            stddraw.filledCircle(self._x,self._y,self._size)
         #create missile of type 0
-        if self.typ == 0:
+        if self._typ == 0:
             stddraw.setPenColor(stddraw.GREEN)
             stddraw.setPenRadius(0.5)
-            stddraw.line(self.x, self.y, self.x, (self.y-5)) 
+            stddraw.line(self._x, self._y, self._x, (self._y-5)) 
     
     def moveMissile(self):
         """
@@ -74,16 +74,16 @@ class Missile:
         """
 
         #move missile if missile is a counter attack missile
-        if self.typ == 0:
+        if self._typ == 0:
             speed = 0.5
-            self.y= self.y - speed*(self.speed*(1-abs(self.dir/(math.pi/2))))
+            self._y= self._y - speed*(self._speed*(1-abs(self._dir/(math.pi/2))))
         
         #move player missiles
         else:
             #change x pos
-            self.x = self.x + (self.speed*(self.dir/(math.pi/2)))
+            self._x = self._x + (self._speed*(self._dir/(math.pi/2)))
             #change y pos
-            self.y = self.y + (self.speed*(1-abs(self.dir/(math.pi/2))))
+            self._y = self._y + (self._speed*(1-abs(self._dir/(math.pi/2))))
 
 
 
@@ -98,10 +98,10 @@ class Missile:
         screenY = 100
 
         #Check if missile x is in the screen bounds
-        if self.x > screenX-6 or self.x < -screenX+6:
+        if self._x > screenX-6 or self._x < -screenX+6:
             #super missile bounce of wall
-            if self.typ == 2 and abs(self.dir)< math.pi/2.1:
-                self.dir = -self.dir
+            if self._typ == 2 and abs(self._dir)< math.pi/2.1:
+                self._dir = -self._dir
                 return True
             else:
 
@@ -109,7 +109,7 @@ class Missile:
                 return False
         
         #Check if missile y is in the screen bounds
-        elif self.y > screenY-8 or self.y < -screenY+8:
+        elif self._y > screenY-8 or self._y < -screenY+8:
             #remove missile
             return False
         
@@ -125,7 +125,7 @@ class MissileList:
         missiles (list of Missile): The list of missile objects currently active in the game.
     """
     def __init__(self):
-        self.missiles = []
+        self._missiles = []
     def add_missile(self,missile:Missile):
         """
         Adds a new missile to the list of active missiles.
@@ -133,7 +133,7 @@ class MissileList:
         Parameters:
             missile (Missile): The missile to be added to the list.
         """
-        self.missiles.append(missile)
+        self._missiles.append(missile)
     def remove_missile(self,missile:Missile):
         """
         Removes a missile from the list of active missiles.
@@ -141,18 +141,18 @@ class MissileList:
         Parameters:
             missile (Missile): The missile to be removed from the list.
         """
-        if missile in self.missiles:
-            self.missiles.remove(missile)
+        if missile in self._missiles:
+            self._missiles.remove(missile)
     def move_drawMissiles(self):
         """
         Updates the positions of all missiles in the list and draws them on the screen.
         This method also checks for missiles that are out of bounds and removes them.
         """
-        for missile in self.missiles[:]:
+        for missile in self._missiles[:]:
             missile.drawMissile()
             missile.moveMissile()
             if not missile.checkMissileBounds():
-                self.missiles.remove(missile)
+                self._missiles.remove(missile)
             
         
 

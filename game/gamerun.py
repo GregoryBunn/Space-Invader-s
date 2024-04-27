@@ -24,11 +24,11 @@ class GameLoop:
         enemys (EnemyList): Manages all enemy-related activities.
     """
     def __init__(self,game_settings):
-        self.screenX = game_settings.screen_x
-        self.screenY = game_settings.screen_y
-        self.game_settings = game_settings
-        self.timer = 0
-        self.level = game_settings.level
+        self._screenX = game_settings._screen_x
+        self._screenY = game_settings._screen_y
+        self._game_settings = game_settings
+        self._timer = 0
+        self._level = game_settings._level
 
 
         #create player class
@@ -40,13 +40,13 @@ class GameLoop:
         #create enemy class
         self.enemys = EnemyList() 
 
-        if self.game_settings.level == 1:
+        if self._game_settings._level == 1:
             #create level 1 enemy settings
             self.Enemy_settingss = EnemySettings(5,3,0,1,0,6)
-        elif self.game_settings.level ==2:
+        elif self._game_settings._level ==2:
             #create level 2 enemy settings
             self.Enemy_settingss = EnemySettings(8,3,1,1,0,6)
-        elif self.game_settings.level == 3:
+        elif self._game_settings._level == 3:
             #create level 3 enemy settings
             self.Enemy_settingss = EnemySettings(1,1,10,1.5,1,12)
             
@@ -86,10 +86,10 @@ class GameLoop:
         self.enemys.Draw_Enemys()
             
         #check if game has ended 
-        self.play = self.enemys.Check_for_End(self.game_settings,self.PlayersList)
+        self.play = self.enemys.Check_for_End(self._game_settings,self.PlayersList)
 
         #check if enemys have been hit
-        self.enemys.hitmarks(self.Missiles_list,self.PlayersList,self.powerups,self.game_settings)
+        self.enemys.hitmarks(self.Missiles_list,self.PlayersList,self.powerups,self._game_settings)
 
         #move Powerups and draw them=
         self.powerups.move_draw_Powerups()
@@ -138,13 +138,13 @@ class GameLoop:
         Handles enemy counter-attacks, determining when and how enemies respond to player actions.
         """
         #check if enemys can shoot back
-        if self.level != 0:
+        if self._level != 0:
             #Counter attack intensity
-            intensity = 5- self.level 
+            intensity = 5- self._level 
             if intensity < 1: intensity = 1 #Intensity between 1 and 4
 
             #check if enough time has passed since previous counter attack and if there is enemys
-            if self.timer % (10*intensity)==0 and len(self.enemys._Enemylist)>0 :
+            if self._timer % (10*intensity)==0 and len(self.enemys._Enemylist)>0 :
                 #get random enemy
                 enemy = random.randint(0,len(self.enemys._Enemylist)-1)
                 #get enemy location
@@ -192,7 +192,7 @@ class GameLoop:
                 self.fireMissile(0)
 
             #process second player input if there is one
-            if self.game_settings.players == 2:
+            if self._game_settings.players == 2:
 
 
                 if key == ";":#shoot
@@ -253,7 +253,7 @@ class GameLoop:
 
 
         #process second player input if there is one
-        if self.game_settings.players == 2:
+        if self._game_settings.players == 2:
         
             #keyboard inputs
             keys = stddraw.getKeysPressed()
@@ -288,14 +288,14 @@ class GameLoop:
         Starts and maintains the game loop until the end of the game, handling transitions between game states and processing all game actions.
         """
         while self.play:
-            self.timer += 1
+            self._timer += 1
             self.Update_game()
             self.counter_Attack()
 
 
-            if self.game_settings.inputType == 0:
+            if self._game_settings._inputType == 0:
                 self.Process_inputType0()
-            elif self.game_settings.inputType == 1:
+            elif self._game_settings._inputType == 1:
                 self.Process_inputType1()
 
     #create Players
@@ -303,11 +303,11 @@ class GameLoop:
         """
         Initializes players in the game, setting up their starting positions and configurations based on the game settings.
         """
-        for i in range(self.game_settings.players):
+        for i in range(self._game_settings.players):
             if i == 0:
-                p = self.game_settings.player1List
+                p = self._game_settings._player1List
             else:
-                p = self.game_settings.player2List
+                p = self._game_settings._player2List
             self.PlayersList.add_player(Player(0+(i*10),-80,0,0,0,1.7,8,0,50,100,3,p))
         
     #create the play screen background
@@ -317,11 +317,11 @@ class GameLoop:
         """
         stddraw.clear(stddraw.BLACK)#form color
         #scale form
-        stddraw.setXscale(-self.screenX,self.screenY)
-        stddraw.setYscale(-self.screenY,self.screenY)
+        stddraw.setXscale(-self._screenX,self._screenY)
+        stddraw.setYscale(-self._screenY,self._screenY)
         stddraw.setFontSize(15)
         stddraw.setPenColor(stddraw.WHITE)
-        stddraw.text(0,-95,"Total score: "+str(self.game_settings.score))
+        stddraw.text(0,-95,"Total score: "+str(self._game_settings._score))
 
     def fireMissile(self,p):
         """

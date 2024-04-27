@@ -187,22 +187,22 @@ class PlayerList:
 
         #itterate through all missiles and player locations
         mc = 0 #missile counter
-        while mc < len(Missiles_list.missiles):
+        while mc < len(Missiles_list._missiles):
             nextM = True
 
             #check if missile is from a enemy
-            if Missiles_list.missiles[mc].owner == 2:
+            if Missiles_list._missiles[mc]._owner == 2:
                 #Itterate through players reversed so that i can remove player if lives are done
                 for player in reversed(self._Players):
                     #calculate distance between missile and player
-                    distx = abs(Missiles_list.missiles[mc].x - player._x)
-                    disty = abs(Missiles_list.missiles[mc].y - player._y)
+                    distx = abs(Missiles_list._missiles[mc]._x - player._x)
+                    disty = abs(Missiles_list._missiles[mc]._y - player._y)
                     dist = (distx**2 + disty**2)**0.5 
                     
                     #test if missile hit player
-                    if dist < player._size + Missiles_list.missiles[mc].size: # + for missile size
+                    if dist < player._size + Missiles_list._missiles[mc]._size: # + for missile size
                         #remove Missile
-                        Missiles_list.remove_missile(Missiles_list.missiles[mc])
+                        Missiles_list.remove_missile(Missiles_list._missiles[mc])
 
                         #code to decreade player health
                         player._lives -= 1
@@ -221,25 +221,25 @@ class PlayerList:
 
         #itterate through all missiles and player locations
         pc = 0 #powerup counter
-        while pc < len(powerupList.List_Powerups):
+        while pc < len(powerupList._List_Powerups):
             nextP = True #boolean to increase powerup counter
             #Itterate through players
             for player in self._Players:
                 #calculate distance between powerup and player
-                distx = abs(powerupList.List_Powerups[pc]._x - player._x)
-                disty = abs(powerupList.List_Powerups[pc]._y - player._y)
+                distx = abs(powerupList._List_Powerups[pc]._x - player._x)
+                disty = abs(powerupList._List_Powerups[pc]._y - player._y)
                 dist = (distx**2 + disty**2)**0.5 
                 
                 #test if powerup hit player
                 if dist < player._size + 2: #+2 if for powerup size
 
                     #powerup type 
-                    typ = powerupList.List_Powerups[pc]._typ
+                    typ = powerupList._List_Powerups[pc]._typ
                     #Do code to active powerup
                     self.activate_Powerup(typ,player)
 
                     #remove Powerup
-                    powerupList.remove_powerup(powerupList.List_Powerups[pc])
+                    powerupList.remove_powerup(powerupList._List_Powerups[pc])
 
                     
 

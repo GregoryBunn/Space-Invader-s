@@ -83,7 +83,7 @@ class Enemy:
     def checkEnemyBelowShooter(self,settings,player):
         if self._y < player._y:
             #player looses-result = Fales
-            settings.result = False
+            settings._result = False
             return True #stop game
         else:
             return False #game continues
@@ -97,7 +97,7 @@ class Enemy:
         #test if enemy is touching player
         if dist < self._size + player._size:
             #player looses result = Fales
-            settings.result = False
+            settings._result = False
             return True #stop game
         else:
             return False #game continues
@@ -177,7 +177,7 @@ class EnemyList:
 
         #test if any players are left
         if len(players_list._Players) == 0:
-            settings.result = False
+            settings._result = False
             return False
         
         
@@ -186,7 +186,7 @@ class EnemyList:
         #if no enemys are left
         if len(self._Enemylist) == 0:
             #game is won
-            settings.result = True
+            settings._result = True
 
             return False #stop game
         
@@ -195,7 +195,7 @@ class EnemyList:
         for player in players_list._Players:
 
             if player._lives ==0:
-                settings.result = False
+                settings._result = False
                 return False
 
             #itterate throung enemys
@@ -232,30 +232,30 @@ class EnemyList:
 
         #itterate through all missiles and enemy locations
         mc = 0 #missile counter
-        while mc < len(Missiles_list.missiles):
+        while mc < len(Missiles_list._missiles):
             nextM = True
             ec = 0 #enemy counter
             #check if missile is from a player
-            if Missiles_list.missiles[mc].owner != 2:
+            if Missiles_list._missiles[mc]._owner != 2:
 
                 while (ec < len(self._Enemylist)):
 
                     #calculate distance between missile and enemy
-                    distx = abs(Missiles_list.missiles[mc].x - self._Enemylist[ec]._x)
-                    disty = abs(Missiles_list.missiles[mc].y - self._Enemylist[ec]._y)
+                    distx = abs(Missiles_list._missiles[mc]._x - self._Enemylist[ec]._x)
+                    disty = abs(Missiles_list._missiles[mc]._y - self._Enemylist[ec]._y)
                     dist = (distx**2 + disty**2)**0.5 
 
                     #need to add missile radius
 
                     #test if missile hit enemy
-                    if dist < self._Enemylist[ec]._size + Missiles_list.missiles[mc].size: # + if for missile size
+                    if dist < self._Enemylist[ec]._size + Missiles_list._missiles[mc]._size: # + if for missile size
 
                         #test enemy hitpoints
                         if self._Enemylist[ec]._hitBox == 0:
                             #increase Total score
-                            settings.score += 1
+                            settings._score += 1
                             #increse player scores
-                            if Missiles_list.missiles[mc].owner == 0:
+                            if Missiles_list._missiles[mc]._owner == 0:
                                 playerlist._Players[0]._score += 1
                 
                             else:
@@ -272,7 +272,7 @@ class EnemyList:
                             self._Enemylist[ec]._hitBox -= 1
 
                         #remove Missile
-                        Missiles_list.remove_missile(Missiles_list.missiles[mc])
+                        Missiles_list.remove_missile(Missiles_list._missiles[mc])
                             
 
                         #Don't have to increase mc (new missile in old position because of pop)
@@ -323,14 +323,14 @@ class Powerup:
 
 class Powerup_List:
     def __init__(self):
-        self.List_Powerups = []
+        self._List_Powerups = []
     def add_powerup(self,powerup : Powerup):
-        self.List_Powerups.append(powerup)
+        self._List_Powerups.append(powerup)
 
     def remove_powerup(self,powerup: Powerup):
-        self.List_Powerups.remove(powerup)
+        self._List_Powerups.remove(powerup)
     def move_draw_Powerups(self):
-        for powerup in self.List_Powerups:
+        for powerup in self._List_Powerups:
             powerup.move_down()
             if not powerup.checkPowerupBound():
                 self.remove_powerup(powerup)
