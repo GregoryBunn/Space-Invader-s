@@ -193,7 +193,7 @@ def createPlayerPicture(lis,pic):
         sinMinusTheta = math.sin(-angle)
         for tx in range(width):
             for ty in range(heigth):
-                if ty < heigth//2:#//2 unsures only the turret rotates
+                if ty < heigth//2.2:#//2 unsures only the turret rotates
                     dX: int = tx - cx
                     dY: int = ty - cy             
                     sx = int(dX*cosMinusTheta - dY*sinMinusTheta + cx)
@@ -203,7 +203,7 @@ def createPlayerPicture(lis,pic):
                         col = pic.get(sx, sy)
 
                         #Make sure nothing else then the turret is rotated
-                        if (sx < 10) or (sx > 50):
+                        if (sx < 30) or (sx > 36):
                             col = stddraw.BLACK
                         
                 else:
@@ -228,9 +228,9 @@ def main():
     picture_list1 = []
     picture_list2 = []
     #create thread for player pictures and start them
-    
+
     #Threading was done by Greg
-    player1TH = threading.Thread(target=createPlayerPicture, args=( picture_list1, Picture('Ship1A.png')))
+    player1TH = threading.Thread(target=createPlayerPicture, args=( picture_list1, Picture('Ship1AB.png')))
     player2TH = threading.Thread(target=createPlayerPicture, args=( picture_list2, Picture('Ship2A.png')))
 
    

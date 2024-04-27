@@ -49,16 +49,19 @@ class Player:
             self.RotatePlayer(aimDir)
             
             #change angle
-        
+        #Draw player
         picture(self._picture, self._x, self._y)
+        
+
+        #draw aimLine
         #aim settings
-        stddraw.setPenColor(stddraw.GREEN)
-        stddraw.setPenRadius(1)
+        #stddraw.setPenColor(stddraw.GREEN)
+        #stddraw.setPenRadius(1)
         #calculation of aim coordinates
-        aimX = x + size*(math.sin(aimDir))
-        aimY = y + size*(math.cos(aimDir))
+        #aimX = x + size*(math.sin(aimDir))
+        #aimY = y + size*(math.cos(aimDir))
         #create aim
-        stddraw.line(x,y,aimX,aimY)
+        #stddraw.line(x,y,aimX,aimY)
 
 
         #Advanced graphics
