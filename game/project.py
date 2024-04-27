@@ -136,6 +136,9 @@ def createPlayerPicture(num,lis,pic):
                     col = stddraw.BLACK
                     if ((sx >= 0) and (sx < width) and (sy >= 0) and (sy < heigth)):
                         col = pic.get(sx, sy)
+                        if (sx < 10) or (sx > 50):
+                            col = stddraw.BLACK
+                        
                 else:
                     col = pic.get(tx,ty)
 
