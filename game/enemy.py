@@ -155,7 +155,6 @@ class EnemyList:
     def Move_Enemys(self):
         moveDown = False
         for enemy in self.Enemylist:
-            
             if enemy.moveEnemySideways():
                 moveDown = True
         if moveDown == True:

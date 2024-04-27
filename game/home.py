@@ -294,5 +294,3 @@ class EndScreen:
             stddraw.show(timer) #show screen
 
 
-
-

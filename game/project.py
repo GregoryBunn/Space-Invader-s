@@ -168,7 +168,7 @@ def main():
     settings_game = GameSettings(screenXsize=512,screenYsize=512,players=1,inputType=1,level=1,p1=picture_list1,p2=picture_list2)
 
     #initialize game
-    game = Game(settings=settings_game)
+    game = Game(settings_game)
 
 
     #run game
