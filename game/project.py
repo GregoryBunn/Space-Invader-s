@@ -109,16 +109,16 @@ class Game:
     #initialized with settings
     def __init__(self,settings):
         #game settings
-        self.settings = settings
+        self._settings = settings
 
         #self playerchoose screen initialized GREG
-        self.Select_Screen = PlayerSelect(self.settings)
+        self._Select_Screen = PlayerSelect(self._settings)
 
         #Game homescreen initialized
-        self.home_screen = HomeScreen(self.settings)
+        self._home_screen = HomeScreen(self._settings)
 
         #Game Endscreen initialized
-        self.end_screen = EndScreen(self.settings)
+        self._end_screen = EndScreen(self._settings)
     
     #starts game
     def run(self,p1,p2):
@@ -127,10 +127,10 @@ class Game:
         """
 
         #createPlayerChoose screen GREG
-        self.Select_Screen.run()
+        self._Select_Screen.run()
 
         #create homscreen
-        self.home_screen.run()
+        self._home_screen.run()
 
         #indicates active game
         active = True
@@ -145,23 +145,23 @@ class Game:
     
             #Run gameloop
             #gamerun.gameloop(self.settings)
-            game = GameLoop(self.settings)
+            game = GameLoop(self._settings)
             game.run()
 
             
 
         
-            if self.settings._result == True and self.settings._level ==3:
-                self.settings._level += 1
-                self.end_screen.run()
-                self.settings._level = 1
-            elif self.settings._result == True:
-                self.settings._level += 1
-                self.end_screen.run()
-            elif self.settings._result == False:
-                self.settings._level = 1
-                self.end_screen.run()
-                self.settings._score = 0
+            if self._settings._result == True and self._settings._level ==3:
+                self._settings._level += 1
+                self._end_screen.run()
+                self._settings._level = 1
+            elif self._settings._result == True:
+                self._settings._level += 1
+                self._end_screen.run()
+            elif self._settings._result == False:
+                self._settings._level = 1
+                self._end_screen.run()
+                self._settings._score = 0
 
 
             
