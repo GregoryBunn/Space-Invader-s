@@ -174,6 +174,7 @@ class EnemyList:
                 if typ == 1:
                     xCor += 10
                     yCor -= 10
+                    
                 size = settings._size#6
                 dir = 1
                 speed = settings._speed #1
