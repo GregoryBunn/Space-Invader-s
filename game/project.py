@@ -185,7 +185,7 @@ def createPlayerPicture(lis,pic):
     width = pic.width()
     heigth = pic.height()
     cx = width // 2#Middle point x
-    cy = heigth // 2#middlepoint y
+    cy = heigth // 2.2#middlepoint y
     while angle < pi/2:
         rotatedpic = Picture(width, heigth)
         #rotatedpic = Picture('invis.png')
