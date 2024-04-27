@@ -217,7 +217,7 @@ class EndScreen:
         Initializes the Endscreen with the given settings.
 
         Args:
-            settings (object): game settings.
+            _settings (object): game settings.
         """
         self._settings = settings
     

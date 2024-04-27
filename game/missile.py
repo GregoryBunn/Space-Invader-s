@@ -9,13 +9,13 @@ class Missile:
     Represents a missile object in a game with properties for managing its state and behavior.
 
     Attributes:
-        x (float): The x-coordinate of the missile on the game screen.
-        y (float): The y-coordinate of the missile on the game screen.
-        dir (float): The direction of the missile's travel.
-        typ (int): The type of missile, which affects its appearance and possibly behavior.
-        owner (int): The identifier of the missile's owner, which could differentiate between player and enemy missiles.
-        speed (int): The speed at which the missile moves.
-        size (int): The size of the missile, affecting its appearance and collision area.
+        _x (float): The x-coordinate of the missile on the game screen.
+        _y (float): The y-coordinate of the missile on the game screen.
+        _dir (float): The direction of the missile's travel.
+        _typ (int): The type of missile, which affects its appearance and possibly behavior.
+        _owner (int): The identifier of the missile's owner, which could differentiate between player and enemy missiles.
+        _speed (int): The speed at which the missile moves.
+        _size (int): The size of the missile, affecting its appearance and collision area.
 
     Methods:
         drawMissile(): Draws the missile on the game screen using different colors and shapes based on the missile type.
@@ -25,12 +25,12 @@ class Missile:
         Initializes a new instance of the Missile class with specified attributes.
 
         Parameters:
-            x (float): The x-coordinate of the missile on the game screen.
-            y (float): The y-coordinate of the missile on the game screen.
-            dir (float): The direction of the missile's travel.
-            typ (int): The type of the missile.
-            owner (int): The identifier of the missile's owner.
-            size (int): The size of the missile.
+            _x (float): The x-coordinate of the missile on the game screen.
+            _y (float): The y-coordinate of the missile on the game screen.
+            _dir (float): The direction of the missile's travel.
+            _typ (int): The type of the missile.
+            _owner (int): The identifier of the missile's owner.
+            _size (int): The size of the missile.
         """
         self._x = x #missile x
         self._y = y #missile y
@@ -122,7 +122,7 @@ class MissileList:
     Manages a collection of missiles in the game, handling operations such as adding, removing, and updating missiles.
 
     Attributes:
-        missiles (list of Missile): The list of missile objects currently active in the game.
+        _missiles (list of Missile): The list of missile objects currently active in the game.
     """
     def __init__(self):
         self._missiles = []

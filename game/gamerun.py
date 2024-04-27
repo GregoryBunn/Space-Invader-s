@@ -14,14 +14,14 @@ class GameLoop:
     It handles game states and transitions between different levels based on the provided game settings.
 
     Attributes:
-        screenX (int): Width of the game screen.
-        screenY (int): Height of the game screen.
-        game_settings (GameSettings): Configuration for game settings including screen size and level.
-        timer (int): A counter used for timing events within the game.
-        level (int): Current game level.
-        PlayersList (PlayerList): Manages all player-related activities.
-        Missiles_list (MissileList): Manages all missile-related activities.
-        enemys (EnemyList): Manages all enemy-related activities.
+        _screenX (int): Width of the game screen.
+        _screenY (int): Height of the game screen.
+        _game_settings (GameSettings): Configuration for game settings including screen size and level.
+        _timer (int): A counter used for timing events within the game.
+        _level (int): Current game level.
+        _PlayersList (PlayerList): Manages all player-related activities.
+        _Missiles_list (MissileList): Manages all missile-related activities.
+        _enemys (EnemyList): Manages all enemy-related activities.
     """
     def __init__(self,game_settings):
         self._screenX = game_settings._screen_x

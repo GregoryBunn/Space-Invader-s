@@ -25,18 +25,18 @@ class GameSettings:
     Manages the game settings including screen size, player settings, input types, and level details.
 
     Attributes:
-        screen_x (int): Width of the game screen.
-        screen_y (int): Height of the game screen.
-        players (int): Number of players in the game.
-        inputType (str): Type of input used by the players.
-        x (int): Custom setting for screen width adjustment.
-        y (int): Custom setting for screen height adjustment.
-        level (int): Current game level.
-        player1List (list): Configuration for player 1.
-        player2List (list): Configuration for player 2.
-        score (int): Current score of the game.
-        txt (str): File path for storing high scores.
-        highScore (int): Highest score achieved in the game.
+        _screen_x (int): Width of the game screen.
+        _screen_y (int): Height of the game screen.
+        _players (int): Number of players in the game.
+        _inputType (str): Type of input used by the players.
+        _x (int): Custom setting for screen width adjustment.
+        _y (int): Custom setting for screen height adjustment.
+        _level (int): Current game level.
+        _player1List (list): Configuration for player 1.
+        _player2List (list): Configuration for player 2.
+        _score (int): Current score of the game.
+        _txt (str): File path for storing high scores.
+        _highScore (int): Highest score achieved in the game.
 
     Methods:
         getHighScore: Retrieves the highest score from the highscore file.
