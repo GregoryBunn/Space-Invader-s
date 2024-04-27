@@ -9,6 +9,20 @@ import sys
 
 
 class GameLoop:
+    """
+    Manages the main game loop, integrating all game components such as players, missiles, and enemies. 
+    It handles game states and transitions between different levels based on the provided game settings.
+
+    Attributes:
+        screenX (int): Width of the game screen.
+        screenY (int): Height of the game screen.
+        game_settings (GameSettings): Configuration for game settings including screen size and level.
+        timer (int): A counter used for timing events within the game.
+        level (int): Current game level.
+        PlayersList (PlayerList): Manages all player-related activities.
+        Missiles_list (MissileList): Manages all missile-related activities.
+        enemys (EnemyList): Manages all enemy-related activities.
+    """
     def __init__(self,game_settings):
         self.screenX = game_settings.screen_x
         self.screenY = game_settings.screen_y
@@ -52,6 +66,9 @@ class GameLoop:
 
     #Update game variables and draw screen
     def Update_game(self):
+        """
+        Updates all game elements based on the current game state, including player positions, missile trajectories, and enemy actions.
+        """
         frameST = time.time()
         #Create graphics
         stddraw.clear() #clear screen
@@ -117,6 +134,9 @@ class GameLoop:
 
     #Counter attack
     def counter_Attack(self):
+        """
+        Handles enemy counter-attacks, determining when and how enemies respond to player actions.
+        """
         #check if enemys can shoot back
         if self.level != 0:
             #Counter attack intensity
@@ -136,6 +156,9 @@ class GameLoop:
 
     #Process input type 0
     def Process_inputType0(self):
+        """
+        Processes player inputs of type 0, typically involving direct control mechanisms such as keyboard or joystick inputs.
+        """
         #Check for input
         if stddraw.hasNextKeyTyped():
 
@@ -199,6 +222,9 @@ class GameLoop:
 
     #Process input type 1                
     def Process_inputType1(self):
+        """
+        Processes player inputs of type 1, typically involving more complex control mechanisms or AI-driven inputs.
+        """
 
         #keyboard inputs
         keys = stddraw.getKeysPressed()
@@ -258,6 +284,9 @@ class GameLoop:
 
     #run
     def run(self):
+        """
+        Starts and maintains the game loop until the end of the game, handling transitions between game states and processing all game actions.
+        """
         while self.play:
             self.timer += 1
             self.Update_game()
@@ -271,6 +300,9 @@ class GameLoop:
 
     #create Players
     def create_players(self):
+        """
+        Initializes players in the game, setting up their starting positions and configurations based on the game settings.
+        """
         for i in range(self.game_settings.players):
             if i == 0:
                 p = self.game_settings.player1List
@@ -280,6 +312,9 @@ class GameLoop:
         
     #create the play screen background
     def createPlayscreen(self):
+        """
+        Sets up the visual components of the play screen at the start of the game or when the game level changes.
+        """
         stddraw.clear(stddraw.BLACK)#form color
         #scale form
         stddraw.setXscale(-self.screenX,self.screenY)
@@ -289,6 +324,9 @@ class GameLoop:
         stddraw.text(0,-95,"Total score: "+str(self.game_settings.score))
 
     def fireMissile(self,p):
+        """
+        Controls the firing of missiles by players, determining the timing and positioning of missile launches.
+        """
         #check if missile is allowed
         if self.PlayersList.Players[p].isAllowed():
 
