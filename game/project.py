@@ -4,11 +4,11 @@ Main project
 
 Classes:
 GameSettings: Game settings functions
-Game:
+Game: Handels the multiple levels and runs the game
 
 Methods:
-    Main():
-    createPlayerPicture():
+    Main(): Runs the  game
+    createPlayerPicture(): Create different angles of the shooter before the game starts
  
 '''
 
@@ -21,6 +21,30 @@ from picture import Picture
 #game settings
 class GameSettings:
     #has three parameters
+    """
+    Manages the game settings including screen size, player settings, input types, and level details.
+
+    Attributes:
+        screen_x (int): Width of the game screen.
+        screen_y (int): Height of the game screen.
+        players (int): Number of players in the game.
+        inputType (str): Type of input used by the players.
+        x (int): Custom setting for screen width adjustment.
+        y (int): Custom setting for screen height adjustment.
+        level (int): Current game level.
+        player1List (list): Configuration for player 1.
+        player2List (list): Configuration for player 2.
+        score (int): Current score of the game.
+        txt (str): File path for storing high scores.
+        highScore (int): Highest score achieved in the game.
+
+    Methods:
+        getHighScore: Retrieves the highest score from the highscore file.
+        setHighScore: Updates the highest score if the current score exceeds the high score.
+        writeHighScore: Writes the new high score to the file.
+    """
+
+
     def __init__(self,screenXsize,screenYsize,players,inputType,level : int,p1,p2):
         #initialize parameters
         self.screen_x = 100
@@ -37,7 +61,13 @@ class GameSettings:
         self.txt = "highscore.txt"
         self.highScore = self.getHighScore()
 
-    def getHighScore(self):   
+    def getHighScore(self): 
+        """
+        Retrieves the highest score from a stored file.
+
+        Returns:
+            int: The highest score recorded.
+        """  
         f = open(self.txt, "r")
         score = f.read()
         f.close()
@@ -46,14 +76,36 @@ class GameSettings:
         else:
             return 0
     def setHighScore(self,score):
+        """
+        Updates the high score if the given score is higher than the current high score.
+
+        Parameters:
+            score (int): The new score to compare against the high score.
+
+        Returns:
+            bool: True if the high score was updated, False otherwise.
+        """
         self.highScore = score
         self.writeHighScore()
     def writeHighScore(self):
+        """
+        Writes the high score to a file.
+
+        Parameters:
+            score (int): The score to write as the new high score.
+        """
         f = open(self.txt,"w")
         f.write(str(self.highScore))
         f.close()
 
 class Game:
+    """
+    Manages the overall game processes including initializing levels, handling player actions, and controlling game states.
+
+    Methods:
+        run(): Starts the main game loop and handles transitions between different screens and states.
+        createPlayerPicture(): Prepares visual representations of the player from different angles.
+    """
     #initialized with settings
     def __init__(self,settings):
         #game settings
@@ -70,6 +122,9 @@ class Game:
     
     #starts game
     def run(self,p1,p2):
+        """
+        Runs the main game loop, processing player inputs, updating game state, and rendering the game screen.
+        """
 
         #createPlayerChoose screen GREG
         self.Select_Screen.run()
@@ -116,6 +171,9 @@ class Game:
    
 
 def createPlayerPicture(num,lis,pic):
+    """
+    Creates and returns images of the player from multiple angles for use in the game.
+    """
     pi = math.pi
     angle = -pi/2
     width = pic.width()
@@ -154,6 +212,9 @@ def createPlayerPicture(num,lis,pic):
 
 
 def main():
+    """
+    The main entry point of the application. Initializes the game and starts the game loop.
+    """
 
     
 
