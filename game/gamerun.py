@@ -231,23 +231,23 @@ class GameLoop:
             
         
         if keys[stddraw.K_e]: 
-            self.PlayersList.Players[0].aimChange = 0.07
+            self.PlayersList.Players[0]._aimChange = 0.07
         elif keys[stddraw.K_q]: 
-            self.PlayersList.Players[0].aimChange = -0.07
+            self.PlayersList.Players[0]._aimChange = -0.07
         else:
-             self.PlayersList.Players[0].aimChange = 0
+             self.PlayersList.Players[0]._aimChange = 0
  
         if keys[stddraw.K_w]:
             pass
             #set angle to straight
         if keys[stddraw.K_a]:
-            self.PlayersList.Players[0].moveDir = -1
+            self.PlayersList.Players[0]._moveDir = -1
         elif keys[stddraw.K_d]:
-            self.PlayersList.Players[0].moveDir = 1
+            self.PlayersList.Players[0]._moveDir = 1
         elif keys[stddraw.K_x]:
             sys.exit()
         else:   
-            self.PlayersList.Players[0].moveDir = 0
+            self.PlayersList.Players[0]._moveDir = 0
         if keys[stddraw.K_SPACE]:
             self.fireMissile(0)
 
@@ -260,21 +260,21 @@ class GameLoop:
                 
             
             if keys[stddraw.K_o]: 
-                self.PlayersList.Players[1].aimChange = 0.07
+                self.PlayersList.Players[1]._aimChange = 0.07
             elif keys[stddraw.K_u]: 
-                self.PlayersList.Players[1].aimChange = -0.07
+                self.PlayersList.Players[1]._aimChange = -0.07
             else:
-                self.PlayersList.Players[1].aimChange = 0
+                self.PlayersList.Players[1]._aimChange = 0
     
             if keys[stddraw.K_i]:
                 pass
                 #set angle to straight
             if keys[stddraw.K_j]:
-                self.PlayersList.Players[1].moveDir = -1
+                self.PlayersList.Players[1]._moveDir = -1
             elif keys[stddraw.K_l]:
-                self.PlayersList.Players[1].moveDir = 1
+                self.PlayersList.Players[1]._moveDir = 1
             else: 
-                self.PlayersList.Players[1].moveDir = 0
+                self.PlayersList.Players[1]._moveDir = 0
 
             if keys[stddraw.K_n]:
                 self.fireMissile(1)
@@ -332,24 +332,24 @@ class GameLoop:
 
 
             #get direction of new missile
-            d = self.PlayersList.Players[p].aimDir
+            d = self.PlayersList.Players[p]._aimDir
     
 
             #add missile
             music.bullet()#play missile sound
             #test for super missile
-            if self.PlayersList.Players[p].time >= self.PlayersList.Players[p].missileTime*2:
+            if self.PlayersList.Players[p]._time >= self.PlayersList.Players[p]._missileTime*2:
                 missiletype = 2#Super missile
                 MissileSize = 5
             else:
                 missiletype = 1#Basic missile 
                 MissileSize = 2.5
-            x = self.PlayersList.Players[p].x+(10*math.sin(d))
-            y = self.PlayersList.Players[p].y+(10*math.cos(d))
-            AimDir = self.PlayersList.Players[p].aimDir
+            x = self.PlayersList.Players[p]._x+(10*math.sin(d))
+            y = self.PlayersList.Players[p]._y+(10*math.cos(d))
+            AimDir = self.PlayersList.Players[p]._aimDir
             
             self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,p,MissileSize))
             #make missile timer 0
-            self.PlayersList.Players[p].time = 0
+            self.PlayersList.Players[p]._time = 0
 
         

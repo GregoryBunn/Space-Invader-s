@@ -81,7 +81,7 @@ class Enemy:
 
     #check if enemy is below shooter
     def checkEnemyBelowShooter(self,settings,player):
-        if self.y < player.y:
+        if self.y < player._y:
             #player looses-result = Fales
             settings.result = False
             return True #stop game
@@ -91,11 +91,11 @@ class Enemy:
     #check if enemy touches player
     def checkEnemyTouchShooter(self,settings,player):
         #calculate distance between player and enemy
-        distx = abs(self.x - player.x)
-        disty = abs(self.y - player.y)
+        distx = abs(self.x - player._x)
+        disty = abs(self.y - player._y)
         dist = (distx**2 + disty**2)**0.5
         #test if enemy is touching player
-        if dist < self.size + player.size:
+        if dist < self.size + player._size:
             #player looses result = Fales
             settings.result = False
             return True #stop game
@@ -194,7 +194,7 @@ class EnemyList:
         #itterate through players
         for player in players_list.Players:
 
-            if player.lives ==0:
+            if player._lives ==0:
                 settings.result = False
                 return False
 
@@ -256,10 +256,10 @@ class EnemyList:
                             settings.score += 1
                             #increse player scores
                             if Missiles_list.missiles[mc].owner == 0:
-                                playerlist.Players[0].score += 1
+                                playerlist.Players[0]._score += 1
                 
                             else:
-                                playerlist.Players[1].score +=1
+                                playerlist.Players[1]._score +=1
                         
 
                             #create Powerup if enemy has one
