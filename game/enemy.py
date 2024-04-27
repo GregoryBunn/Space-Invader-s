@@ -38,10 +38,10 @@ class Enemy:
         #graphics
         if self.hitBox == 1:
             #draw enemy with one life
-            basic = Picture('Aliens.png')
+            basic = Picture('Alien2.png')
         else:
-            #draw enemy with 2 lives
-            basic = Picture("Aliens.png")
+            #draw enemy with 0 lives
+            basic = Picture("Alien1.png")
             pass
         picture(basic, self.x, self.y)
 
