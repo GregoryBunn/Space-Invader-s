@@ -101,6 +101,7 @@ class Missile:
         if self._x > screenX-6 or self._x < -screenX+6:
             #super missile bounce of wall
             if self._typ == 2 and abs(self._dir)< math.pi/2.1:
+                #Change direction of missile
                 self._dir = -self._dir
                 return True
             else:
@@ -151,6 +152,7 @@ class MissileList:
         for missile in self._missiles[:]:
             missile.drawMissile()
             missile.moveMissile()
+            #Check if missile is in bound
             if not missile.checkMissileBounds():
                 self._missiles.remove(missile)
             

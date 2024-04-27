@@ -166,25 +166,25 @@ class GameLoop:
             key = stddraw.nextKeyTyped()
 
             if key == "d":#move right
-                self.PlayersList._Players[0].moveDir = 1
+                self.PlayersList._Players[0]._moveDir = 1
             elif key == "a":#move left
-                self.PlayersList._Players[0].moveDir = -1
+                self.PlayersList._Players[0]._moveDir = -1
 
 
             elif key == "s":#stop moving
-                self.PlayersList._Players[0].moveDir = 0
+                self.PlayersList._Players[0]._moveDir = 0
 
             elif key == "x":#exit
-                self.play = False
+                self._play = False
 
             elif key == "e":#rotate right
-                self.PlayersList._Players[0].aimChange = 0.07
+                self.PlayersList._Players[0]._aimChange = 0.07
 
             elif key == "q":#rotate lefr                
-                self.PlayersList._Players[0].aimChange = -0.07
+                self.PlayersList._Players[0]._aimChange = -0.07
 
             elif key == "w":#stop rotate   
-                self.PlayersList._Players[0].aimChange = 0
+                self.PlayersList._Players[0]._aimChange = 0
             elif key == "x":#exit
                 sys.exit()
 
@@ -192,7 +192,7 @@ class GameLoop:
                 self.fireMissile(0)
 
             #process second player input if there is one
-            if self._game_settings.players == 2:
+            if self._game_settings._players == 2:
 
 
                 if key == ";":#shoot
@@ -201,22 +201,22 @@ class GameLoop:
 
 
                 elif key == "l":#move right
-                        self.PlayersList._Players[1].moveDir = 1
+                        self.PlayersList._Players[1]._moveDir = 1
                 elif key == "j":#move left
-                    self.PlayersList._Players[1].moveDir = -1
+                    self.PlayersList._Players[1]._moveDir = -1
 
 
                 elif key == "k":#stop moving
-                    self.PlayersList._Players[1].moveDir = 0
+                    self.PlayersList._Players[1]._moveDir = 0
 
                 elif key == "o":#rotate right
-                    self.PlayersList._Players[1].aimChange = 0.07
+                    self.PlayersList._Players[1]._aimChange = 0.07
 
                 elif key == "u":#rotate lefr                
-                    self.PlayersList._Players[1].aimChange = -0.07
+                    self.PlayersList._Players[1]._aimChange = -0.07
 
                 elif key == "i":#stop rotate   
-                    self.PlayersList._Players[1].aimChange = 0
+                    self.PlayersList._Players[1]._aimChange = 0
                 
 
 
@@ -230,26 +230,26 @@ class GameLoop:
         keys = stddraw.getKeysPressed()
             
         
-        if keys[stddraw.K_e]: 
+        if keys[stddraw.K_e]: #rotate left
             self.PlayersList._Players[0]._aimChange = 0.07
-        elif keys[stddraw.K_q]: 
+        elif keys[stddraw.K_q]: #rotate rigth
             self.PlayersList._Players[0]._aimChange = -0.07
-        else:
+        else: #stop rotate
              self.PlayersList._Players[0]._aimChange = 0
  
         if keys[stddraw.K_w]:
             pass
             #set angle to straight
-        if keys[stddraw.K_a]:
+        if keys[stddraw.K_a]:#move left
             self.PlayersList._Players[0]._moveDir = -1
-        elif keys[stddraw.K_d]:
+        elif keys[stddraw.K_d]:#move right
             self.PlayersList._Players[0]._moveDir = 1
-        elif keys[stddraw.K_x]:
+        elif keys[stddraw.K_x]:#exit
             sys.exit()
         else:   
-            self.PlayersList._Players[0]._moveDir = 0
+            self.PlayersList._Players[0]._moveDir = 0#stop movement
         if keys[stddraw.K_SPACE]:
-            self.fireMissile(0)
+            self.fireMissile(0)#fire missile
 
 
         #process second player input if there is one
@@ -259,24 +259,24 @@ class GameLoop:
             keys = stddraw.getKeysPressed()
                 
             
-            if keys[stddraw.K_o]: 
+            if keys[stddraw.K_o]: #rotate left
                 self.PlayersList._Players[1]._aimChange = 0.07
-            elif keys[stddraw.K_u]: 
+            elif keys[stddraw.K_u]: #rotate right
                 self.PlayersList._Players[1]._aimChange = -0.07
             else:
-                self.PlayersList._Players[1]._aimChange = 0
+                self.PlayersList._Players[1]._aimChange = 0#stop rotate
     
             if keys[stddraw.K_i]:
                 pass
                 #set angle to straight
-            if keys[stddraw.K_j]:
+            if keys[stddraw.K_j]:#move left
                 self.PlayersList._Players[1]._moveDir = -1
-            elif keys[stddraw.K_l]:
+            elif keys[stddraw.K_l]:#move right
                 self.PlayersList._Players[1]._moveDir = 1
-            else: 
+            else: #stop moving
                 self.PlayersList._Players[1]._moveDir = 0
 
-            if keys[stddraw.K_n]:
+            if keys[stddraw.K_n]:#fire missile
                 self.fireMissile(1)
 
 
@@ -288,11 +288,11 @@ class GameLoop:
         Starts and maintains the game loop until the end of the game, handling transitions between game states and processing all game actions.
         """
         while self.play:
-            self._timer += 1
-            self.Update_game()
-            self.counter_Attack()
+            self._timer += 1#update time that has passed
+            self.Update_game() #Update all the game characteristics
+            self.counter_Attack() #call the enemy counter attack function
 
-
+            #handel input depending in  input type
             if self._game_settings._inputType == 0:
                 self.Process_inputType0()
             elif self._game_settings._inputType == 1:
@@ -304,11 +304,12 @@ class GameLoop:
         Initializes players in the game, setting up their starting positions and configurations based on the game settings.
         """
         for i in range(self._game_settings.players):
+            # p is the amount of players
             if i == 0:
                 p = self._game_settings._player1List
             else:
                 p = self._game_settings._player2List
-            self.PlayersList.add_player(Player(0+(i*10),-80,0,0,0,1.7,8,0,50,100,3,p))
+            self.PlayersList.add_player(Player(0+(i*10),-80,0,0,0,1.7,8,0,50,100,3,p))#Create players
         
     #create the play screen background
     def createPlayscreen(self):
@@ -344,10 +345,11 @@ class GameLoop:
             else:
                 missiletype = 1#Basic missile 
                 MissileSize = 2.5
+            #Get  missile starting coordinates
             x = self.PlayersList._Players[p]._x+(10*math.sin(d))
             y = self.PlayersList._Players[p]._y+(10*math.cos(d))
             AimDir = self.PlayersList._Players[p]._aimDir
-            
+            #create missile
             self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,p,MissileSize))
             #make missile timer 0
             self.PlayersList._Players[p]._time = 0

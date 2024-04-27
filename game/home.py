@@ -233,6 +233,7 @@ class EndScreen:
 
         Finallevel = 4
         if self._settings._level == Finallevel:
+            #Show the screen for when the game has been won
             stddraw.setFontSize(40) #set font size
             stddraw.text(0,30,"You Win!!!")
             stddraw.text(0,0,"Score: " + str(self._settings._score))
@@ -252,6 +253,7 @@ class EndScreen:
         else:
             #check if player won or lose
             if self._settings._result:
+                #Progress to next level
                 stddraw.setFontSize(40) #set font size
                 stddraw.text(0,0,"Next Level")
                 stddraw.setFontSize(15) #set font size
@@ -259,6 +261,7 @@ class EndScreen:
                 stddraw.text(0,-60,"Press [x] to exit game")
                 
             else:
+                #restart game
                 stddraw.setFontSize(35)
                 stddraw.text(0,0,"Better luck next time")
                 stddraw.text(0,-20,"Score: " + str(self._settings._score))

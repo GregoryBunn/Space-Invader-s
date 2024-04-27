@@ -135,7 +135,7 @@ class Game:
         #indicates active game
         active = True
 
-        #Wait for the player threads to complete
+        #Wait for the player images threads to complete
         p1.join()
         p2.join()
 
@@ -150,15 +150,18 @@ class Game:
 
             
 
-        
+            #Test to see at what level the game is
             if self._settings._result == True and self._settings._level ==3:
+                #if the game has been won
                 self._settings._level += 1
                 self._end_screen.run()
                 self._settings._level = 1
             elif self._settings._result == True:
+                #level has been completed
                 self._settings._level += 1
                 self._end_screen.run()
             elif self._settings._result == False:
+                #game has been failed
                 self._settings._level = 1
                 self._end_screen.run()
                 self._settings._score = 0
@@ -170,16 +173,19 @@ class Game:
             #Run End
    
 
-def createPlayerPicture(num,lis,pic):
+
+def createPlayerPicture(lis,pic):
     """
     Creates and returns images of the player from multiple angles for use in the game.
     """
-    pi = math.pi
-    angle = -pi/2
+    #Coded by Greg, minor adjustments made from the tut3 memo compSci 214E
+    
+    pi = math.pi 
+    angle = -pi/2#Starting angle
     width = pic.width()
     heigth = pic.height()
-    cx = width // 2
-    cy = heigth // 2
+    cx = width // 2#Middle point x
+    cy = heigth // 2#middlepoint y
     while angle < pi/2:
         rotatedpic = Picture(width, heigth)
         #rotatedpic = Picture('invis.png')
@@ -222,8 +228,10 @@ def main():
     picture_list1 = []
     picture_list2 = []
     #create thread for player pictures and start them
-    player1TH = threading.Thread(target=createPlayerPicture, args=(0, picture_list1, Picture('Ship1A.png')))
-    player2TH = threading.Thread(target=createPlayerPicture, args=(1, picture_list2, Picture('Ship2A.png')))
+    
+    #Threading was done by Greg
+    player1TH = threading.Thread(target=createPlayerPicture, args=( picture_list1, Picture('Ship1A.png')))
+    player2TH = threading.Thread(target=createPlayerPicture, args=( picture_list2, Picture('Ship2A.png')))
 
    
     music.playSong()

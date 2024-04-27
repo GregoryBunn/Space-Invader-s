@@ -64,13 +64,18 @@ class Enemy:
             #draw enemy with 0 lives
             basic = Picture("Alien1.png")
             pass
+        #Draw Picture
         picture(basic, self._x, self._y)
+
 
     def drawBoss(self):
         boss = Picture('Boss0.png')
+        #draw boss
         picture(boss, self._x, self._y)
+        #draw the boss health
         self.drawBossHealth()
 
+    #Function to create and draw boss health
     def drawBossHealth(self):
         stddraw.setPenColor(stddraw.RED)
         stddraw.rectangle(-80,95,160,4)
