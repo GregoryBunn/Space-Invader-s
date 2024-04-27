@@ -230,7 +230,7 @@ def main():
     player1TH.start()
     player2TH.start()
     
-    #Create new instance of gamesettigns
+    #Create new instance of gamesettings
     settings_game = GameSettings(screenXsize=512,screenYsize=512,players=1,inputType=1,level=1,p1=picture_list1,p2=picture_list2)
 
     #initialize game
