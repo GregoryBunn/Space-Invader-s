@@ -81,7 +81,7 @@ class PlayerSelect:
                 key = stddraw.nextKeyTyped()
 
                 #enter play screen
-                if key == "x":
+                if key == "q":
                     #quit
                     sys.exit()
 
@@ -127,23 +127,8 @@ class HomeScreen:
     def displayHome(self):
 
         """
-        Create the graphics and draws them
+        Create the graphics depending on number of players and draws them
         """
-        stddraw.clear(stddraw.BLACK)
-        stddraw.setPenColor(stddraw.WHITE)
-        stddraw.setFontSize(40)
-        stddraw.text(0, 90, "COSMIC CONQUISTADORS")
-        stddraw.setFontSize(35)
-        stddraw.text(0, 40, "Instructions:")
-        stddraw.setFontSize(20)
-        stddraw.text(0, 15, "[A] move left, [D] move right")
-        stddraw.text(0, 0, "[Q] rotate left, [E] rotate right")
-        stddraw.text(0, -15, "[Space] to shoot")
-        stddraw.text(0, -30, "[H] for help")
-        stddraw.text(0, -45, "[X] to quit")
-        stddraw.setFontSize(35)
-        stddraw.text(0, -70, "Press any key to start")
-
         if self.settings.players==1:
             stddraw.clear(stddraw.BLACK)
             stddraw.setPenColor(stddraw.WHITE)
@@ -165,19 +150,19 @@ class HomeScreen:
             stddraw.setFontSize(40)
             stddraw.text(0, 90, "COSMIC CONQUISTADORS")
             stddraw.setFontSize(35)
-            stddraw.text(0, 70, "Instructions:")
+            stddraw.text(0, 65, "Instructions:")
             stddraw.setFontSize(20)
-            stddraw.text(0, 60, "Player1:")
+            stddraw.text(0, 45, "Player1:")
             stddraw.setFontSize(18)
-            stddraw.text(0, 45, "[A] move left, [D] move right")
-            stddraw.text(0, 30, "[Q] rotate left, [E] rotate right")
+            stddraw.text(0, 35, "[A] move left, [D] move right")
+            stddraw.text(0, 25, "[Q] rotate left, [E] rotate right")
             stddraw.text(0, 15, "[Space] to shoot")
             stddraw.setFontSize(20)
-            stddraw.text(0, -5, "Player2:")
+            stddraw.text(0, -10, "Player2:")
             stddraw.setFontSize(18)
             stddraw.text(0, -20, "[J] move left, [L] move right")
-            stddraw.text(0, -35, "[U] rotate left, [O] rotate right")
-            stddraw.text(0, -50, "[N] to shoot")
+            stddraw.text(0, -30, "[U] rotate left, [O] rotate right")
+            stddraw.text(0, -40, "[N] to shoot")
             stddraw.setFontSize(35)
             stddraw.text(0, -70, "Press any key to start")
             stddraw.setFontSize(16)
@@ -209,7 +194,7 @@ class HomeScreen:
                 start = True
 
                 #enter play screen
-                if stddraw.nextKeyTyped() == "q":
+                if stddraw.nextKeyTyped() == "x":
                     #quit
                     sys.exit()
 
