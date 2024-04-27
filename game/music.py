@@ -18,7 +18,7 @@ The Final Boss Battle : alperomeresin
 
 
 def playSong():
-    musicTH = threading.Thread(target=song(),args=(None))
+    musicTH = threading.Thread(target=song)
     musicTH.start()
     
 def song():
