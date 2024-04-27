@@ -1,9 +1,14 @@
 
 '''
 Main project
-sound: Pixabay
-The Final Boss Battle : alperomeresin
-8-bit Air Fight : moodmode
+
+Classes:
+GameSettings: Game settings functions
+Game:
+
+Methods:
+    Main():
+    createPlayerPicture():
  
 '''
 
