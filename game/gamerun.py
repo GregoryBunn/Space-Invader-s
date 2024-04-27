@@ -347,7 +347,7 @@ class GameLoop:
                 MissileSize = 2.5
             #Get  missile starting coordinates
             x = self.PlayersList._Players[p]._x+(10*math.sin(d))
-            y = self.PlayersList._Players[p]._y+(10*math.cos(d))+abs(66//2-66//2.2)
+            y = self.PlayersList._Players[p]._y+(10*math.cos(d))+abs(66//2-66//2.2)#the abs is to adjust for the image rotation
             AimDir = self.PlayersList._Players[p]._aimDir
             #create missile
             self.Missiles_list.add_missile(Missile(x,y,AimDir,missiletype,p,MissileSize))

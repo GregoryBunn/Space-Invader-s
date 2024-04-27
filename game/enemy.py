@@ -177,7 +177,10 @@ class EnemyList:
                 size = settings._size#6
                 dir = 1
                 speed = settings._speed #1
+
+                #Get random  number to decide if enemy gets powerup
                 p = random.random()
+                #use p to give enemy powerup
                 if p < 0.2:
                     PowerupType = 1
                 elif p < 0.4:
@@ -193,8 +196,10 @@ class EnemyList:
     def Move_Enemys(self):
         moveDown = False
         for enemy in self._Enemylist:
+            #See if enemys are at the side
             if enemy.moveEnemySideways():
                 moveDown = True
+        #move enemys down if they are at the side
         if moveDown == True:
             for enemy in self._Enemylist:
                 enemy.moveEnemyDown()
@@ -251,6 +256,7 @@ class EnemyList:
     
     #powerup
     def Create_powerup(self,ec,powerups):
+        #get coordinates and type 
         x = self._Enemylist[ec]._x
         y = self._Enemylist[ec]._y
         powerupTyp = self._Enemylist[ec]._powerup
@@ -345,11 +351,11 @@ class Powerup:
         POWERUP_SPEED = 1
         self._y -= POWERUP_SPEED
     def drawType(self):
-        if self._typ == 1:
+        if self._typ == 1:#Draw type 1 powerup
             stddraw.setPenColor(stddraw.PINK)
-        elif self._typ == 2:
+        elif self._typ == 2:#Draw type 2 powerup
             stddraw.setPenColor(stddraw.BLUE)
-        elif self._typ == 3:
+        elif self._typ == 3:#Draw type 3 powerup
             stddraw.setPenColor(stddraw.DARK_GREEN)
 
         stddraw.filledCircle(self._x,self._y,2)
@@ -382,13 +388,15 @@ class Powerup_List:
         move_draw_Powerups(): Moves all powerups in the list and draws them; removes powerups that are out of bounds.
     """
     def __init__(self):
-        self._List_Powerups = []
+        self._List_Powerups = []#Initialize lsit of powerups
     def add_powerup(self,powerup : Powerup):
         self._List_Powerups.append(powerup)
 
     def remove_powerup(self,powerup: Powerup):
+        #remove powerup
         self._List_Powerups.remove(powerup)
     def move_draw_Powerups(self):
+        #move and draw powerups
         for powerup in self._List_Powerups:
             powerup.move_down()
             if not powerup.checkPowerupBound():

@@ -191,16 +191,16 @@ def createPlayerPicture(lis,pic):
         #rotatedpic = Picture('invis.png')
         cosMinusTheta = math.cos(-angle)
         sinMinusTheta = math.sin(-angle)
-        for tx in range(width):
-            for ty in range(heigth):
+        for tx in range(width):#Itterate throung new image x pixels
+            for ty in range(heigth):#itterate throung new image y pixels
                 if ty < heigth//2.2:#//2 unsures only the turret rotates
-                    dX: int = tx - cx
-                    dY: int = ty - cy             
+                    dX = tx - cx
+                    dY = ty - cy             
                     sx = int(dX*cosMinusTheta - dY*sinMinusTheta + cx)
                     sy = int(dX*sinMinusTheta + dY*cosMinusTheta + cy)
                     col = stddraw.BLACK
                     if ((sx >= 0) and (sx < width) and (sy >= 0) and (sy < heigth)):
-                        col = pic.get(sx, sy)
+                        col = pic.get(sx, sy)#get color from normal image
 
                         #Make sure nothing else then the turret is rotated
                         if (sx < 30) or (sx > 36):
@@ -210,9 +210,9 @@ def createPlayerPicture(lis,pic):
                     col = pic.get(tx,ty)
 
                 
-                rotatedpic.set(tx, ty, col)
-        angle += pi/48 
-        lis.append(rotatedpic)
+                rotatedpic.set(tx, ty, col)#set pixel color in new image
+        angle += pi/48 #go to next angle
+        lis.append(rotatedpic)#Add image to rotation list
 
 
 
