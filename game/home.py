@@ -12,7 +12,7 @@ Endscreen
 
 class PlayerSelect:
     """
-    Handles the player selection process on the  first title screen of the game, 
+    Handles the player selection process on the first title screen of the game, 
     where the number of players are chosen.
 
     Attributes:

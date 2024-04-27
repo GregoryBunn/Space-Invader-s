@@ -97,16 +97,17 @@ class GameLoop:
         '''
         The next few lines of code does the math inorder to have a consistent frame rate throughout the game
         '''
+
         try:
-            totTime = (frameEND - frameST)*1000
-            #stddraw.text(1.8, 1.8, '%.0f' % (fps))
-            if totTime > 24:
+            fps = 1/(frameEND - frameST)
+            stddraw.setPenColor(stddraw.WHITE)
+            stddraw.text(90, 90, '%.0f' % (fps))
+            if fps < 30:
                 stddraw.show(0)
             else:
-                stddraw.show(24 - totTime)
+                stddraw.show(1000/30 - (frameEND-frameST)*1000)
         except Exception: 
-            stddraw.show(24)
-
+            stddraw.show(1000/30)
         
         
 

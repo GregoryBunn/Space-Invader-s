@@ -9,13 +9,9 @@ The Final Boss Battle : alperomeresin
 
 from home import HomeScreen,EndScreen,PlayerSelect
 from gamerun import GameLoop
-import threading
-import stddraw
+import threading, stddraw, math, music
 from stddraw import picture
 from picture import Picture
-import math
-import music 
-
 
 #game settings
 class GameSettings:
