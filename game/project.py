@@ -47,19 +47,19 @@ class GameSettings:
 
     def __init__(self,screenXsize,screenYsize,players,inputType,level : int,p1,p2):
         #initialize parameters
-        self.screen_x = 100
-        self.screen_y = 100
-        self.players = players
-        self.result = False
-        self.inputType = inputType
-        self.x = screenXsize
-        self.y = screenYsize
-        self.level = level
-        self.player1List = p1
-        self.player2List = p2
-        self.score = 0
-        self.txt = "highscore.txt"
-        self.highScore = self.getHighScore()
+        self._screen_x = 100
+        self._screen_y = 100
+        self._players = players
+        self._result = False
+        self._inputType = inputType
+        self._x = screenXsize
+        self._y = screenYsize
+        self._level = level
+        self._player1List = p1
+        self._player2List = p2
+        self._score = 0
+        self._txt = "highscore.txt"
+        self._highScore = self.getHighScore()
 
     def getHighScore(self): 
         """
@@ -68,7 +68,7 @@ class GameSettings:
         Returns:
             int: The highest score recorded.
         """  
-        f = open(self.txt, "r")
+        f = open(self._txt, "r")
         score = f.read()
         f.close()
         if len(score) > 0:
@@ -85,7 +85,7 @@ class GameSettings:
         Returns:
             bool: True if the high score was updated, False otherwise.
         """
-        self.highScore = score
+        self._highScore = score
         self.writeHighScore()
     def writeHighScore(self):
         """
@@ -94,8 +94,8 @@ class GameSettings:
         Parameters:
             score (int): The score to write as the new high score.
         """
-        f = open(self.txt,"w")
-        f.write(str(self.highScore))
+        f = open(self._txt,"w")
+        f.write(str(self._highScore))
         f.close()
 
 class Game:
@@ -151,17 +151,17 @@ class Game:
             
 
         
-            if self.settings.result == True and self.settings.level ==3:
-                self.settings.level += 1
+            if self.settings._result == True and self.settings._level ==3:
+                self.settings._level += 1
                 self.end_screen.run()
-                self.settings.level = 1
-            elif self.settings.result == True:
-                self.settings.level += 1
+                self.settings._level = 1
+            elif self.settings._result == True:
+                self.settings._level += 1
                 self.end_screen.run()
-            elif self.settings.result == False:
-                #self.settings.level = 1
+            elif self.settings._result == False:
+                self.settings._level = 1
                 self.end_screen.run()
-                self.settings.score = 0
+                self.settings._score = 0
 
 
             
