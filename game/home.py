@@ -10,6 +10,9 @@ Endscreen
 
 """
 
+#Code for the formatting was done by Greg and Zoe
+
+
 class PlayerSelect:
     """
     Handles the player selection process on the first title screen of the game, 

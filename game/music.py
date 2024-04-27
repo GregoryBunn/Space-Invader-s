@@ -20,6 +20,9 @@ negative_beeps
 
 '''
 
+#Music done by Wikus
+#Threading got from Gregs code
+
 
 def playSong():
     #Tread for background music

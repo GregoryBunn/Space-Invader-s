@@ -18,6 +18,8 @@ import threading, stddraw, math, music
 from stddraw import picture
 from picture import Picture
 
+#Game settings done by all parties
+
 #game settings
 class GameSettings:
     #has three parameters
@@ -61,6 +63,8 @@ class GameSettings:
         self._txt = "highscore.txt"
         self._highScore = self.getHighScore()
 
+
+        #coded by zoe
     def getHighScore(self): 
         """
         Retrieves the highest score from a stored file.
@@ -75,6 +79,8 @@ class GameSettings:
             return int(score)
         else:
             return 0
+        
+        #coded by zoe
     def setHighScore(self,score):
         """
         Updates the high score if the given score is higher than the current high score.
@@ -87,6 +93,8 @@ class GameSettings:
         """
         self._highScore = score
         self.writeHighScore()
+
+        #high score done by Zoe
     def writeHighScore(self):
         """
         Writes the high score to a file.
@@ -150,6 +158,7 @@ class Game:
 
             
 
+
             #Test to see at what level the game is
             if self._settings._result == True and self._settings._level ==3:
                 #if the game has been won
@@ -173,12 +182,12 @@ class Game:
             #Run End
    
 
-
+#Coded by Greg, minor adjustments made from the tut3 memo compSci 214E
 def createPlayerPicture(lis,pic):
     """
     Creates and returns images of the player from multiple angles for use in the game.
     """
-    #Coded by Greg, minor adjustments made from the tut3 memo compSci 214E
+   
     
     pi = math.pi 
     angle = -pi/2#Starting angle

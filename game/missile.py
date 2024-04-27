@@ -5,6 +5,7 @@ import math
 
 
 class Missile:
+    #class done by Wikus
     """
     Represents a missile object in a game with properties for managing its state and behavior.
 
@@ -40,7 +41,7 @@ class Missile:
         self._speed = 4 #missile speed
         self._size = size
 
-    #draw Missile 
+    #draw Missile Done by all parties Combined for version below
     def drawMissile(self):
         """
         Draws the missile on the game screen, with different characteristics based on the missile type.
@@ -66,8 +67,10 @@ class Missile:
         if self._typ == 0:
             stddraw.setPenColor(stddraw.GREEN)
             stddraw.setPenRadius(0.5)
-            stddraw.line(self._x, self._y, self._x, (self._y-5)) 
-    
+            stddraw.line(self._x, self._y, self._x, (self._y-5))
+
+
+    #move Missile Done by all parties Combined for version below
     def moveMissile(self):
         """
         Updates the missile's position based on its direction and speed, moving it across the game screen.
@@ -118,6 +121,8 @@ class Missile:
         else:
             return True
         
+# Missile list Done by all parties Combined for version below
+# class done by wikus
 class MissileList:
     """
     Manages a collection of missiles in the game, handling operations such as adding, removing, and updating missiles.
