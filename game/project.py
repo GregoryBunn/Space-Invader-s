@@ -160,7 +160,7 @@ class Game:
 
 
             #Test to see at what level the game is
-            if self._settings._result == True and self._settings._level ==3:
+            if self._settings._result == True and self._settings._level ==5:
                 #if the game has been won
                 self._settings._level += 1
                 self._end_screen.run()

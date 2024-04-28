@@ -42,12 +42,18 @@ class GameLoop:
 
         if self._game_settings._level == 1:
             #create level 1 enemy settings
-            self.Enemy_settingss = EnemySettings(5,3,0,1,0,6)
-        elif self._game_settings._level ==2:
+            self.Enemy_settingss = EnemySettings(6,2,0,1,0,6)
+        elif self._game_settings._level == 2:
             #create level 2 enemy settings
-            self.Enemy_settingss = EnemySettings(8,3,1,1,0,6)
+            self.Enemy_settingss = EnemySettings(5,3,0,1,0,6)
         elif self._game_settings._level == 3:
             #create level 3 enemy settings
+            self.Enemy_settingss = EnemySettings(4,3,1,1,0,6)
+        elif self._game_settings._level == 4:
+            #create level 4 enemy settings
+            self.Enemy_settingss = EnemySettings(6,3,1,1,0,6)
+        elif self._game_settings._level == 5:
+            #create level 5 enemy settings
             self.Enemy_settingss = EnemySettings(1,1,10,1.5,1,12)
             
 
@@ -293,7 +299,7 @@ class GameLoop:
             self.Update_game() #Update all the game characteristics
             self.counter_Attack() #call the enemy counter attack function
 
-            #handel input depending in  input type
+            #handle input depending in  input type
             if self._game_settings._inputType == 0:
                 self.Process_inputType0()
             elif self._game_settings._inputType == 1:

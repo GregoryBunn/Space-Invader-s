@@ -234,7 +234,7 @@ class EndScreen:
         
         stddraw.setPenColor(stddraw.WHITE) #set font color
 
-        Finallevel = 4
+        Finallevel = 6
         if self._settings._level == Finallevel:
             #Show the screen for when the game has been won
             stddraw.setFontSize(40) #set font size
