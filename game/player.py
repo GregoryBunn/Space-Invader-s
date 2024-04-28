@@ -219,10 +219,13 @@ class PlayerList:
     """
     def __init__(self):
         self._Players = []
+
     def add_player(self,player:Player):
         self._Players.append(player)
+
     def remove_player(self,player:Player):
         self._Players.remove(player)
+
     def draw_ScorePlayers(self):
         c = 0 #num of player
         for player in self._Players:
@@ -232,7 +235,7 @@ class PlayerList:
             player.drawLives(c)
             c+=1#increase player num
 
-    #Itterate throuhg player and update their positions aim and time
+    #Itterate throung player and update their positions aim and time
     def move_aim_timeUpdate(self):
         for player in self._Players:
             player.movePlayer()
@@ -261,7 +264,7 @@ class PlayerList:
                         #remove Missile
                         Missiles_list.remove_missile(Missiles_list._missiles[mc])
 
-                        #code to decreade player health
+                        #code to decrease player health
                         player._lives -= 1
 
                         
@@ -275,8 +278,6 @@ class PlayerList:
                 mc = mc + 1 # go to next missile 
 
     def hitmarks_Powerups(self,powerupList):
-        #nextP = True #boolean to increase missile count
-
         #itterate through all missiles and player locations
         pc = 0 #powerup counter
         while pc < len(powerupList._List_Powerups):
@@ -299,12 +300,6 @@ class PlayerList:
                     #remove Powerup
                     powerupList.remove_powerup(powerupList._List_Powerups[pc])
 
-                    
-
-
-                    
-                    
-
                     #Don't have to increase pc (new powerup in old position because of pop)
                     nextP = False 
                     break # exit for
@@ -312,7 +307,6 @@ class PlayerList:
                 pc = pc + 1 # go to next powerup 
 
     def activate_Powerup(self,typ,player):
-
         if typ == 1:#Activate type 1 missile
             #Only allow if allow if time less than 45
             if player._missileTime < 45: 
