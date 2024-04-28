@@ -266,7 +266,6 @@ class PlayerList:
 
                         
                         music.Player()
-                        #time.sleep(0.5)
                         
 
                         #Don't have to increase mc (new missile in old position because of pop)

@@ -158,73 +158,7 @@ class GameLoop:
                 y = self.enemys._Enemylist[enemy]._y
 
                 MissileSize = 5
-                self.Missiles_list.add_missile(Missile(x,y,0,0,2,MissileSize))
-
-    #Process input type 0
-    def Process_inputType0(self):
-        """
-        Processes player inputs of type 0, typically involving direct control mechanisms such as keyboard or joystick inputs.
-        """
-        #Check for input
-        if stddraw.hasNextKeyTyped():
-
-            #Process input
-            key = stddraw.nextKeyTyped()
-
-            if key == "d":#move right
-                self.PlayersList._Players[0]._moveDir = 1
-            elif key == "a":#move left
-                self.PlayersList._Players[0]._moveDir = -1
-
-
-            elif key == "s":#stop moving
-                self.PlayersList._Players[0]._moveDir = 0
-
-            elif key == "x":#exit
-                self._play = False
-
-            elif key == "e":#rotate right
-                self.PlayersList._Players[0]._aimChange = 0.07
-
-            elif key == "q":#rotate lefr                
-                self.PlayersList._Players[0]._aimChange = -0.07
-
-            elif key == "w":#stop rotate   
-                self.PlayersList._Players[0]._aimChange = 0
-            elif key == "x":#exit
-                sys.exit()
-
-            elif key == " ":#shoot
-                self.fireMissile(0)
-
-            #process second player input if there is one
-            if self._game_settings._players == 2:
-
-
-                if key == ";":#shoot
-                    
-                    self.fireMissile(1)
-
-
-                elif key == "l":#move right
-                        self.PlayersList._Players[1]._moveDir = 1
-                elif key == "j":#move left
-                    self.PlayersList._Players[1]._moveDir = -1
-
-
-                elif key == "k":#stop moving
-                    self.PlayersList._Players[1]._moveDir = 0
-
-                elif key == "o":#rotate right
-                    self.PlayersList._Players[1]._aimChange = 0.07
-
-                elif key == "u":#rotate lefr                
-                    self.PlayersList._Players[1]._aimChange = -0.07
-
-                elif key == "i":#stop rotate   
-                    self.PlayersList._Players[1]._aimChange = 0
-                
-
+                self.Missiles_list.add_missile(Missile(x,y,0,0,2,MissileSize))                
 
     #Process input type 1  
     #This input type was done by Greg              
