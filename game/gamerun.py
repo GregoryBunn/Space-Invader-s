@@ -45,13 +45,13 @@ class GameLoop:
             self.Enemy_settingss = EnemySettings(6,2,0,1,0,6)
         elif self._game_settings._level == 2:
             #create level 2 enemy settings
-            self.Enemy_settingss = EnemySettings(5,3,0,1,0,6)
+            self.Enemy_settingss = EnemySettings(5,4,0,1,0,6)
         elif self._game_settings._level == 3:
             #create level 3 enemy settings
-            self.Enemy_settingss = EnemySettings(4,3,1,1,0,6)
+            self.Enemy_settingss = EnemySettings(6,2,1,1,0,6)
         elif self._game_settings._level == 4:
             #create level 4 enemy settings
-            self.Enemy_settingss = EnemySettings(6,3,1,1,0,6)
+            self.Enemy_settingss = EnemySettings(7,3,1,1,0,6)
         elif self._game_settings._level == 5:
             #create level 5 enemy settings
             self.Enemy_settingss = EnemySettings(1,1,10,1.5,1,12)
@@ -149,7 +149,7 @@ class GameLoop:
         #check if enemys can shoot back
         if self._level != 0:
             #Counter attack intensity
-            intensity = 7- self._level 
+            intensity = 6- self._level 
             if intensity < 1: intensity = 1 #Intensity between 1 and 4
 
             #check if enough time has passed since previous counter attack and if there is enemys

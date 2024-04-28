@@ -240,15 +240,14 @@ class EndScreen:
             #Show the screen for when the game has been won
             stddraw.setFontSize(40) #set font size
             stddraw.text(0,30,"You Win!!!")
-            stddraw.setFontSize(20)
+            stddraw.setFontSize(25)
             stddraw.text(0,0,"Total Score: " + str(self._settings._score))
             
             if self._settings._score > self._settings._highScore:
-                stddraw.setFontSize(25)
-                stddraw.text(0,-40,"You set the high score!!" )
+                stddraw.setFontSize(20)
+                stddraw.text(0,-25,"You set the high score!!" )
                 self._settings.setHighScore(self._settings._score)
             else:
-
                 stddraw.setFontSize(20)
                 stddraw.text(0,-35,"HighScore: " + str(self._settings._highScore))
             #set new high score
@@ -261,6 +260,8 @@ class EndScreen:
                 #Progress to next level
                 stddraw.setFontSize(40) #set font size
                 stddraw.text(0,0,"Next Level")
+                stddraw.setFontSize(25)
+                stddraw.text(0,-20,"Total Score: " + str(self._settings._score))
                 stddraw.setFontSize(15) #set font size
                 stddraw.text(0,-50,"Next level starting soon...")
                 stddraw.text(0,-60,"Press [x] to exit game")
@@ -268,18 +269,19 @@ class EndScreen:
             else:
                 #restart game
                 stddraw.setFontSize(35)
-                stddraw.text(0,0,"Better luck next time")
+                stddraw.text(0,20,"Better luck next time")
                 stddraw.setFontSize(25)
-                stddraw.text(0,-20,"Total Score: " + str(self._settings._score))
+                stddraw.text(0,-10,"Total Score: " + str(self._settings._score))
                 
                
-
-                stddraw.setFontSize(15) #set font size
-                stddraw.text(0,-30,"HighScore: " + str(self._settings._highScore))
                 if self._settings._score > self._settings._highScore:
                     #set new highscore
-                    stddraw.text(0,-35,"You set the high score!!" )
+                    stddraw.text(0,-30,"You set the high score!!" )
                     self._settings.setHighScore(self._settings._score)
+                else:
+                    stddraw.setFontSize(20) #set font size
+                    stddraw.text(0,-20,"HighScore: " + str(self._settings._highScore))
+                stddraw.setFontSize(15)
                 stddraw.text(0,-50,"New game starting soon...")
                 stddraw.text(0,-60,"Press [x] to exit game")
 
