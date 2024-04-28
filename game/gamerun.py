@@ -146,7 +146,7 @@ class GameLoop:
         #check if enemys can shoot back
         if self._level != 0:
             #Counter attack intensity
-            intensity = 5- self._level 
+            intensity = 7- self._level 
             if intensity < 1: intensity = 1 #Intensity between 1 and 4
 
             #check if enough time has passed since previous counter attack and if there is enemys
