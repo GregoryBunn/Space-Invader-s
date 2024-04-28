@@ -1,0 +1,65 @@
+INSTRUCTIONS: Ensure that all the required information is filled in by providing
+the appropriate details to replace all text in angled brackets (e.g. <Insert student number>)
+throughout the document (including the details required at the end of the
+document).
+----------------------------------------------------------------------------
+
+This declaration is applicable to Project of Computer Science E 214 in 2024
+
+By including this document as part of my assignment submission, we, 
+Zoe Herman, (Student number 26266482), 
+Gregory Bunn, (Student number 26922762), 
+and Wikus Van Biljon, (Student number 26927543)
+declare the following:
+
+[BEGIN DECLARATION]
+Stellenbosch University Computer Science Assignment Declaration 
+---------------------------------------------------------------
+ 
+We know that using another person’s ideas (including written work and source
+code) and claiming them as our own constitutes plagiarism. We are aware that the
+potential penalties for this offence, as specified in the university’s policy
+on academic integrity, may include expulsion from the university and other
+serious consequences. 
+ 
+1. This submission is entirely our own work, excepting the inclusion of
+resources explicitly permitted for this assignment, and assistance as noted in
+the following item. 
+
+2. Our submission acknowledges the source of all libraries and external sources
+used, and identifies any other students and/or staff (including demis, tutors,
+and lecturers) with whom we have discussed this assignment, as well as the
+extent of those discussions. Students and staff who helped any of us, or whom any of us
+helped, with debugging, are specifically listed, as well as what portions
+of the code were involved.  (Note that, unless explicitly stated otherwise,
+submissions or solutions to assignments in previous courses at this university
+or any other educational institution which correspond to (significant portions
+of) this assignment may not be used as external sources. ­In particular, do not
+look at or use solutions to assignments from previous years.) 
+
+3. We have not allowed, and will not in the future allow, anyone to copy any
+portion of our work, or give them access to it in any way, since they may have
+the intention of passing it off as their own work (whether as is, or in a
+modified form).  In addition, we will not make my work publicly available in any
+way, including posting our code in public source code repositories or forums.
+(You may, however, allow someone to look at selected portions of your code for
+the purposes of debugging, but you may not make the code available to them
+otherwise.) 
+
+4. We have not and will not facilitate plagiarism, such as by distributing any
+written work or source code created by fellow students. 
+
+5. We understand that any code we submit may be inspected for plagiarism
+detection (either manually or by automated systems) and be retained for
+detecting plagiarism in other courses. 
+[END DECLARATION]
+
+Acknowledgement of sources
+--------------------------
+
+- pixabay (Creative Commons CC0 license):
+	- Shoot : Pixabay (080997_Bullet)
+	- Song: Pixabay (8-bit Air Fight : moodmode)
+	- Live lost: Pixabay (negative_beeps)
+- David Van Heerden (ship graphic designer)
+- CSE214 Tutorial 3 Memo
