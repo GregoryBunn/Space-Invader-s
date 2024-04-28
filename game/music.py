@@ -51,7 +51,7 @@ def bullet():
     bulletTH = threading.Thread(target=ShootSound)
     bulletTH.start()
 
-    
+
 def Player():
     #player live lose thread
     PlayerTH = threading.Thread(target=hitPlayer)
