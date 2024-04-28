@@ -53,9 +53,6 @@ class Enemy:
        
     #Draw type 0 enemy
     def drawBasicEnemy(self):
-        #stddraw.setPenColor(stddraw.RED) #set pen color
-        #stddraw.filledCircle(self.x,self.y,self.size) #Draw red Circle
-
         #graphics
         if self._hitBox == 1:
             #draw enemy with one life
@@ -67,7 +64,7 @@ class Enemy:
         #Draw Picture
         picture(basic, self._x, self._y)
 
-
+    #Draw type 1 enemy
     def drawBoss(self):
         boss = Picture('Boss0.png')
         #draw boss
