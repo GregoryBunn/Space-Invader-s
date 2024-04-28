@@ -7,7 +7,7 @@ import random, time
 import music
 import sys
 
-#Game loop and the gamerun file handles most of the game logic and was coded by all parties the class implemetation was doen by Wikus
+#Game loop and the gamerun file handles most of the game logic and was coded by all parties the class implemetation was done by Wikus
 class GameLoop:
     """
     Manages the main game loop, integrating all game components such as players, missiles, and enemies. 
