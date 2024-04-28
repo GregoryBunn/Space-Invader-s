@@ -300,24 +300,19 @@ class EndScreen:
             #check if enough time has passed after end
             if time == timer*100:
                 time = 0
-                return True#start new game
+                return True #start new game after time has passed
 
             #check for a key input
             if stddraw.hasNextKeyTyped():
                 #exit loop
-                start = True
+                #start = True
 
                 #play again
-                if stddraw.nextKeyTyped() != "x":
-                    return True #(game run is called again)
+                if stddraw.nextKeyTyped() == "x":
+                    return False #quit game if x is pressed
 
-                    
-                    
-                #quit game if x is pressed
-                else:
-                    return False
 
-                #show screen if nothing is pressed
+            #show screen if nothing is pressed
 
             time = time + timer #increase time passed
             stddraw.show(timer) #show screen
