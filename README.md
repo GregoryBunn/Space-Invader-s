@@ -19,7 +19,7 @@ When playing sound and rotating an image it takes too long and makes the game la
 - Wikus added an additional shooter to the game where two players are able to play simultaneously. They play as a team to reach the highest score but can also play competitively against each other each round.
 - Enemy counter-attack was also added to the game as a team effort. The counter-attack is an unpredictable event that gets more intense as the levels progress.
 - Zoe added hitpoints to the game making it possible for the players to have multiple lives, as well as enemies that have more than one life depending on the enemy type and game level.
-- Wikus and Greg added power-ups to the game, thus making it possible to increase the player speed, fire rate, and lives by getting a power-up.
+- Wikus and Greg added power-ups to the game, thus making it possible to increase the player speed (Blue-balls), fire rate(Pink-balls), and lives(Green-balls) by getting a power-up.
 - A special missile timer was added to the game by Wikus which enables a player to wait longer before firing and so shooting a super missile that has a bigger radius and that bounces off the side walls.
 - Wikus added a health bar for the final Boss enemy making it feel more like a final battle and shows how close you are to winning.
 - An Extra keyboard Feature was added: when 'W' is pressed the ship points vertically again to make it easy to reset the shooter angle
