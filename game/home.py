@@ -229,9 +229,7 @@ class EndScreen:
         """
         Create and display the endscreen
         """
-        stddraw.clear(stddraw.BLACK) #Create Black form
-        #stddraw.setFontFamily('Arial') #set font
-        
+        stddraw.clear(stddraw.BLACK) #Create Black form        
         stddraw.setPenColor(stddraw.WHITE) #set font color
 
         Finallevel = 6
@@ -239,7 +237,8 @@ class EndScreen:
             #Show the screen for when the game has been won
             stddraw.setFontSize(40) #set font size
             stddraw.text(0,30,"You Win!!!")
-            stddraw.text(0,0,"Score: " + str(self._settings._score))
+            stddraw.setFontSize(20)
+            stddraw.text(0,0,"Total Score: " + str(self._settings._score))
             
             if self._settings._score > self._settings._highScore:
                 stddraw.setFontSize(25)
@@ -247,7 +246,7 @@ class EndScreen:
                 self._settings.setHighScore(self._settings._score)
             else:
 
-                stddraw.setFontSize(15)
+                stddraw.setFontSize(20)
                 stddraw.text(0,-35,"HighScore: " + str(self._settings._highScore))
             #set new high score
             stddraw.setFontSize(15)
@@ -267,7 +266,8 @@ class EndScreen:
                 #restart game
                 stddraw.setFontSize(35)
                 stddraw.text(0,0,"Better luck next time")
-                stddraw.text(0,-20,"Score: " + str(self._settings._score))
+                stddraw.setFontSize(25)
+                stddraw.text(0,-20,"Total Score: " + str(self._settings._score))
                 
                
 
@@ -299,6 +299,7 @@ class EndScreen:
         while start == False:
             #check if enough time has passed after end
             if time == timer*100:
+                time = 0
                 return True#start new game
 
             #check for a key input
@@ -315,7 +316,6 @@ class EndScreen:
                 #quit game if x is pressed
                 else:
                     return False
-                    sys.exit()
 
                 #show screen if nothing is pressed
 
