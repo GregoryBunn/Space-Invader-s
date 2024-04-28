@@ -331,7 +331,7 @@ class GameLoop:
         """
         #check if missile is allowed
         if self.PlayersList._Players[p].isAllowed():
-
+        #if 1 ==1:
 
             #get direction of new missile
             d = self.PlayersList._Players[p]._aimDir
