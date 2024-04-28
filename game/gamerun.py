@@ -124,8 +124,11 @@ class GameLoop:
         #______________________________________________________________________________________________________
         try:
             fps = 1/(frameEND - frameST)
+            '''
+            #Remove comment block flags to show fps
             stddraw.setPenColor(stddraw.WHITE)
             stddraw.text(90, 90, '%.0f' % (fps))
+            '''
             if fps < 30:
                 stddraw.show(0)
             else:
