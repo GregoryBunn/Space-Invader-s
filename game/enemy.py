@@ -257,17 +257,12 @@ class EnemyList:
     
     #powerup
     def Create_powerup(self,ec,powerups):
+        #Coded by Wikus, eddited by Greg
         #get coordinates and type 
         x = self._Enemylist[ec]._x
         y = self._Enemylist[ec]._y
         powerupTyp = self._Enemylist[ec]._powerup
-        if self._Enemylist[ec]._powerup == 0:
-            #No powerup
-            pass
-
-
-        else:
-            #add powerup
+        if powerupTyp != 0:
             powerups.add_powerup(Powerup(x,y,powerupTyp))
         
     #check if any of the enemy's have been hit

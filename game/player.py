@@ -329,10 +329,3 @@ class PlayerList:
             #only allow if move speed is not to high
             if player._moveSpeed < 3.5:
                 player._moveSpeed += 0.5
-            
-
-        
-
-
-
-    
