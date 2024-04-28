@@ -33,7 +33,7 @@ def song():
     #background song
     song = "song1.wav"
     winsound.PlaySound(song, winsound.SND_ASYNC)
-
+    
 def ShootSound():
     #Shooting sound
     bullet = "blast"

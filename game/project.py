@@ -157,8 +157,6 @@ class Game:
             game.run()
 
             
-
-
             #Test to see at what level the game is
             if self._settings._result == True and self._settings._level ==5:
                 #if the game has been won
