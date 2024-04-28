@@ -161,7 +161,8 @@ class GameLoop:
                 self.Missiles_list.add_missile(Missile(x,y,0,0,2,MissileSize))                
 
     #Process input type 1  
-    #This input type was done by Greg              
+    #This input type was done by Greg 
+    #_______________________________________________________________________________________________________________             
     def Process_inputType1(self):
         """
         Processes player inputs of type 1, typically involving more complex control mechanisms or AI-driven inputs.
@@ -176,11 +177,13 @@ class GameLoop:
         elif keys[stddraw.K_q]: #rotate rigth
             self.PlayersList._Players[0]._aimChange = -0.07
         else: #stop rotate
-             self.PlayersList._Players[0]._aimChange = 0
+            self.PlayersList._Players[0]._aimChange = 0
  
         if keys[stddraw.K_w]:
-            pass
             #set angle to straight
+            pass
+            # self.PlayersList._Players[0]._aimDir = 0
+            # self.PlayersList._Players[0]._aimChange = 0
         if keys[stddraw.K_a]:#move left
             self.PlayersList._Players[0]._moveDir = -1
         elif keys[stddraw.K_d]:#move right
@@ -219,7 +222,7 @@ class GameLoop:
 
             if keys[stddraw.K_n]:#fire missile
                 self.fireMissile(1)
-
+    #____________________________________________________________________________________________
 
             
 

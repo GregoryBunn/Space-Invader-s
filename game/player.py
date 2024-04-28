@@ -232,7 +232,7 @@ class PlayerList:
             player.drawLives(c)
             c+=1#increase player num
 
-    #Itterate throung player and update their positions aim and time
+    #Itterate throuhg player and update their positions aim and time
     def move_aim_timeUpdate(self):
         for player in self._Players:
             player.movePlayer()
