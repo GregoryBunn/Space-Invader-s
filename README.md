@@ -32,6 +32,7 @@ Additional elements added to the game
 - Zoe added enemy hitpoints to the game making it possible for the  players to have multiple lives and also enemys that have more than one live depending on the enemy type
 - Wikus and Greg added powerups to the game making it possible to increase the player speed, fire rate and lives by getting a powerup
 - A special missile timer was added to the game by Wikus which enables a player to wait longer before firing and so shooting a super missile that has a bigger radius and that bounces of the side walls
+- Wikus added a health bar for the final Boss enemy making it feel more like a final battle
 
 
 
