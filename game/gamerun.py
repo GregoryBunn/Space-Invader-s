@@ -181,9 +181,8 @@ class GameLoop:
  
         if keys[stddraw.K_w]:
             #set angle to straight
-            pass
-            # self.PlayersList._Players[0]._aimDir = 0
-            # self.PlayersList._Players[0]._aimChange = 0
+            self.PlayersList._Players[0]._aimDir = 0
+            self.PlayersList._Players[0]._aimChange = 0
         if keys[stddraw.K_a]:#move left
             self.PlayersList._Players[0]._moveDir = -1
         elif keys[stddraw.K_d]:#move right
@@ -213,6 +212,8 @@ class GameLoop:
             if keys[stddraw.K_i]:
                 pass
                 #set angle to straight
+                self.PlayersList._Players[1]._aimDir = 0
+                self.PlayersList._Players[1]._aimChange = 0
             if keys[stddraw.K_j]:#move left
                 self.PlayersList._Players[1]._moveDir = -1
             elif keys[stddraw.K_l]:#move right
@@ -233,7 +234,6 @@ class GameLoop:
         """
         while self.play:
             self._timer += 1#update time that has passed
-            self.Update_game() #Update all the game characteristics
             self.counter_Attack() #call the enemy counter attack function
 
             #handle input depending in  input type
@@ -241,6 +241,8 @@ class GameLoop:
                 self.Process_inputType0()
             elif self._game_settings._inputType == 1:
                 self.Process_inputType1()
+
+            self.Update_game() #Update all the game characteristics
 
     #create Players
     def create_players(self):

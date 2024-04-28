@@ -76,11 +76,9 @@ class Player:
         #Create player
 
 
-        #rotate if needed
-        if self._aimChange != 0:
-            self.RotatePlayer(aimDir)
+        #Get Correct Picture of ship
+        self.RotatePlayer(aimDir)
             
-            #change angle
         #Draw player
         picture(self._picture, self._x, self._y)
         
