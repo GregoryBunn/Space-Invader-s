@@ -1,3 +1,6 @@
+To run the Project ensure you have all the std library's installed
+Run python project.py once your in the game folder
+
 Additional elements added to the game
 - The game is structured in a modular fashion, using principles of object-oriented design implemented by Wikus.
 - Music and sound was added to the game by Wikus. These sounds were downloaded from pixabay (Creative Commons CC0 license). According to the pixabay website the sounds' author(s) do not require that they are mentioned when their sounds are used,  but they are still mentioned.
