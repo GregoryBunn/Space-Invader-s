@@ -23,3 +23,6 @@ Additional elements added to the game:
 - A special missile timer was added to the game by Wikus which enables a player to wait longer before firing and so shooting a super missile that has a bigger radius and that bounces off the side walls.
 - Wikus added a health bar for the final Boss enemy making it feel more like a final battle and shows how close you are to winning.
 - An Extra keyboard Feature was added: when 'W' is pressed the ship points vertically again to make it easy to reset the shooter angle
+- A equation was used to ensure that the bullet is fired form the end of the ships turrent even when it is rotated
+- base game
+- Base game was coded using dictionary's making for a different approach than the final project which was coded using classes
