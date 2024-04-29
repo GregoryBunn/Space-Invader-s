@@ -52,6 +52,7 @@ def checkForEnd(enemy,settings,player):
         dist = (distx**2 + disty**2)**0.5
         #test if enemy is touching shooter
         if dist < enemy[i]["size"] + player["playerSize"]:
+            settings["result"] = False
             return False
 
 
