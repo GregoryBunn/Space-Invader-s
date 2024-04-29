@@ -26,3 +26,5 @@ When playing sound and rotating an image it takes too long and makes the game la
 - A equation was used to ensure that the bullet is fired form the end of the ships turrent even when it is rotated
 - base game
 - Base game was coded using dictionary's making for a different approach than the final project which was coded using classes
+- Docstrings were included in all the classes and makes for a easily understandable coding style
+
