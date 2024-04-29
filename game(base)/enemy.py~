@@ -1,0 +1,121 @@
+import stddraw
+import math
+
+
+def drawEnemy(enemy):
+    stddraw.setPenColor(stddraw.RED)
+    for i in range(len(enemy)):
+        stddraw.filledCircle(enemy[i]["x"],enemy[i]["y"],enemy[i]["size"])
+
+def moveEnemy(enemy,settings):
+    screenX = 100 #screen size x
+    screenY = 100 #screen size y
+
+    #itterate through enemy's
+    for c in range(len(enemy)):
+
+        #check if enemy has reached side
+        if enemy[c]["x"] < -screenX+8 or enemy[c]["x"] > screenX-8:
+            settings["Dir"] = settings["Dir"] * -1
+
+            #move enemy's down
+            for h in range(len(enemy)):
+                enemy[h]["y"] = enemy[h]["y"] - (settings["size"]*2)
+
+            break#Stop going through enemy list
+
+    #move enemys rigth to left
+    for c in range(len(enemy)):
+        enemy[c]["x"] = enemy[c]["x"] + (settings["Dir"]*1)
+
+def checkForEnd(enemy,settings,player):
+
+    screenY = 100 # screen Y size
+
+    #check if no enemy's are left
+    if len(enemy) == 0:
+        settings["result"] = True
+        return False
+
+    #check if enemy's are blow shooter
+    for c in range(len(enemy)):
+        if enemy[c]["y"] < -screenY+20:
+            settings["result"] = False
+            return False
+
+    #check if enemy touches shooter
+    for i in range(len(enemy)):
+
+        #calculate distance between missile and enemy
+        distx = abs(enemy[i]["x"] - player["player_x"])
+        disty = abs(enemy[i]["y"] - player["player_y"])
+        dist = (distx**2 + disty**2)**0.5
+        if dist < enemy[i]["size"] + player["playerSize"]:
+            return False
+
+
+
+    return True # return result
+
+
+def createEnemy(enemy,settings):
+
+    #imort some settings for ease of use
+    s = settings["size"]
+    ID = settings["ID"]
+    cx = settings["countx"]
+    cy = settings["county"]
+
+    #create grid of enemy's
+    for y in range(cy):
+        for x in range(cx):
+            enemy.append({
+                "x": -90+x*(15),
+                "y": 90 - y*(15),
+                "size" : s,
+                "type" : ID,
+                })
+
+
+def hitmarks(enemy,settings,missiles,player):
+
+    nextM = True #boolean to increase missile count
+
+    #itterate through all missiles and enemy locations
+    mc = 0 #missile counter
+    while mc < len(missiles):
+        nextM = True
+        ec = 0 #enemy counter
+        while ec < len(enemy):
+
+            #calculate distance between missile and enemy
+            distx = abs(missiles[mc]["x"] - enemy[ec]["x"])
+            disty = abs(missiles[mc]["y"] - enemy[ec]["y"])
+            dist = (distx**2 + disty**2)**0.5
+
+            #test if missile hit enemy
+            if dist < settings["size"]:
+                #remove enemy and missile
+                enemy.pop(ec)
+                missiles.pop(mc)
+
+                #increase player score
+                player["score"] += 1
+
+                #Don't have to increase mc (new missile in old position because of pop)
+                nextM = False 
+                break # exit while
+
+            else:
+                ec = ec + 1 #go to next enemy
+        if nextM:
+            mc = mc + 1 # go to next missile
+                
+
+
+def main():
+
+    print("hello")
+
+
+if __name__ == "__main__":main()
