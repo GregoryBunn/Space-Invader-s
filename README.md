@@ -24,3 +24,5 @@ When playing sound and rotating an image it takes too long and makes the game la
 - Wikus added a health bar for the final Boss enemy making it feel more like a final battle and shows how close you are to winning.
 - An Extra keyboard Feature was added: when 'W' is pressed the ship points vertically again to make it easy to reset the shooter angle
 - A equation was used to ensure that the bullet is fired form the end of the ships turrent even when it is rotated
+- base game
+- Base game was coded using dictionary's making for a different approach than the final project which was coded using classes
